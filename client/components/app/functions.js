@@ -1,5 +1,5 @@
-function sortImageArray() {
+function sortImageData() {
   return null;
 }
 
-export { sortImageArray };
+export { sortImageData };
