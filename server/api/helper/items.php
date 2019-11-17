@@ -5,35 +5,31 @@ set_exception_handler('handleErrors');
 startup();
 require_once('../../dbconnection.php');
 
-$getAllQuery = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`,
-  GROUP_CONCAT(i.`url`) AS images
-    FROM `items` AS p
-    JOIN `images` AS i
-      ON p.`id` = i.`item_id`
-  GROUP BY p.`id`;";
-
-$getDetailsQuery = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`, p.`description1`, p.`description2`,
-  GROUP_CONCAT(i.`url`) AS images
-    FROM `items` AS p
-    JOIN `images` AS i
-      ON p.`id` = i.`item_id`
-    WHERE p.`id` = 1
-  GROUP BY p.`id`;";
-
 $idIncluded = false;
-$queryToRun = $getAllQuery;
+$query = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`,
+  GROUP_CONCAT(i.`url`) AS images
+    FROM `items` AS p
+    JOIN `images` AS i
+      ON p.`id` = i.`item_id`
+  GROUP BY p.`id`;";
 
 if (!empty($_GET['id'])) {
   if (is_numeric($_GET['id'])) {
     $idIncluded = true;
-    $queryToRun = $getDetailsQuery;
+    $query = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`, p.`description1`, p.`description2`,
+      GROUP_CONCAT(i.`url`) AS images
+        FROM `items` AS p
+        JOIN `images` AS i
+          ON p.`id` = i.`item_id`
+        WHERE p.`id` = {$_GET['id']}
+      GROUP BY p.`id`;";
   } else {
     throw new Exception('Item ID must be a number');
     exit();
   }
 }
 
-$result = mysqli_query($conn, $queryToRun);
+$result = mysqli_query($conn, $query);
 
 if (!$result) {
   throw new Exception('Query error ' . mysqli_error($conn));
