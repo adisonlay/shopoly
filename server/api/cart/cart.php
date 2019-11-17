@@ -1,16 +1,12 @@
 <?php
 
 define('INTERNAL', true);
-
 require_once('functions.php');
-
 session_start();
-
 set_exception_handler('handleErrors');
-
 require_once('dbconnection.php');
 
-switch ($_SESSION['REQUEST_METHOD']) {
+switch ($_SERVER['REQUEST_METHOD']) {
   case 'GET':
     include('cart-get.php');
     break;
