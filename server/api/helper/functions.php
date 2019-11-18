@@ -18,4 +18,12 @@ if (!function_exists('startup')) {
   }
 }
 
+if (!function_exists('getBodyData')) {
+  function getBodyData() {
+    $stdin = file_get_contents("php://input");
+    $data = json_decode($stdin, true);
+    return $data;
+  }
+}
+
 ?>

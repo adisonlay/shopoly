@@ -6,28 +6,29 @@ startup();
 require_once('../../dbconnection.php');
 
 $idIncluded = false;
-$query = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`,
-  GROUP_CONCAT(i.`url`) AS images
-    FROM `items` AS p
-    JOIN `images` AS i
-      ON p.`id` = i.`item_id`
-  GROUP BY p.`id`;";
+$getDetailsQueryModifiers = array(
+  'fields' => '',
+  'whereClause' => ''
+);
 
 if (!empty($_GET['id'])) {
   if (is_numeric($_GET['id'])) {
     $idIncluded = true;
-    $query = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`, p.`description1`, p.`description2`,
-      GROUP_CONCAT(i.`url`) AS images
-        FROM `items` AS p
-        JOIN `images` AS i
-          ON p.`id` = i.`item_id`
-        WHERE p.`id` = {$_GET['id']}
-      GROUP BY p.`id`;";
+    $getDetailsQueryModifiers['fields'] = 'p.`description1`, p.`description2`,';
+    $getDetailsQueryModifiers['whereClause'] = "WHERE p.`id` = {$_GET['id']}";
   } else {
     throw new Exception('Item ID must be a number');
     exit();
   }
 }
+
+$query = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`, {$getDetailsQueryModifiers['fields']}
+  GROUP_CONCAT(i.`url`) AS images
+    FROM `items` AS p
+    JOIN `images` AS i
+      ON p.`id` = i.`item_id`
+    {$getDetailsQueryModifiers['whereClause']}
+  GROUP BY p.`id`;";
 
 $result = mysqli_query($conn, $query);
 
