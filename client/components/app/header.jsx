@@ -8,17 +8,17 @@ import { ShoppingCartTwoTone } from '@material-ui/icons';
 // import ShoppingCartTwoToneIcon from '@material-ui/icons/ShoppingCartTwoTone';
 
 export default function Header({ setAppView, cartItemCount }) {
-  const logoClickHandler = () => props.setAppView('catalog', {});
-  const cartClickHandler = () => props.setAppView('cart', {});
+  const handleLogoClick = () => props.setAppView('catalog', {});
+  const handleCartClick = () => props.setAppView('cart', {});
 
   return (
     <AppBar position="static">
       <Toolbar>
-          <Typography variant="h3" onClick={logoClickHandler}>Shopoly</Typography>
+          <Typography variant="h3" onClick={handleLogoClick}>Shopoly</Typography>
           <Typography variant="subtitle1">The Property Trading Shop</Typography>
 
         <Box ml="auto">
-          <Button>
+          <Button onClick={handleCartClick}>
             {cartItemCount}
             <ShoppingCartTwoTone />
           </Button>
