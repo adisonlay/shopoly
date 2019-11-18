@@ -13,14 +13,17 @@ export default class App extends Component {
       cartItems: [],
       orderedCarts: []
     };
+    this.setView = this.setView.bind(this);
   }
-  setView() {
-
+  setView(name, params) {
+    this.setState({
+      view: { name, params }
+    });
   }
   render() {
     return (
       <div>
-        <Header />
+        <Header setAppView={this.setView} />
       </div>
     );
   }
