@@ -10,6 +10,7 @@ import { ShoppingCartTwoTone } from '@material-ui/icons';
 export default function Header({ setAppView, cartItemCount }) {
   const logoClickHandler = () => props.setAppView('catalog', {});
   const cartClickHandler = () => props.setAppView('cart', {});
+
   return (
     <AppBar position="static">
       <Toolbar>
