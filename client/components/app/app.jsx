@@ -23,7 +23,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Header setAppView={this.setView} />
+        <Header setAppView={this.setView} cartItemCount={this.state.cartItems.length} />
       </div>
     );
   }
