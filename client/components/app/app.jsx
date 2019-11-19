@@ -8,10 +8,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      view: {
-        page: 'catalog',
-        params: {}
-      },
+      view: { page: 'catalog', params: {} },
       activeCartID: null,
       cartItems: [],
       orderedCarts: []
@@ -26,9 +23,10 @@ export default class App extends Component {
   }
 
   render() {
+    const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
       catalog: (<ItemCardsList setAppView={this.setView} />),
-      details: (<ItemDetails setAppView={this.setView} viewParams={this.state.view.params} />),
+      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} />),
       cart: '',
       checkout: '',
       orderHistory: '',
@@ -38,8 +36,8 @@ export default class App extends Component {
     return (
       <div>
         <Header setAppView={this.setView} cartItemCount={this.state.cartItems.length} />
-        <BreadcrumbBar currentView={this.state.view.page} itemName={this.state.view.page === 'details' ? this.state.view.params.itemName : null} />
-        {pageComponents[this.state.view.page]}
+        <BreadcrumbBar currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
+        {pageComponents[currentPage]}
       </div>
     );
   }
