@@ -4,7 +4,7 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Box, Typogra
 
 export default function ItemCard({ itemData, setAppView }) {
   const {
-    id,
+    id: itemID,
     name,
     price,
     lot_number: lotNumber,
@@ -14,7 +14,7 @@ export default function ItemCard({ itemData, setAppView }) {
   } = itemData;
 
   const sortedImages = sortImageData(images);
-  const handleDetailsClick = () => setAppView('details', { itemID: id });
+  const handleDetailsClick = () => setAppView('details', { itemID });
 
   return (
     <Card>
