@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './header';
+import BreadcrumbBar from './breadcrumb-bar';
 import ItemCardsList from '../item/item-cards-list';
 import ItemDetails from '../item/item-details';
 
@@ -37,6 +38,7 @@ export default class App extends Component {
     return (
       <div>
         <Header setAppView={this.setView} cartItemCount={this.state.cartItems.length} />
+        <BreadcrumbBar currentView={this.state.view.page} itemName={this.state.view.page === 'details' ? this.state.view.params.itemName : null} />
         {pageComponents[this.state.view.page]}
       </div>
     );
