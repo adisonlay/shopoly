@@ -40,30 +40,34 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
     return (
       <Container fixed>
         <Paper>
-          <Grid container>
-            <Grid item xs={12} md={6} lg={4}>
-              <Box
-                width={1}
-                height="16rem"
-                style={{
-                  backgroundImage: `url("${images[1]}")`,
-                  backgroundSize: 'contain',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
-              />
+          <Box p="2rem">
+            <Grid container>
+              <Grid item xs={12} md={6} lg={4}>
+                <Box
+                  mb="1rem"
+                  width={1}
+                  height="16rem"
+                  style={{
+                    backgroundImage: `url("${images[1]}")`,
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} lg={6}>
+                <Typography gutterBottom variant="h5">{name}</Typography>
+                <Typography gutterBottom variant="h6" color="textSecondary">{price}</Typography>
+                <Typography>Lot Number: {lotNumber}</Typography>
+                <Typography>Base Rent: {rent}</Typography>
+                <Typography gutterBottom>Color Group: {itemGroup}</Typography>
+                <Button variant="contained" color="primary">Add to Cart</Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={6} lg={6}>
-              <Typography gutterBottom variant="h5">{name}</Typography>
-              <Typography gutterBottom variant="h6" color="textSecondary">{price}</Typography>
-              <Typography>Lot Number: {lotNumber}</Typography>
-              <Typography>Base Rent: {rent}</Typography>
-              <Typography>Color Group: {itemGroup}</Typography>
-              <Button variant="contained" color="primary">Add to Cart</Button>
-            </Grid>
-          </Grid>
-          <Typography paragraph>{description1}</Typography>
-          <Typography paragraph>{description2}</Typography>
+            <Typography paragraph>{description1}</Typography>
+            <Typography paragraph>{description2}</Typography>
+          </Box>
+
         </Paper>
       </Container>
     );

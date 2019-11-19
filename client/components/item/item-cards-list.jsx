@@ -23,7 +23,7 @@ export default function ItemCardsList({ setAppView }) {
     return (<Typography variant="h5" color="textSecondary">Items data unavailable.</Typography>);
   } else {
     return (
-      <Container>
+      <Container maxWidth={false}>
         <Grid container spacing={3}>
           {itemsData.map(item => (
             <Grid item xs={12} sm={6} lg={4} xl={3} key={item.itemID}>

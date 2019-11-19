@@ -14,7 +14,7 @@ export default function ItemCard({ itemData, setAppView }) {
     images
   } = itemData;
 
-  const handleDetailsClick = () => setAppView('details', { itemID });
+  const handleDetailsClick = () => setAppView('details', { itemID, itemName: name });
 
   return (
     <Card>
