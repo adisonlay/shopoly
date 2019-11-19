@@ -6,7 +6,7 @@ export default function ItemCardsList({ setAppView }) {
   const [itemsData, setItemsData] = useState([]);
 
   const getItemsData = () => {
-    fetch('/api/helper/items.php')
+    fetch('api/helper/items.php')
       .then(response => response.json())
       .then(itemsData => setItemsData(itemsData))
       .catch(error => console.error(error));

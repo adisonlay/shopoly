@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './header';
+import ItemCardsList from '../item/item-cards-list';
 
 export default class App extends Component {
   constructor() {
@@ -24,6 +25,7 @@ export default class App extends Component {
     return (
       <div>
         <Header setAppView={this.setView} cartItemCount={this.state.cartItems.length} />
+        <ItemCardsList setAppView={this.setView} />
       </div>
     );
   }

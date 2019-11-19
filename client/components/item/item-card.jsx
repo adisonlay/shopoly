@@ -13,14 +13,15 @@ export default function ItemCard({ itemData, setAppView }) {
     images
   } = itemData;
 
-  images = sortImageData(images);
+  const sortedImages = sortImageData(images);
   const handleDetailsClick = () => props.setAppView('details', { itemID: id });
 
   return (
     <Card>
       <CardActionArea>
         <CardMedia
-          image={`../../${images[0]}`}
+          style={{ height: '16rem', backgroundSize: 'contain' }}
+          image={sortedImages[0].substring(13)}
           title={name}
         />
         <CardContent>
@@ -32,8 +33,8 @@ export default function ItemCard({ itemData, setAppView }) {
               {`$${price}`}
             </Typography>
           </Box>
-          <Typography>Lot Number: {lotNumber}</Typography>
-          <Typography>Base Rent: {`$${baseRent}`}</Typography>
+          <Typography>Lot Number: {lotNumber > 0 ? lotNumber : 'N/A'}</Typography>
+          <Typography>Base Rent: {isNaN(parseInt(baseRent)) ? baseRent :`$${baseRent}`}</Typography>
           <Typography>Color Group: {itemGroup}</Typography>
         </CardContent>
       </CardActionArea>
