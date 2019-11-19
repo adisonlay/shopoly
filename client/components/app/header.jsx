@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Box, IconButton, Badge } from '@material-ui/core';
 // import AppBar from '@material-ui/core/AppBar';
 // import Toolbar from '@material-ui/core/Toolbar';
 // import Typography from '@material-ui/core/Typography';
@@ -14,14 +14,15 @@ export default function Header({ setAppView, cartItemCount }) {
   return (
     <AppBar position="static">
       <Toolbar>
-          <Typography variant="h3" onClick={handleLogoClick}>Shopoly</Typography>
-          <Typography variant="subtitle1">The Property Trading Shop</Typography>
+        <Typography variant="h3" onClick={handleLogoClick}>Shopoly</Typography>
+        <Typography variant="subtitle1">The Property Trading Shop</Typography>
 
         <Box ml="auto">
-          <Button onClick={handleCartClick}>
-            {cartItemCount}
-            <ShoppingCartTwoTone />
-          </Button>
+          <IconButton onClick={handleCartClick}>
+            <Badge showZero color="secondary" badgeContent={cartItemCount}>
+              <ShoppingCartTwoTone />
+            </Badge>
+          </IconButton>
         </Box>
 
       </Toolbar>
