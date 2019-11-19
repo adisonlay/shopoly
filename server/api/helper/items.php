@@ -22,7 +22,7 @@ if (!empty($_GET['id'])) {
   }
 }
 
-$query = "SELECT p.`id`, p.`name`, p.`lot_number`, p.`price`, p.`rent`, p.`item_group`, {$getDetailsQueryModifiers['fields']}
+$query = "SELECT p.`id` AS itemID, p.`name`, p.`lot_number` AS lotNumber, p.`price`, p.`rent`, p.`item_group` AS itemGroup, {$getDetailsQueryModifiers['fields']}
   GROUP_CONCAT(i.`url`) AS images
     FROM `items` AS p
     JOIN `images` AS i
@@ -44,14 +44,14 @@ if ($idIncluded && mysqli_num_rows($result) === 0) {
 
 if ($idIncluded && mysqli_num_rows($result) === 1) {
   $itemDetailObj = mysqli_fetch_assoc($result);
-  $itemDetailObj['lot_number'] = intval($itemDetailObj['lot_number']);
+  $itemDetailObj['lotNumber'] = intval($itemDetailObj['lotNumber']);
   $itemDetailObj['images'] = explode(',', $itemDetailObj['images']);
   $itemDetailObjOutput = json_encode($itemDetailObj);
   print($itemDetailObjOutput);
 } else {
   $output = [];
   while ($row = mysqli_fetch_assoc($result)) {
-    $row['lot_number'] = intval($row['lot_number']);
+    $row['lotNumber'] = intval($row['lotNumber']);
     $row['images'] = explode(',', $row['images']);
     $output[] = $row;
   }
