@@ -14,12 +14,12 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'catalog':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link>
-          <Typography>
+          <Typography color="textPrimary">
             Catalog
           </Typography>
         </Breadcrumbs>
@@ -28,15 +28,15 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'details':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link >
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             Catalog
           </Link>
-          <Typography>
+          <Typography color="textPrimary">
             {itemName}
           </Typography>
         </Breadcrumbs>
@@ -45,12 +45,12 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'cart':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link>
-          <Typography>
+          <Typography color="textPrimary">
             Cart
           </Typography>
         </Breadcrumbs>
@@ -59,15 +59,15 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'checkout':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link >
-          <Link color="inherit" href="#" onClick={handleCartClick}>
+          <Link color="textSecondary" href="#" onClick={handleCartClick}>
             Cart
           </Link>
-          <Typography>
+          <Typography color="textPrimary">
             Checkout
           </Typography>
         </Breadcrumbs>
@@ -76,12 +76,12 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'orderHistory':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link>
-          <Typography>
+          <Typography color="textPrimary">
             Orders
           </Typography>
         </Breadcrumbs>
@@ -90,15 +90,15 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'orderSummary':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="inherit" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link >
-          <Link color="inherit" href="#" onClick={handleOrdersClick}>
+          <Link color="textSecondary" href="#" onClick={handleOrdersClick}>
             Orders
           </Link>
-          <Typography>
+          <Typography color="textPrimary">
             Checkout
           </Typography>
         </Breadcrumbs>

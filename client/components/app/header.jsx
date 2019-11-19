@@ -1,10 +1,5 @@
 import React from 'react';
-import { Box, AppBar, Toolbar, Typography, IconButton, Badge } from '@material-ui/core';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-// import { ShoppingCartTwoTone } from '@material-ui/icons';
+import { Box, AppBar, Toolbar, Typography, IconButton, Badge, Tooltip } from '@material-ui/core';
 import ShoppingCartTwoToneIcon from '@material-ui/icons/ShoppingCartTwoTone';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
 
@@ -23,14 +18,18 @@ export default function Header({ setAppView, cartItemCount }) {
           </Box>
 
           <Box ml="auto">
-            <IconButton onClick={handleOrdersClick}>
-              <LocalMallTwoToneIcon />
-            </IconButton>
-            <IconButton onClick={handleCartClick}>
-              <Badge showZero color="secondary" badgeContent={cartItemCount}>
-                <ShoppingCartTwoToneIcon />
-              </Badge>
-            </IconButton>
+            <Tooltip title="Orders">
+              <IconButton onClick={handleOrdersClick}>
+                <LocalMallTwoToneIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Cart">
+              <IconButton onClick={handleCartClick}>
+                <Badge color="secondary" badgeContent={cartItemCount}>
+                  <ShoppingCartTwoToneIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>
