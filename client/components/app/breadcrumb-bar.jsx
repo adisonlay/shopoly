@@ -3,10 +3,10 @@ import { Box, Paper, Breadcrumbs, Link, Typography } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 
-export default function BreadcrumbBar({ currentView, itemName }) {
-  const handleCatalogClick = () => { };
-  const handleCartClick = () => { };
-  const handleOrdersClick = () => { };
+export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
+  const handleCatalogClick = () => setAppView('catalog', {});
+  const handleCartClick = () => setAppView('cart', {});
+  const handleOrdersClick = () => setAppView('orderHistory', {});
 
   let crumbsToDisplay = null;
 
