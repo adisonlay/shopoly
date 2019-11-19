@@ -14,7 +14,7 @@ export default function ItemCard({ itemData, setAppView }) {
   } = itemData;
 
   const sortedImages = sortImageData(images);
-  const handleDetailsClick = () => props.setAppView('details', { itemID: id });
+  const handleDetailsClick = () => setAppView('details', { itemID: id });
 
   return (
     <Card>
@@ -26,12 +26,8 @@ export default function ItemCard({ itemData, setAppView }) {
         />
         <CardContent>
           <Box display="flex" justifyContent="space-between">
-            <Typography gutterBottom variant="h5">
-              {name}
-            </Typography>
-            <Typography gutterBottom variant="h5" color="textSecondary">
-              {`$${price}`}
-            </Typography>
+            <Typography gutterBottom variant="h5">{name}</Typography>
+            <Typography gutterBottom variant="h5" color="textSecondary">{`$${price}`}</Typography>
           </Box>
           <Typography>Lot Number: {lotNumber > 0 ? lotNumber : 'N/A'}</Typography>
           <Typography>Base Rent: {isNaN(parseInt(baseRent)) ? baseRent :`$${baseRent}`}</Typography>
@@ -39,9 +35,7 @@ export default function ItemCard({ itemData, setAppView }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" onClick={handleDetailsClick}>
-          View Product Details
-        </Button>
+        <Button size="small" onClick={handleDetailsClick}>View Product Details</Button>
       </CardActions>
     </Card>
   );
