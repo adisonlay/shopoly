@@ -5,16 +5,19 @@ import { Container, Grid, Paper, Box, Typography, Button } from '@material-ui/co
 export default function ItemDetails({ setAppView, viewParams, addToCartCallback }) {
   const [itemDetailData, setItemDetailData] = useState({});
 
-  const getItemDetailData = itemID => {
-    fetch(`api/helper/items.php?id=${itemID}`)
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    fetch(`api/helper/items.php?id=${viewParams.itemID}`, { signal })
       .then(response => response.json())
       .then(itemDetailData => setItemDetailData(itemDetailData))
       .catch(error => console.error(error));
-  }
 
-  useEffect(() => {
-    getItemDetailData(viewParams.itemID);
-  });
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [itemDetailData]);
 
   const handleAddToCart = () => {};
 

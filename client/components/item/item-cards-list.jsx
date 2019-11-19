@@ -5,16 +5,19 @@ import { Container, Grid, Typography } from '@material-ui/core';
 export default function ItemCardsList({ setAppView }) {
   const [itemsData, setItemsData] = useState([]);
 
-  const getItemsData = () => {
-    fetch('api/helper/items.php')
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
+    fetch('api/helper/items.php', { signal })
       .then(response => response.json())
       .then(itemsData => setItemsData(itemsData))
       .catch(error => console.error(error));
-  }
 
-  useEffect(() => {
-    getItemsData();
-  });
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [itemsData]);
 
   if (itemsData.length === 0) {
     return (<Typography variant="h5" color="textSecondary">Items data unavailable.</Typography>);
