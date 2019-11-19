@@ -1,19 +1,19 @@
 import React from 'react';
-import { sortImageData } from '../app/functions'
+import { formatItemData } from '../app/functions'
 import { Card, CardActionArea, CardActions, CardContent, CardMedia, Box, Typography, Button } from '@material-ui/core';
 
 export default function ItemCard({ itemData, setAppView }) {
+  itemData = formatItemData(itemData);
   const {
-    id: itemID,
+    itemID,
     name,
     price,
-    lot_number: lotNumber,
-    rent: baseRent,
-    item_group: itemGroup,
+    lotNumber,
+    rent,
+    itemGroup,
     images
   } = itemData;
 
-  const sortedImages = sortImageData(images);
   const handleDetailsClick = () => setAppView('details', { itemID });
 
   return (
@@ -21,16 +21,16 @@ export default function ItemCard({ itemData, setAppView }) {
       <CardActionArea>
         <CardMedia
           style={{ height: '16rem', backgroundSize: 'contain' }}
-          image={sortedImages[0].substring(13)}
+          image={images[0]}
           title={name}
         />
         <CardContent>
           <Box display="flex" justifyContent="space-between">
             <Typography gutterBottom variant="h5">{name}</Typography>
-            <Typography gutterBottom variant="h5" color="textSecondary">{`$${price}`}</Typography>
+            <Typography gutterBottom variant="h5" color="textSecondary">{price}</Typography>
           </Box>
-          <Typography>Lot Number: {lotNumber > 0 ? lotNumber : 'N/A'}</Typography>
-          <Typography>Base Rent: {isNaN(parseInt(baseRent)) ? baseRent :`$${baseRent}`}</Typography>
+          <Typography>Lot Number: {lotNumber}</Typography>
+          <Typography>Base Rent: {rent}</Typography>
           <Typography>Color Group: {itemGroup}</Typography>
         </CardContent>
       </CardActionArea>

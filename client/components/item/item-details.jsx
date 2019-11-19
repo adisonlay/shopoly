@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { sortImageData } from '../app/functions'
+import { formatItemData } from '../app/functions'
 import { Container, Grid, Paper, Box, Typography, Button } from '@material-ui/core';
 
 export default function ItemDetails({ setAppView, viewParams, addToCartCallback }) {
@@ -21,19 +21,18 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
   if (Object.keys(itemDetailData).length === 0) {
     return (<Typography variant="h5" color="textSecondary">Item details unavailable.</Typography>);
   } else {
+    const formattedData = formatItemData(itemDetailData);
     const {
-      id: itemID,
+      itemID,
       name,
       price,
-      lot_number: lotNumber,
-      rent: baseRent,
-      item_group: itemGroup,
+      lotNumber,
+      rent,
+      itemGroup,
       description1,
       description2,
       images
-    } = itemDetailData;
-
-    const sortedImages = sortImageData(images);
+    } = formattedData;
 
     return (
       <Container fixed>
@@ -44,7 +43,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
                 width={1}
                 height="16rem"
                 style={{
-                  backgroundImage: `url("${sortedImages[1].substring(13)}")`,
+                  backgroundImage: `url("${images[1]}")`,
                   backgroundSize: 'contain',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat'
@@ -53,9 +52,9 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
             </Grid>
             <Grid item xs={12} md={6} lg={6}>
               <Typography gutterBottom variant="h5">{name}</Typography>
-              <Typography gutterBottom variant="h6" color="textSecondary">{`Price: $${price}`}</Typography>
-              <Typography>Lot Number: {lotNumber > 0 ? lotNumber : 'N/A'}</Typography>
-              <Typography>Base Rent: {isNaN(parseInt(baseRent)) ? baseRent : `$${baseRent}`}</Typography>
+              <Typography gutterBottom variant="h6" color="textSecondary">{price}</Typography>
+              <Typography>Lot Number: {lotNumber}</Typography>
+              <Typography>Base Rent: {rent}</Typography>
               <Typography>Color Group: {itemGroup}</Typography>
               <Button variant="contained" color="primary">Add to Cart</Button>
             </Grid>

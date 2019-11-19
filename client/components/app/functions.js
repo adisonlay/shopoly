@@ -13,4 +13,23 @@ function sortImageData(imagesArray) {
   return sortedArray;
 }
 
-export { sortImageData };
+function formatItemData(itemDataObject) {
+  let formattedData = JSON.parse(JSON.stringify(itemDataObject));
+
+  if (formattedData.lotNumber > 0) {
+    formattedData.lotNumber = '#' + formattedData.lotNumber;
+  } else {
+    formattedData.lotNumber = 'N/A';
+  }
+
+  if (!isNaN(parseInt(formattedData.rent))) {
+    formattedData.rent = '$' + formattedData.rent;
+  }
+
+  formattedData.price = '$' + formattedData.price;
+  formattedData.images = sortImageData(formattedData.images).map(url => url.substring(13));
+
+  return formattedData;
+}
+
+export { formatItemData };
