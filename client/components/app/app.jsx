@@ -19,9 +19,7 @@ export default class App extends Component {
   }
 
   setView(page, params) {
-    this.setState({
-      view: { page, params }
-    });
+    this.setState({ view: { page, params } });
   }
 
   getCartItems() {
