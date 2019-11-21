@@ -29,6 +29,28 @@ export default class App extends Component {
       .catch(error => console.error(error));
   }
 
+  addToCart(cartAddBody, itemDetailData) {
+    fetch('/api/cart/cart.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(cartAddBody)
+    })
+      .then(response => response.json())
+      .then(cartAddData => {
+        const { itemID, finalPrice, quantity} = cartAddBody;
+        const newCartItemData = JSON.parse(JSON.stringify(itemDetailData));
+        newCartItemData.cartID = cartAddData.cartID;
+        newCartItemData.finalPrice = finalPrice;
+        newCartItemData.quantity = quantity;
+        this.setState(prevState => { cartItems: prevState.cartItems.concat([newCartItemData]) });
+      })
+      .catch(error => console.error(error));
+  }
+
+  componentDidMount() {
+    this.getCartItems();
+  }
+
   render() {
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
