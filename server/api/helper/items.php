@@ -33,12 +33,12 @@ $query = "SELECT p.`id` AS itemID, p.`name`, p.`lot_number` AS lotNumber, p.`pri
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-  throw new Exception('Query error ' . mysqli_error($conn));
+  throw new Exception('Query error; invalid SELECT: ' . mysqli_error($conn));
   exit();
 }
 
 if ($idIncluded && mysqli_num_rows($result) === 0) {
-  throw new Exception('Invalid ID: ' . $_GET['id']);
+  throw new Exception('Invalid Item ID: ' . $_GET['id']);
   exit();
 }
 
