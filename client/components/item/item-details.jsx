@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import AddToCart from './add-to-cart';
-import { formatItemData } from '../app/functions'
+import { formatItemData } from '../app/functions';
 import { Container, Grid, Paper, Box, Typography } from '@material-ui/core';
 
 export default function ItemDetails({ setAppView, viewParams, addToCartCallback }) {
