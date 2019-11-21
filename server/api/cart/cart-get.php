@@ -25,6 +25,24 @@ $query = "SELECT ci.`cart_id` AS cartID,
     ON ci.`item_id` = pi.`itemID`
     WHERE ci.`cart_id` = {$activeCartID}";
 
+$result = mysqli_query($conn, $query);
 
+if (!$result) {
+  throw new Exception('Query error; invalid SELECT: ' . mysqli_error($conn));
+  exit();
+}
+
+if (mysqli_num_rows($result) === 0) {
+  print(json_encode([]));
+} else {
+  $output = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $row['lotNumber'] = intval($row['lotNumber']);
+    $row['images'] = explode(',', $row['images']);
+    $output[] = $row;
+  }
+  $jsonData = json_encode($output);
+  print($jsonData);
+}
 
 ?>
