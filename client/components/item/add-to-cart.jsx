@@ -26,7 +26,7 @@ export default function AddToCart({ itemDetailData, addToCartCallback }) {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    setToastOpen(false);
   };
 
   return (
@@ -51,10 +51,10 @@ export default function AddToCart({ itemDetailData, addToCartCallback }) {
       <Button variant="contained" color="primary" disabled={!quantity} onClick={handleAddToCart}>Add to Cart</Button>
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={open}
+        open={toastOpen}
         autoHideDuration={6000}
         onClose={handleCloseToast}
-        message={<span>{itemDetailData.name} added to cart</span>}
+        message={<span>{itemDetailData.name} Added to Cart</span>}
         action={
           <IconButton key="close" aria-label="close" color="inherit" onClick={handleCloseToast} >
             <CloseIcon />
