@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import AddToCart from './add-to-cart';
 import { formatItemData } from '../app/functions'
-import { Container, Grid, Paper, Box, Typography, Button } from '@material-ui/core';
+import { Container, Grid, Paper, Box, Typography } from '@material-ui/core';
 
 export default function ItemDetails({ setAppView, viewParams, addToCartCallback }) {
   const [itemDetailData, setItemDetailData] = useState({});
@@ -18,8 +19,6 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
       abortController.abort();
     };
   }, [itemDetailData]);
-
-  const handleAddToCart = () => {};
 
   if (Object.keys(itemDetailData).length === 0) {
     return (<Typography variant="h5" color="textSecondary">Item details unavailable.</Typography>);
@@ -42,6 +41,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
         <Paper>
           <Box p="2rem">
             <Grid container>
+
               <Grid item xs={12} md={6} lg={4}>
                 <Box
                   mb="1rem"
@@ -55,19 +55,24 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
                   }}
                 />
               </Grid>
+
               <Grid item xs={12} md={6} lg={6}>
-                <Typography gutterBottom variant="h5">{name}</Typography>
-                <Typography gutterBottom variant="h6" color="textSecondary">{price}</Typography>
-                <Typography>Lot Number: {lotNumber}</Typography>
-                <Typography>Base Rent: {rent}</Typography>
-                <Typography gutterBottom>Color Group: {itemGroup}</Typography>
-                <Button variant="contained" color="primary">Add to Cart</Button>
+                <Box mb="1rem">
+                  <Typography gutterBottom variant="h5">{name}</Typography>
+                  <Typography gutterBottom variant="h6" color="textSecondary">{price}</Typography>
+                  <Typography>Lot Number: {lotNumber}</Typography>
+                  <Typography>Base Rent: {rent}</Typography>
+                  <Typography gutterBottom>Color Group: {itemGroup}</Typography>
+                  <AddToCart />
+                </Box>
               </Grid>
+
             </Grid>
+
             <Typography paragraph>{description1}</Typography>
             <Typography paragraph>{description2}</Typography>
-          </Box>
 
+          </Box>
         </Paper>
       </Container>
     );
