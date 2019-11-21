@@ -1,10 +1,10 @@
 <?php
 
 define('INTERNAL', true);
-require_once('functions.php');
+require_once('../helper/functions.php');
 session_start();
 set_exception_handler('handleErrors');
-require_once('dbconnection.php');
+require_once('../../dbconnection.php');
 
 switch ($_SERVER['REQUEST_METHOD']) {
   case 'GET':

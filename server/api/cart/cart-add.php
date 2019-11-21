@@ -1,19 +1,21 @@
 <?php
 
-if (!defined(INTERNAL)) {
+if (!defined('INTERNAL')) {
   exit('Direct access unavailable');
 }
 
 $bodyData = getBodyData();
 
 if (empty($bodyData['itemID'])) {
-  throw new Exception('Item ID not found; item not added to cart');
+  throw new Exception('Item ID missing; item not added to cart');
+  exit();
 }
 
 $itemID = intval($bodyData['itemID']);
 
 if ($itemID <= 0) {
   throw new Exception('Invalid Item ID: ' . $bodyData['itemID']);
+  exit();
 }
 
 if (!empty($_SESSION['activeCartID'])) {
@@ -26,12 +28,14 @@ $selectQuery = "SELECT * FROM `items` WHERE `id` = {$itemID};";
 
 $selectResult = mysqli_query($conn, $selectQuery);
 
-if ($selectResult) {
+if (!$selectResult) {
   throw new Exception('Query error; invalid SELECT: ' . mysqli_error($conn));
+  exit();
 }
 
 if (mysqli_num_rows($selectResult) === 0) {
-  throw new Exception('Invalid Item ID: ' . $itemID);
+  throw new Exception('Item ID: ' . $itemID . ' not found; item not added to cart');
+  exit();
 }
 
 $itemData = mysqli_fetch_assoc($selectResult);
@@ -40,6 +44,7 @@ $transactionResult = mysqli_query($conn, 'START TRANSACTION');
 
 if (!$transactionResult) {
   throw new Exception('Unable to start transaction: ' . mysqli_error($conn));
+  exit();
 }
 
 if (!$activeCartID) {
@@ -59,13 +64,14 @@ foreach ($bodyData as $field => $value) {
 }
 
 $insertCartItemsQuery = "INSERT INTO `cart_items` (`cart_id`, `item_id`, `final_price`, `quantity`, `added`)
-  VALUES ({$activeCartID}, {$bodyData[$itemID]}, {$bodyData[$finalPrice]}, {$bodyData[$quantity]}, NOW())
-  ON DUPLICATE KEY UPDATE `quantity` = `quantity` + {$bodyData[$quantity]};";
+  VALUES ({$activeCartID}, {$bodyData['itemID']}, {$bodyData['finalPrice']}, {$bodyData['quantity']}, NOW())
+  ON DUPLICATE KEY UPDATE `quantity` = `quantity` + {$bodyData['quantity']};";
 
 $insertCartItemsResult = mysqli_query($conn, $insertCartItemsQuery);
 
 if (!$insertCartItemsResult) {
   throw new Exception('Query error; invalid INSERT: ' . mysqli_error($conn));
+  exit();
 }
 
 if (mysqli_affected_rows($conn) === 0) {

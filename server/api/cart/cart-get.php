@@ -1,6 +1,6 @@
 <?php
 
-if (!defined(INTERNAL)) {
+if (!defined('INTERNAL')) {
   exit('Direct access unavailable');
 }
 
