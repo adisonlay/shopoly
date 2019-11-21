@@ -4,9 +4,8 @@ import { FormControl, InputLabel, Select, MenuItem, Button } from '@material-ui/
 export default function AddToCart({ addToCartCallback }) {
   const [quantity, setQuantity] = useState(1);
 
-  useEffect(() => {}, []);
-
-  const handleSelect = () => {};
+  const handleSelect = event => setQuantity(event.target.value);
+  const handleAddToCart = () => addToCartCallback();
 
   return (
     <div>
@@ -27,7 +26,7 @@ export default function AddToCart({ addToCartCallback }) {
           <MenuItem value={4}>4</MenuItem>
         </Select>
 
-        <Button variant="contained" color="primary">Add to Cart</Button>
+        <Button variant="contained" color="primary" onClick={handleAddToCart}>Add to Cart</Button>
       </FormControl>
     </div>
   );

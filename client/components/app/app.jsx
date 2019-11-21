@@ -22,6 +22,13 @@ export default class App extends Component {
     });
   }
 
+  getCartItems() {
+    fetch('/api/cart/cart.php')
+      .then(response => response.json())
+      .then(cartItems => this.setState({ cartItems }))
+      .catch(error => console.error(error));
+  }
+
   render() {
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
