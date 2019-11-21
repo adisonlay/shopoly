@@ -63,7 +63,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
                   <Typography>Lot Number: {lotNumber}</Typography>
                   <Typography>Base Rent: {rent}</Typography>
                   <Typography gutterBottom>Color Group: {itemGroup}</Typography>
-                  <AddToCart />
+                  <AddToCart itemDetailData={itemDetailData} addToCartCallback={addToCartCallback} />
                 </Box>
               </Grid>
 

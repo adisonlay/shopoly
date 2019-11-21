@@ -3,6 +3,7 @@ import Header from './header';
 import BreadcrumbBar from './breadcrumb-bar';
 import ItemCardsList from '../item/item-cards-list';
 import ItemDetails from '../item/item-details';
+import { Box } from '@material-ui/core';
 
 export default class App extends Component {
   constructor() {
@@ -14,6 +15,7 @@ export default class App extends Component {
       orderedCarts: []
     };
     this.setView = this.setView.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   setView(page, params) {
@@ -36,12 +38,11 @@ export default class App extends Component {
       body: JSON.stringify(cartAddBody)
     })
       .then(response => response.json())
-      .then(cartAddData => {
-        const { itemID, finalPrice, quantity} = cartAddBody;
+      .then(cartAddResponse => {
         const newCartItemData = JSON.parse(JSON.stringify(itemDetailData));
-        newCartItemData.cartID = cartAddData.cartID;
-        newCartItemData.finalPrice = finalPrice;
-        newCartItemData.quantity = quantity;
+        newCartItemData.cartID = cartAddResponse.cartID;
+        newCartItemData.finalPrice = cartAddBody.finalPrice;
+        newCartItemData.quantity = cartAddBody.quantity;
         this.setState(prevState => { cartItems: prevState.cartItems.concat([newCartItemData]) });
       })
       .catch(error => console.error(error));
@@ -55,7 +56,7 @@ export default class App extends Component {
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
       catalog: (<ItemCardsList setAppView={this.setView} />),
-      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} />),
+      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
       cart: '',
       checkout: '',
       orderHistory: '',
@@ -63,11 +64,11 @@ export default class App extends Component {
     };
 
     return (
-      <div>
+      <Box>
         <Header setAppView={this.setView} cartItemCount={this.state.cartItems.length} />
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
-      </div>
+      </Box>
     );
   }
 }
