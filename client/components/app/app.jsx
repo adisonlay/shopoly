@@ -52,6 +52,9 @@ export default class App extends Component {
   }
 
   render() {
+    let initialCartItemCount = 0;
+    const cartItemCount = this.state.cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
+
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
       catalog: (<ItemCardsList setAppView={this.setView} />),
@@ -64,7 +67,7 @@ export default class App extends Component {
 
     return (
       <Box>
-        <Header setAppView={this.setView} cartItemCount={this.state.cartItems.length} />
+        <Header setAppView={this.setView} cartItemCount={cartItemCount} />
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
       </Box>

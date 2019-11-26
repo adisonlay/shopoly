@@ -32,15 +32,4 @@ function formatItemData(itemDataObject) {
   return formattedData;
 }
 
-function calculateCartTotal(cartItems) {
-  let cartTotal = null;
-  cartItems.forEach(item => {
-    cartTotal += parseInt(item.finalPrice);
-  });
-  if (!cartTotal) {
-    cartTotal = 0;
-  }
-  return '$' + cartTotal;
-}
-
-export { formatItemData, calculateCartTotal };
+export { formatItemData };
