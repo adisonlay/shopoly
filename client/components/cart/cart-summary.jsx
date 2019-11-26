@@ -10,7 +10,7 @@ export default function CartSummary({ setAppView, cartItems }) {
   const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
 
   let initialCartTotal = 0;
-  const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice, initialCartTotal);
+  const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, initialCartTotal);
 
   const handleCheckout = () => setAppView('checkout', { itemTotal: '' });
 
@@ -25,7 +25,7 @@ export default function CartSummary({ setAppView, cartItems }) {
     <Container fixed>
       {cartItemListDisplay}
       <Box display="flex" justifyContent="space-between">
-        <Typography variant="h5">Cart Total ({cartItemCount} Items): {cartTotal}</Typography>
+        <Typography variant="h5">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
         {checkoutButtonDisplay}
       </Box>
     </Container>
