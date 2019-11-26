@@ -14,7 +14,7 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'catalog':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
@@ -28,12 +28,12 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'details':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link >
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             Catalog
           </Link>
           <Typography color="textPrimary">
@@ -45,7 +45,7 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'cart':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
@@ -59,12 +59,12 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'checkout':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link >
-          <Link color="textSecondary" href="#" onClick={handleCartClick}>
+          <Link color="textSecondary" onClick={handleCartClick}>
             Cart
           </Link>
           <Typography color="textPrimary">
@@ -76,7 +76,7 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'orderHistory':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
@@ -90,12 +90,12 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
     case 'orderSummary':
       crumbsToDisplay = (
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" href="#" onClick={handleCatalogClick}>
+          <Link color="textSecondary" onClick={handleCatalogClick}>
             <Box display="flex" alignItems="center">
               <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
             </Box>
           </Link >
-          <Link color="textSecondary" href="#" onClick={handleOrdersClick}>
+          <Link color="textSecondary" onClick={handleOrdersClick}>
             Orders
           </Link>
           <Typography color="textPrimary">
