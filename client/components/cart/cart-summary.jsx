@@ -12,12 +12,12 @@ export default function CartSummary({ setAppView, cartItems }) {
   let initialCartTotal = 0;
   const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, initialCartTotal);
 
-  const handleCheckout = () => setAppView('checkout', { itemTotal: '' });
+  const handleCheckout = () => setAppView('checkout', { cartTotal });
 
   if (!cartItems.length) {
     cartItemListDisplay = (<Typography variant="h5" color="textSecondary">There are no items in your cart.</Typography>);
   } else {
-    cartItemListDisplay = (cartItems.map(cartItem => <CartSummaryItem key={cartItem.itemID} itemData={cartItem} />));
+    cartItemListDisplay = (cartItems.map(cartItem => <CartSummaryItem key={cartItem.itemID} itemData={cartItem} setAppView={setAppView} />));
     checkoutButtonDisplay = (<Button variant="contained" color="primary" onClick={handleCheckout}>Checkout</Button>);
   }
 
