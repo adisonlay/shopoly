@@ -1,4 +1,5 @@
 import React from 'react';
+import CartSummaryItem from './cart-summary-item';
 import { formatItemData } from '../app/functions';
 import { Container, Grid, Paper, Box, Typography, Button } from '@material-ui/core';
 
@@ -17,15 +18,11 @@ export default function CartSummary({ setAppView, cartItems }) {
 
   return (
     <Container fixed>
-      <Paper>
-        <Box p="2rem">
-          <Grid container>
-            <Grid item xs={12} md={6} lg={4}>
-
-            </Grid>
-          </Grid>
-        </Box>
-      </Paper>
+      {cartItemListDisplay}
+      <Box display="flex" justifyContent="space-between">
+        <Typography>Cart Total: </Typography>
+        {checkoutButtonDisplay}
+      </Box>
     </Container>
   );
 }

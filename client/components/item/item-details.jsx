@@ -42,7 +42,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
           <Box p="2rem">
             <Grid container>
 
-              <Grid item xs={12} md={6} lg={4}>
+              <Grid item xs={12} md={6}>
                 <Box
                   mb="1rem"
                   width={1}
@@ -56,7 +56,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
                 />
               </Grid>
 
-              <Grid item xs={12} md={6} lg={6}>
+              <Grid item xs={12} md={6}>
                 <Box mb="1rem">
                   <Typography gutterBottom variant="h5">{name}</Typography>
                   <Typography gutterBottom variant="h6" color="textSecondary">{price}</Typography>
