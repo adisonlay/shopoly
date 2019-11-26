@@ -6,10 +6,10 @@ startup();
 require_once('../../dbconnection.php');
 
 $idIncluded = false;
-$getDetailsQueryModifiers = array(
+$getDetailsQueryModifiers = [
   'fields' => '',
   'whereClause' => ''
-);
+];
 
 if (!empty($_GET['id'])) {
   if (is_numeric($_GET['id'])) {

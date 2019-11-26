@@ -35,7 +35,7 @@ export default function ItemCard({ itemData, setAppView }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" onClick={handleDetailsClick}>View Product Details</Button>
+        <Button size="small" color="primary" onClick={handleDetailsClick}>View Product Details</Button>
       </CardActions>
     </Card>
   );

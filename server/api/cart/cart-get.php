@@ -11,7 +11,7 @@ if (empty($_SESSION['activeCartID'])) {
 
 $activeCartID = intval($_SESSION['activeCartID']);
 
-$query = "SELECT ci.`cart_id` AS cartID,
+$query = "SELECT ci.`cart_id` AS cartID, ci.`final_price` AS finalPrice, ci.`quantity`,
   pi.`itemID`, pi.`name`, pi.`lotNumber`, pi.`price`, pi.`rent`, pi.`itemGroup`, pi.`images`
     FROM `cart_items` AS ci
     LEFT JOIN (
@@ -37,6 +37,8 @@ if (mysqli_num_rows($result) === 0) {
 } else {
   $output = [];
   while ($row = mysqli_fetch_assoc($result)) {
+    $row['finalPrice'] = intval($row['finalPrice']);
+    $row['quantity'] = intval($row['quantity']);
     $row['lotNumber'] = intval($row['lotNumber']);
     $row['images'] = explode(',', $row['images']);
     $output[] = $row;
