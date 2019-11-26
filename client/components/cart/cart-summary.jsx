@@ -1,7 +1,7 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 import { formatItemData } from '../app/functions';
-import { Container, Grid, Paper, Box, Typography, Button } from '@material-ui/core';
+import { Container, Box, Typography, Button } from '@material-ui/core';
 
 export default function CartSummary({ setAppView, cartItems }) {
   let cartItemListDisplay = null;
