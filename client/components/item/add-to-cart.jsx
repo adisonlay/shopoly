@@ -29,7 +29,7 @@ export default function AddToCart({ itemDetailData, addToCartCallback }) {
 
   return (
     <Box my="1rem">
-      <FormControl variant="outlined">
+      <FormControl variant="outlined" margin="dense">
         <InputLabel ref={selectLabel} id="quantity-select-label">Quantity</InputLabel>
         <Select
           labelId="quantity-select-label"
@@ -47,7 +47,16 @@ export default function AddToCart({ itemDetailData, addToCartCallback }) {
         <FormHelperText style={{ margin: '0.5rem 0' }}>Maximum order quantity: 4</FormHelperText>
       </FormControl>
       <Button
-        variant="contained" color="primary" size="large" disabled={!quantity} onClick={handleAddToCart}>Add to Cart</Button>
+        variant="contained"
+        color="primary"
+        size="large"
+        disabled={!quantity}
+        onClick={handleAddToCart}
+        style={{ marginTop: '0.25rem' }}
+      >
+        Add to Cart
+      </Button>
+
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         open={toastOpen}
