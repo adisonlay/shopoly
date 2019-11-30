@@ -17,7 +17,6 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
 
   const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr.Monopoly', 'Jake the Jailbird'];
   const inputStyle = { margin: '1rem' };
-  // const selectStyle = { margin: '1rem', wid };
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handlePlaceOrder = () => placeOrderCallback();
@@ -27,12 +26,13 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
       <Grid container spacing={2}>
 
         <Grid item xs={12} md={9}>
-          <Box mb="0.25rem">
+          <Box mb="0.5rem">
             <Typography variant="h5">Checkout</Typography>
           </Box>
           <Paper>
             <Box p="2rem">
               <form>
+                <Typography variant="h6">Shipping Address</Typography>
                 <TextField
                   fullWidth
                   id="name-input"
@@ -56,24 +56,12 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   placeholder="e.g. Atlantic City"
                   style={inputStyle}
                 />
-                {/* <TextField
-                  id="state-input"
-                  select
-                  label="State"
-                  value=""
-                  variant="outlined"
-                >
-                  <MenuItem value=""><em>Choose...</em></MenuItem>
-                  <MenuItem value="NJ">New Jersey</MenuItem>
-                  <MenuItem value="CA">California</MenuItem>
-                </TextField> */}
-                <FormControl variant="outlined">
+                <FormControl variant="outlined" style={{ margin: '1rem', width: '20%' }}>
                   <InputLabel ref={stateSelectLabel} id="state-select-label">State</InputLabel>
                   <Select
                     labelId="state-select-label"
                     id="state-input"
                     labelWidth={stateLabelWidth}
-                    style={inputStyle}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
                     <MenuItem value="NJ">New Jersey</MenuItem>
@@ -87,20 +75,54 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   placeholder="e.g. 50200"
                   style={inputStyle}
                 />
-                <FormControl variant="outlined">
+                <br />
+                <FormControl variant="outlined" style={{ margin: '1rem', width: '35%' }}>
                   <InputLabel ref={countrySelectLabel} id="country-select-label">Country</InputLabel>
                   <Select
-                    fullWidth
                     labelId="country-select-label"
                     id="country-input"
-                    margin="dense"
                     labelWidth={countryLabelWidth}
-                    style={inputStyle}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
                     <MenuItem value="US">United States</MenuItem>
                   </Select>
                 </FormControl>
+
+                <Box my="1rem">
+                  <Divider />
+                </Box>
+
+                <Typography variant="h6">Payment</Typography>
+                <TextField
+                  id="card-name-input"
+                  label="Name on Card"
+                  variant="outlined"
+                  placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
+                  style={{ margin: '1rem', width: '45%' }}
+                />
+                <TextField
+                  id="card-number-input"
+                  label="Credit Card Number"
+                  variant="outlined"
+                  placeholder="e.g. 1234-5555-6789-0000"
+                  style={{ margin: '1rem', width: '45%' }}
+                />
+                <br />
+                <TextField
+                  id="card-expiration-input"
+                  label="Expiration"
+                  variant="outlined"
+                  placeholder="e.g. 01/2020"
+                  style={inputStyle}
+                />
+                <TextField
+                  id="card-cvv-input"
+                  label="CVV"
+                  variant="outlined"
+                  placeholder="e.g. 123"
+                  style={inputStyle}
+                />
+
               </form>
             </Box>
           </Paper>
