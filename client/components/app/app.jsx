@@ -4,6 +4,7 @@ import BreadcrumbBar from './breadcrumb-bar';
 import ItemCardsList from '../item/item-cards-list';
 import ItemDetails from '../item/item-details';
 import CartSummary from '../cart/cart-summary';
+import CartCheckoutForm from '../cart/cart-checkout-form';
 import { Box } from '@material-ui/core';
 
 export default class App extends Component {
@@ -60,7 +61,7 @@ export default class App extends Component {
       catalog: (<ItemCardsList setAppView={this.setView} />),
       details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
       cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
-      checkout: '',
+      checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} />),
       orderHistory: '',
       orderSummary: ''
     };
