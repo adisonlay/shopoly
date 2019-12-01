@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Container, Grid, Box, Paper, Typography, Chip,
+  Container, Grid, Box, Paper, Typography, Chip, Button,
   TextField, FormControl, InputLabel, Select, MenuItem,
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
@@ -32,6 +32,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
           <Paper>
             <Box p="2rem">
               <form>
+
                 <Typography variant="h6">Shipping Address</Typography>
                 <TextField
                   fullWidth
@@ -133,6 +134,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
             <Typography variant="h5">Cart</Typography>
             <Chip label={viewParams.cartItemCount} />
           </Box>
+
           <Paper>
             <List>
               {cartItems.map(cartItem => (
@@ -152,6 +154,17 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
               </ListItem>
             </List>
           </Paper>
+
+          <Box mt="1rem" display="flex" justifyContent="flex-end">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={handlePlaceOrder}
+            >
+              Place Order
+          </Button>
+          </Box>
         </Grid>
 
       </Grid>
