@@ -38,8 +38,6 @@ if (mysqli_num_rows($selectResult) === 0) {
   exit();
 }
 
-$itemData = mysqli_fetch_assoc($selectResult);
-
 $transactionResult = mysqli_query($conn, 'START TRANSACTION');
 
 if (!$transactionResult) {
