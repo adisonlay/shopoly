@@ -49,6 +49,7 @@ export default class App extends Component {
   getOrderHistory() { }
 
   placeOrder(cartID) {
+    cartID = parseInt(cartID);
     fetch('/api/order/order.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
