@@ -48,11 +48,11 @@ export default class App extends Component {
 
   getOrderHistory() { }
 
-  placeOrder(activeCartID) {
+  placeOrder(cartID) {
     fetch('/api/order/order.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(activeCartID)
+      body: JSON.stringify({ cartID })
     })
       .then(() => this.setState({
         view: { page: 'orderSummary', params: {} },

@@ -19,7 +19,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
   const inputStyle = { margin: '1rem' };
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
-  const handlePlaceOrder = () => placeOrderCallback();
+  const handlePlaceOrder = () => placeOrderCallback(cartItems[0].cartID);
 
   return (
     <Container fixed>
