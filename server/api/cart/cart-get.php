@@ -23,7 +23,7 @@ $query = "SELECT ci.`cart_id` AS cartID, ci.`final_price` AS finalPrice, ci.`qua
         GROUP BY p.`id`
     ) AS pi
     ON ci.`item_id` = pi.`itemID`
-    WHERE ci.`cart_id` = {$activeCartID}";
+    WHERE ci.`cart_id` = {$activeCartID};";
 
 $result = mysqli_query($conn, $query);
 
