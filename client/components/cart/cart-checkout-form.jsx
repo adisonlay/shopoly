@@ -6,6 +6,8 @@ import {
 } from '@material-ui/core';
 
 export default function CartCheckoutForm({ setAppView, viewParams, cartItems, placeOrderCallback }) {
+  const { cartItemCount, cartTotal } = viewParams;
+
   const [stateLabelWidth, setStateLabelWidth] = useState(0);
   const [countryLabelWidth, setCountryLabelWidth] = useState(0);
   const stateSelectLabel = useRef(null);
@@ -19,7 +21,10 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
   const inputStyle = { margin: '1rem' };
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
-  const handlePlaceOrder = () => placeOrderCallback(cartItems[0].cartID);
+  const handlePlaceOrder = () => {
+    placeOrderCallback(cartItems[0].cartID);
+    setAppView('orderSummary', { orderItems: cartItems, orderItemCount: cartItemCount, orderTotal: cartTotal });
+  };
 
   return (
     <Container fixed>
@@ -132,7 +137,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
         <Grid item xs={12} md={3}>
           <Box mb="0.5rem" display="flex" justifyContent="space-between">
             <Typography variant="h5">Cart</Typography>
-            <Chip label={viewParams.cartItemCount} />
+            <Chip label={cartItemCount} />
           </Box>
 
           <Paper>
@@ -149,7 +154,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
               <ListItem>
                 <ListItemText primary="Total" />
                 <ListItemSecondaryAction>
-                  <Typography>{'$' + viewParams.cartTotal}</Typography>
+                  <Typography>{'$' + cartTotal}</Typography>
                 </ListItemSecondaryAction>
               </ListItem>
             </List>
