@@ -1,6 +1,6 @@
 import React from 'react';
 import OrderSummaryItem from './order-summary-item';
-import { Container, Grid, Box, Typography, Button, Divider } from '@material-ui/core';
+import { Container, Typography, Grid, Paper, Box, Divider, Button } from '@material-ui/core';
 
 export default function OrderSummary({ setAppView, viewParams }) {
   const { orderItems, orderItemCount, orderTotal } = viewParams;
@@ -13,45 +13,70 @@ export default function OrderSummary({ setAppView, viewParams }) {
   if (!orderItems.length) {
     orderItemListDisplay = (<Typography variant="h5" color="textSecondary">No order data available.</Typography>);
   } else {
-    orderItemListDisplay = (orderItems.map(orderItem => <OrderSummaryItem key={orderItem.itemID} itemData={orderItem} setAppView={setAppView} />));
+    // orderItemListDisplay = (orderItems.map(orderItem => <OrderSummaryItem key={orderItem.itemID} itemData={orderItem} setAppView={setAppView} />));
     continueButtonDisplay = (<Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>);
   }
 
   return (
     <Container fixed>
       <Typography variant="h5" gutterBottom>Order Summary</Typography>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={3}>
-          <Typography variant="h6" color="textSecondary" gutterBottom>Order #{orderItems[0].cartID}</Typography>
+          <Paper>
+            <Box p="1rem">
+              <Typography variant="h6" color="textSecondary" gutterBottom>Order #{orderItems[0].cartID}</Typography>
 
-          <Typography>Payment Summary</Typography>
-          <Grid container>
-            <Grid item>
-              <Typography variant="body2" color="textSecondary">Item Total</Typography>
-              <Typography variant="body2" color="textSecondary">Taxes</Typography>
-              <Typography variant="body2" color="textSecondary">Shipping</Typography>
-              <Divider />
-              <Typography variant="body2" gutterBottom>Order Total</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body2" color="textSecondary">{'$' + orderTotal}</Typography>
-              <Typography variant="body2" color="textSecondary">$0</Typography>
-              <Typography variant="body2" color="textSecondary">$0</Typography>
-              <Divider />
-              <Typography variant="body2" gutterBottom>{'$' + orderTotal}</Typography>
-            </Grid>
-          </Grid>
+              <Typography>Payment Summary:</Typography>
+              <Box display="flex" justifyContent="space-between">
+                <Box>
+                  <Typography variant="body2" color="textSecondary">Item Total</Typography>
+                  <Typography variant="body2" color="textSecondary">Taxes</Typography>
+                  <Typography variant="body2" color="textSecondary">Shipping</Typography>
+                  <Box my="0.25rem">
+                    <Divider />
+                  </Box>
+                  <Typography variant="body2" gutterBottom>Order Total</Typography>
+                </Box>
+                <Box flexGrow={1}>
+                  <Typography variant="body2" color="textSecondary">
+                    <br />
+                    <br />
+                    <br />
+                  </Typography>
+                  <Box my="0.25rem">
+                    <Divider />
+                  </Box>
+                  <Typography variant="body2" gutterBottom><br /></Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="textSecondary">${orderTotal}</Typography>
+                  <Typography variant="body2" color="textSecondary">$0</Typography>
+                  <Typography variant="body2" color="textSecondary">$0</Typography>
+                  <Box my="0.25rem">
+                    <Divider />
+                  </Box>
+                  <Typography variant="body2" gutterBottom>${orderTotal}</Typography>
+                </Box>
+              </Box>
 
-          <Typography>Shipping Address</Typography>
-          <Typography variant="body2">Mr. Monopoly</Typography>
-          <Typography variant="body2">200 Park Place</Typography>
-          <Typography variant="body2">Atlantic City, NJ 34982</Typography>
-          <Typography variant="body2">United States</Typography>
+              <br />
+
+              <Typography>Shipping Address:</Typography>
+              <Typography variant="body2">Mr. Monopoly</Typography>
+              <Typography variant="body2">200 Park Place</Typography>
+              <Typography variant="body2">Atlantic City, NJ 34982</Typography>
+              <Typography variant="body2">United States</Typography>
+            </Box>
+          </Paper>
         </Grid>
 
         <Grid item xs={12} md={9}>
-          <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
-          {orderItemListDisplay}
+          <Paper>
+            <Box p="1rem">
+              <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
+              {orderItemListDisplay}
+            </Box>
+          </Paper>
         </Grid>
       </Grid>
 

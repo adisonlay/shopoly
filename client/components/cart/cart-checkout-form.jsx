@@ -146,7 +146,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                 <ListItem button onClick={() => handleCartItemClick(cartItem)}>
                   <ListItemText primary={cartItem.name} secondary={'Quantity: ' + cartItem.quantity} />
                   <ListItemSecondaryAction>
-                    <Typography>{'$' + cartItem.finalPrice * cartItem.quantity}</Typography>
+                    <Typography>${cartItem.finalPrice * cartItem.quantity}</Typography>
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
@@ -154,7 +154,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
               <ListItem>
                 <ListItemText primary="Total" />
                 <ListItemSecondaryAction>
-                  <Typography>{'$' + cartTotal}</Typography>
+                  <Typography>${cartTotal}</Typography>
                 </ListItemSecondaryAction>
               </ListItem>
             </List>
