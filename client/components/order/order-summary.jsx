@@ -1,15 +1,13 @@
 import React from 'react';
 import OrderSummaryItem from './order-summary-item';
-import {
-  Container, Typography, Grid, Paper, Box, Divider, Button,
-  List, ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction
-} from '@material-ui/core';
+import { Container, Typography, Grid, Paper, Box, Divider, List, Button } from '@material-ui/core';
 
 export default function OrderSummary({ setAppView, viewParams }) {
   const { orderItems, orderItemCount, orderTotal } = viewParams;
 
   const handleItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handleContinue = () => setAppView('catalog', {});
+  const handleHistory = () => setAppView('orderHistory', {});
 
   return (
     <Container fixed>
@@ -69,26 +67,7 @@ export default function OrderSummary({ setAppView, viewParams }) {
             <Box p="1rem">
               <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
               <List>
-                {orderItems.map(orderItem => (
-                  <ListItem key={orderItem.itemID} button onClick={() => handleItemClick(orderItem)}>
-                    <ListItemAvatar style={{ marginRight: '0.5rem' }}>
-                      <Box
-                        width={1}
-                        minHeight="4rem"
-                        style={{
-                          backgroundImage: `url("${orderItem.images[1].substring(13)}")`,
-                          backgroundSize: 'contain',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat'
-                        }}
-                      />
-                    </ListItemAvatar>
-                    <ListItemText primary={orderItem.name} secondary={'Quantity: ' + orderItem.quantity} />
-                    <ListItemSecondaryAction>
-                      <Typography>${orderItem.finalPrice * orderItem.quantity}</Typography>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ))}
+                {orderItems.map(orderItem => <OrderSummaryItem key={orderItem.itemID} itemData={orderItem} setAppView={setAppView} />)}
               </List>
             </Box>
           </Paper>
@@ -97,6 +76,7 @@ export default function OrderSummary({ setAppView, viewParams }) {
 
       <Box mt="1rem" display="flex" justifyContent="flex-end">
         <Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>
+        <Button variant="contained" color="primary" onClick={handleHistory} style={{ marginLeft: '0.5rem' }}>View Order History</Button>
       </Box>
     </Container>
   );
