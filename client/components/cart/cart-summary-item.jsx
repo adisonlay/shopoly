@@ -28,7 +28,7 @@ export default function CartSummaryItem({ itemData, setAppView }) {
             <Grid item xs={6} md={3}>
               <Box
                 width={1}
-                minHeight="12rem"
+                minHeight="8rem"
                 style={{
                   backgroundImage: `url("${images[1]}")`,
                   backgroundSize: 'contain',
