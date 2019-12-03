@@ -74,8 +74,24 @@ export default class App extends Component {
       details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
       cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
       checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
-      orderSummary: <OrderSummary setAppView={this.setView} viewParams={currentParams} />,
-      orderHistory: ''
+      // orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
+      // orderHistory: ''
+
+
+      orderSummary: '',
+      orderHistory: (<OrderSummary setAppView={this.setView} viewParams={{
+        orderItems: this.state.cartItems,
+        orderItemCount: 5,
+        orderTotal: 800,
+        shippingAddress: {
+          nameInput: 'Mr. Monopoly',
+          addressInput: '200 Park Place',
+          cityInput: 'Atlantic City',
+          stateInput: 'NJ',
+          zipInput: '12345',
+          countryInput: 'United States'
+        }
+      }} />)
     };
 
     return (
@@ -83,14 +99,6 @@ export default class App extends Component {
         <Header setAppView={this.setView} cartItemCount={cartItemCount} />
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
-
-        {/* {this.state.cartItems.length
-        ?
-          <OrderSummary setAppView={this.setView} viewParams={{ orderItems: this.state.cartItems, orderItemCount: 5, orderTotal: 800}} />
-        :
-          null
-        } */}
-
       </div>
     );
   }

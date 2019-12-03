@@ -1,9 +1,9 @@
 import React from 'react';
 import OrderSummaryItem from './order-summary-item';
-import { Container, Typography, Grid, Paper, Box, Divider, List, Button } from '@material-ui/core';
+import { Container, Typography, Grid, Paper, Box, Divider, Chip, List, Button } from '@material-ui/core';
 
 export default function OrderSummary({ setAppView, viewParams }) {
-  const { orderItems, orderItemCount, orderTotal } = viewParams;
+  const { orderItems, orderItemCount, orderTotal, shippingAddress } = viewParams;
 
   const handleItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handleContinue = () => setAppView('catalog', {});
@@ -59,10 +59,10 @@ export default function OrderSummary({ setAppView, viewParams }) {
               <br />
 
               <Typography>Shipping Address:</Typography>
-              <Typography variant="body2">Mr. Monopoly</Typography>
-              <Typography variant="body2">200 Park Place</Typography>
-              <Typography variant="body2">Atlantic City, NJ 34982</Typography>
-              <Typography variant="body2">United States</Typography>
+              <Typography variant="body2">{shippingAddress.nameInput}</Typography>
+              <Typography variant="body2">{shippingAddress.addressInput}</Typography>
+              <Typography variant="body2">{shippingAddress.cityInput + ', ' + shippingAddress.stateInput + ' ' + shippingAddress.zipInput}</Typography>
+              <Typography variant="body2">{shippingAddress.countryInput}</Typography>
             </Box>
           </Paper>
         </Grid>
@@ -70,7 +70,10 @@ export default function OrderSummary({ setAppView, viewParams }) {
         <Grid item xs={12} md={9}>
           <Paper>
             <Box p="1rem">
-              <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
+              <Box display="flex" justifyContent="space-between">
+                <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
+                <Chip label={orderItemCount} />
+              </Box>
               <List>
                 {orderItems.map(orderItem => <OrderSummaryItem key={orderItem.itemID} itemData={orderItem} setAppView={setAppView} />)}
               </List>

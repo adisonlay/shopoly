@@ -131,7 +131,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     {...bindToCountryInput}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
-                    <MenuItem value="US">United States</MenuItem>
+                    <MenuItem value="United States">United States</MenuItem>
                   </Select>
                 </FormControl>
 
@@ -203,6 +203,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
 
           <Box mt="1rem" display="flex" justifyContent="flex-end">
             <Button
+              disabled
               variant="contained"
               color="primary"
               size="large"
