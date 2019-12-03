@@ -81,8 +81,8 @@ export default class App extends Component {
       orderSummary: '',
       orderHistory: (<OrderSummary setAppView={this.setView} viewParams={{
         orderItems: this.state.cartItems,
-        orderItemCount: 5,
-        orderTotal: 800,
+        orderItemCount: 6,
+        orderTotal: 860,
         shippingAddress: {
           nameInput: 'Mr. Monopoly',
           addressInput: '200 Park Place',

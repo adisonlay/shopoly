@@ -8,109 +8,46 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
   const handleCartClick = () => setAppView('cart', {});
   const handleOrdersClick = () => setAppView('orderHistory', {});
 
-  let crumbsToDisplay = null;
+  let crumbToDisplay1 = null;
+  let crumbToDisplay2 = null;
 
   switch (currentView) {
     case 'catalog':
-      crumbsToDisplay = (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            <Box display="flex" alignItems="center">
-              <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
-          </Link>
-          <Typography color="textPrimary">
-            Catalog
-          </Typography>
-        </Breadcrumbs>
-      );
+      crumbToDisplay1 = (<Typography color="textPrimary">Catalog</Typography>);
       break;
     case 'details':
-      crumbsToDisplay = (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            <Box display="flex" alignItems="center">
-              <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
-          </Link >
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            Catalog
-          </Link>
-          <Typography color="textPrimary">
-            {itemName}
-          </Typography>
-        </Breadcrumbs>
-      );
+      crumbToDisplay1 = (<Link color="textSecondary" onClick={handleCatalogClick}>Catalog</Link>);
+      crumbToDisplay2 = (<Typography color="textPrimary">{itemName}</Typography>);
       break;
     case 'cart':
-      crumbsToDisplay = (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            <Box display="flex" alignItems="center">
-              <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
-          </Link>
-          <Typography color="textPrimary">
-            Cart
-          </Typography>
-        </Breadcrumbs>
-      );
+      crumbToDisplay1 = (<Typography color="textPrimary">Cart</Typography>);
       break;
     case 'checkout':
-      crumbsToDisplay = (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            <Box display="flex" alignItems="center">
-              <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
-          </Link >
-          <Link color="textSecondary" onClick={handleCartClick}>
-            Cart
-          </Link>
-          <Typography color="textPrimary">
-            Checkout
-          </Typography>
-        </Breadcrumbs>
-      );
+      crumbToDisplay1 = (<Link color="textSecondary" onClick={handleCartClick}>Cart</Link>);
+      crumbToDisplay2 = (<Typography color="textPrimary">Checkout</Typography>);
       break;
     case 'orderHistory':
-      crumbsToDisplay = (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            <Box display="flex" alignItems="center">
-              <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
-          </Link>
-          <Typography color="textPrimary">
-            Orders
-          </Typography>
-        </Breadcrumbs>
-      );
+      crumbToDisplay1 = (<Typography color="textPrimary">Orders</Typography>);
       break;
     case 'orderSummary':
-      crumbsToDisplay = (
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-          <Link color="textSecondary" onClick={handleCatalogClick}>
-            <Box display="flex" alignItems="center">
-              <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
-          </Link >
-          <Link color="textSecondary" onClick={handleOrdersClick}>
-            Orders
-          </Link>
-          <Typography color="textPrimary">
-            Checkout
-          </Typography>
-        </Breadcrumbs>
-      );
+      crumbToDisplay1 = (<Link color="textSecondary" onClick={handleOrdersClick}>Orders</Link>);
+      crumbToDisplay2 = (<Typography color="textPrimary">Summary</Typography>);
       break;
   }
 
   return (
     <Box mb="1rem">
-      <Paper elevation={0}>
+      <Paper elevation={0} style={{ backgroundColor: '#f2f2f2' }} >
         <Box ml="1rem">
-          {crumbsToDisplay}
+          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
+            <Link color="textSecondary" onClick={handleCatalogClick}>
+              <Box display="flex" alignItems="center">
+                <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
+            </Box>
+            </Link>
+            {crumbToDisplay1}
+            {crumbToDisplay2}
+          </Breadcrumbs>
         </Box>
       </Paper>
     </Box>
