@@ -9,6 +9,8 @@ export default function OrderSummary({ setAppView, viewParams }) {
   const handleContinue = () => setAppView('catalog', {});
   const handleHistory = () => setAppView('orderHistory', {});
 
+  const today = new Date();
+
   return (
     <Container fixed>
       <Typography variant="h5" gutterBottom>Order Summary</Typography>
@@ -16,7 +18,10 @@ export default function OrderSummary({ setAppView, viewParams }) {
         <Grid item xs={12} md={3}>
           <Paper>
             <Box p="1rem">
-              <Typography variant="h6" color="textSecondary" gutterBottom>Order #{orderItems[0].cartID}</Typography>
+              <Typography variant="h6" color="textSecondary">Order #{orderItems[0].cartID}</Typography>
+              <Typography variant="body2" gutterBottom>Order Date: {today.toLocaleDateString('en-US')}</Typography>
+
+              <br />
 
               <Typography>Payment Summary:</Typography>
               <Box display="flex" justifyContent="space-between">
