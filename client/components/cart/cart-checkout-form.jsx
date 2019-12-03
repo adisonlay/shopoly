@@ -5,8 +5,29 @@ import {
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
 
+//Custom hook to handle input change
+const useInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  return {
+    value,
+    setValue,
+    bindToInput: {
+      value,
+      onChange: event => setValue(event.target.value)
+    }
+  };
+};
+
 export default function CartCheckoutForm({ setAppView, viewParams, cartItems, placeOrderCallback }) {
   const { cartItemCount, cartTotal } = viewParams;
+
+  const { value: nameInput, bindToInput: bindToNameInput} = useInput('');
+  const { value: addressInput, bindToInput: bindToAddressInput} = useInput('');
+  const { value: cityInput, bindToInput: bindToCityInput } = useInput('');
+  const { value: stateInput, bindToInput: bindToStateInput } = useInput('');
+  const { value: zipInput, bindToInput: bindToZipInput } = useInput('');
+  const { value: countryInput, bindToInput: bindToCountryInput } = useInput('');
 
   const [stateLabelWidth, setStateLabelWidth] = useState(0);
   const [countryLabelWidth, setCountryLabelWidth] = useState(0);
@@ -46,6 +67,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
                   style={inputStyle}
+                  {...bindToNameInput}
                 />
                 <TextField
                   fullWidth
@@ -54,6 +76,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder="e.g. 200 Park Place"
                   style={inputStyle}
+                  {...bindToAddressInput}
                 />
                 <TextField
                   id="city-input"
@@ -61,6 +84,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder="e.g. Atlantic City"
                   style={inputStyle}
+                  {...bindToCityInput}
                 />
                 <FormControl variant="outlined" style={{ margin: '1rem', width: '20%' }}>
                   <InputLabel ref={stateSelectLabel} id="state-select-label">State</InputLabel>
@@ -68,6 +92,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     labelId="state-select-label"
                     id="state-input"
                     labelWidth={stateLabelWidth}
+                    {...bindToStateInput}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
                     <MenuItem value="NJ">New Jersey</MenuItem>
@@ -80,6 +105,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder="e.g. 50200"
                   style={inputStyle}
+                  {...bindToZipInput}
                 />
                 <br />
                 <FormControl variant="outlined" style={{ margin: '1rem', width: '35%' }}>
@@ -88,6 +114,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     labelId="country-select-label"
                     id="country-input"
                     labelWidth={countryLabelWidth}
+                    {...bindToCountryInput}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
                     <MenuItem value="US">United States</MenuItem>
