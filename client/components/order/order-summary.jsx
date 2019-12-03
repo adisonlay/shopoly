@@ -1,4 +1,5 @@
 import React from 'react';
+import OrderSummaryItem from './order-summary-item';
 import {
   Container, Typography, Grid, Paper, Box, Divider, Button,
   List, ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction
