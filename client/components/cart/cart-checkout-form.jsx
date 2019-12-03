@@ -143,7 +143,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
           <Paper>
             <List>
               {cartItems.map(cartItem => (
-                <ListItem button onClick={() => handleCartItemClick(cartItem)}>
+                <ListItem key={cartItem.itemID} button onClick={() => handleCartItemClick(cartItem)}>
                   <ListItemText primary={cartItem.name} secondary={'Quantity: ' + cartItem.quantity} />
                   <ListItemSecondaryAction>
                     <Typography>${cartItem.finalPrice * cartItem.quantity}</Typography>

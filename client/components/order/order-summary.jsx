@@ -1,21 +1,14 @@
 import React from 'react';
-import OrderSummaryItem from './order-summary-item';
-import { Container, Typography, Grid, Paper, Box, Divider, Button } from '@material-ui/core';
+import {
+  Container, Typography, Grid, Paper, Box, Divider, Button,
+  List, ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction
+} from '@material-ui/core';
 
 export default function OrderSummary({ setAppView, viewParams }) {
   const { orderItems, orderItemCount, orderTotal } = viewParams;
 
-  let orderItemListDisplay = null;
-  let continueButtonDisplay = null;
-
+  const handleItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handleContinue = () => setAppView('catalog', {});
-
-  if (!orderItems.length) {
-    orderItemListDisplay = (<Typography variant="h5" color="textSecondary">No order data available.</Typography>);
-  } else {
-    // orderItemListDisplay = (orderItems.map(orderItem => <OrderSummaryItem key={orderItem.itemID} itemData={orderItem} setAppView={setAppView} />));
-    continueButtonDisplay = (<Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>);
-  }
 
   return (
     <Container fixed>
@@ -74,14 +67,35 @@ export default function OrderSummary({ setAppView, viewParams }) {
           <Paper>
             <Box p="1rem">
               <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
-              {orderItemListDisplay}
+              <List>
+                {orderItems.map(orderItem => (
+                  <ListItem key={orderItem.itemID} button onClick={() => handleItemClick(orderItem)}>
+                    <ListItemAvatar style={{ marginRight: '0.5rem' }}>
+                      <Box
+                        width={1}
+                        minHeight="4rem"
+                        style={{
+                          backgroundImage: `url("${orderItem.images[1].substring(13)}")`,
+                          backgroundSize: 'contain',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat'
+                        }}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText primary={orderItem.name} secondary={'Quantity: ' + orderItem.quantity} />
+                    <ListItemSecondaryAction>
+                      <Typography>${orderItem.finalPrice * orderItem.quantity}</Typography>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+              </List>
             </Box>
           </Paper>
         </Grid>
       </Grid>
 
-      <Box display="flex" justifyContent="flex-end">
-        {continueButtonDisplay}
+      <Box mt="1rem" display="flex" justifyContent="flex-end">
+        <Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>
       </Box>
     </Container>
   );
