@@ -13,8 +13,8 @@ export default function OrderSummary({ setAppView, viewParams }) {
   if (!orderItems.length) {
     orderItemListDisplay = (<Typography variant="h5" color="textSecondary">No order data available.</Typography>);
   } else {
-  //   cartItemListDisplay = (cartItems.map(cartItem => <CartSummaryItem key={cartItem.itemID} itemData={cartItem} setAppView={setAppView} />));
-  //   checkoutButtonDisplay = (<Button variant="contained" color="primary" onClick={handleCheckout}>Checkout</Button>);
+    orderItemListDisplay = (orderItems.map(orderItem => <OrderSummaryItem key={orderItem.itemID} itemData={orderItem} setAppView={setAppView} />));
+    continueButtonDisplay = (<Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>);
   }
 
   // return (
