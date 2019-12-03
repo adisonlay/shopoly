@@ -6,13 +6,7 @@ export default function OrderSummary({ setAppView, viewParams, cartItems }) {
   let cartItemListDisplay = null;
   let continueButtonDisplay = null;
 
-  // let initialCartItemCount = 0;
-  // const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
-
-  // let initialCartTotal = 0;
-  // const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, initialCartTotal);
-
-  // const handleCheckout = () => setAppView('checkout', { cartItemCount, cartTotal });
+  const handleContinue = () => setAppView('catalog', {});
 
   // if (!cartItems.length) {
   //   cartItemListDisplay = (<Typography variant="h5" color="textSecondary">There are no items in your cart.</Typography>);
