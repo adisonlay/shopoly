@@ -5,6 +5,7 @@ import ItemCardsList from '../item/item-cards-list';
 import ItemDetails from '../item/item-details';
 import CartSummary from '../cart/cart-summary';
 import CartCheckoutForm from '../cart/cart-checkout-form';
+import OrderSummary from '../order/order-summary';
 
 export default class App extends Component {
   constructor() {
@@ -55,10 +56,7 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cartID })
     })
-      .then(() => this.setState({
-        view: { page: 'orderSummary', params: {} },
-        cartItems: []
-      }))
+      .then(() => this.setState({ cartItems: [] }))
       .catch(error => console.error(error));
   }
 
@@ -76,8 +74,24 @@ export default class App extends Component {
       details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
       cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
       checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
-      orderHistory: '',
-      orderSummary: ''
+      // orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
+      // orderHistory: ''
+
+
+      orderSummary: '',
+      orderHistory: (<OrderSummary setAppView={this.setView} viewParams={{
+        orderItems: this.state.cartItems,
+        orderItemCount: 5,
+        orderTotal: 800,
+        shippingAddress: {
+          nameInput: 'Mr. Monopoly',
+          addressInput: '200 Park Place',
+          cityInput: 'Atlantic City',
+          stateInput: 'NJ',
+          zipInput: '12345',
+          countryInput: 'United States'
+        }
+      }} />)
     };
 
     return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Box, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function AddToCart({ itemDetailData, addToCartCallback }) {
+export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
   const [quantity, setQuantity] = useState('');
   const [toastOpen, setToastOpen] = useState(false);
   const [labelWidth, setLabelWidth] = useState(0);
@@ -46,6 +46,7 @@ export default function AddToCart({ itemDetailData, addToCartCallback }) {
         </Select>
         <FormHelperText style={{ margin: '0.5rem 0' }}>Maximum order quantity: 4</FormHelperText>
       </FormControl>
+
       <Button
         variant="contained"
         color="primary"

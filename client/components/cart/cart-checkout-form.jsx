@@ -5,7 +5,30 @@ import {
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
 
+//Custom hook to handle input change
+const useInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  return {
+    value,
+    setValue,
+    bindToInput: {
+      value,
+      onChange: event => setValue(event.target.value)
+    }
+  };
+};
+
 export default function CartCheckoutForm({ setAppView, viewParams, cartItems, placeOrderCallback }) {
+  const { cartItemCount, cartTotal } = viewParams;
+
+  const { value: nameInput, bindToInput: bindToNameInput} = useInput('');
+  const { value: addressInput, bindToInput: bindToAddressInput} = useInput('');
+  const { value: cityInput, bindToInput: bindToCityInput } = useInput('');
+  const { value: stateInput, bindToInput: bindToStateInput } = useInput('');
+  const { value: zipInput, bindToInput: bindToZipInput } = useInput('');
+  const { value: countryInput, bindToInput: bindToCountryInput } = useInput('');
+
   const [stateLabelWidth, setStateLabelWidth] = useState(0);
   const [countryLabelWidth, setCountryLabelWidth] = useState(0);
   const stateSelectLabel = useRef(null);
@@ -15,11 +38,28 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
     setCountryLabelWidth(countrySelectLabel.current.offsetWidth);
   }, []);
 
-  const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr.Monopoly', 'Jake the Jailbird'];
+  const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr. Monopoly', 'Jake the Jailbird'];
   const inputStyle = { margin: '1rem' };
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
-  const handlePlaceOrder = () => placeOrderCallback(cartItems[0].cartID);
+  const handlePlaceOrder = () => {
+    const shippingAddress = {
+      nameInput,
+      addressInput,
+      cityInput,
+      stateInput,
+      zipInput,
+      countryInput
+    };
+
+    placeOrderCallback(cartItems[0].cartID);
+    setAppView('orderSummary', {
+      orderItems: cartItems,
+      orderItemCount: cartItemCount,
+      orderTotal: cartTotal,
+      shippingAddress
+    });
+  };
 
   return (
     <Container fixed>
@@ -41,6 +81,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
                   style={inputStyle}
+                  {...bindToNameInput}
                 />
                 <TextField
                   fullWidth
@@ -49,6 +90,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder="e.g. 200 Park Place"
                   style={inputStyle}
+                  {...bindToAddressInput}
                 />
                 <TextField
                   id="city-input"
@@ -56,6 +98,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder="e.g. Atlantic City"
                   style={inputStyle}
+                  {...bindToCityInput}
                 />
                 <FormControl variant="outlined" style={{ margin: '1rem', width: '20%' }}>
                   <InputLabel ref={stateSelectLabel} id="state-select-label">State</InputLabel>
@@ -63,6 +106,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     labelId="state-select-label"
                     id="state-input"
                     labelWidth={stateLabelWidth}
+                    {...bindToStateInput}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
                     <MenuItem value="NJ">New Jersey</MenuItem>
@@ -75,6 +119,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   variant="outlined"
                   placeholder="e.g. 50200"
                   style={inputStyle}
+                  {...bindToZipInput}
                 />
                 <br />
                 <FormControl variant="outlined" style={{ margin: '1rem', width: '35%' }}>
@@ -83,9 +128,10 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     labelId="country-select-label"
                     id="country-input"
                     labelWidth={countryLabelWidth}
+                    {...bindToCountryInput}
                   >
                     <MenuItem value=""><em>Choose...</em></MenuItem>
-                    <MenuItem value="US">United States</MenuItem>
+                    <MenuItem value="United States">United States</MenuItem>
                   </Select>
                 </FormControl>
 
@@ -132,16 +178,16 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
         <Grid item xs={12} md={3}>
           <Box mb="0.5rem" display="flex" justifyContent="space-between">
             <Typography variant="h5">Cart</Typography>
-            <Chip label={viewParams.cartItemCount} />
+            <Chip label={cartItemCount} />
           </Box>
 
           <Paper>
             <List>
               {cartItems.map(cartItem => (
-                <ListItem button onClick={() => handleCartItemClick(cartItem)}>
+                <ListItem key={cartItem.itemID} button onClick={() => handleCartItemClick(cartItem)}>
                   <ListItemText primary={cartItem.name} secondary={'Quantity: ' + cartItem.quantity} />
                   <ListItemSecondaryAction>
-                    <Typography>{'$' + cartItem.finalPrice * cartItem.quantity}</Typography>
+                    <Typography>${cartItem.finalPrice * cartItem.quantity}</Typography>
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
@@ -149,7 +195,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
               <ListItem>
                 <ListItemText primary="Total" />
                 <ListItemSecondaryAction>
-                  <Typography>{'$' + viewParams.cartTotal}</Typography>
+                  <Typography>${cartTotal}</Typography>
                 </ListItemSecondaryAction>
               </ListItem>
             </List>
@@ -157,6 +203,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
 
           <Box mt="1rem" display="flex" justifyContent="flex-end">
             <Button
+              disabled
               variant="contained"
               color="primary"
               size="large"

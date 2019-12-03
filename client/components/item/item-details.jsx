@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AddToCart from './add-to-cart';
+import ItemAddToCart from './item-add-to-cart';
 import { formatItemData } from '../app/functions';
 import { Container, Grid, Paper, Box, Typography } from '@material-ui/core';
 
@@ -63,7 +63,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
                   <Typography>Lot Number: {lotNumber}</Typography>
                   <Typography>Base Rent: {rent}</Typography>
                   <Typography gutterBottom>Color Group: {itemGroup}</Typography>
-                  <AddToCart itemDetailData={itemDetailData} addToCartCallback={addToCartCallback} />
+                  <ItemAddToCart itemDetailData={itemDetailData} addToCartCallback={addToCartCallback} />
                 </Box>
               </Grid>
 
