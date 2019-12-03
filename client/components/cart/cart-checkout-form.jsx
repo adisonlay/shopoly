@@ -17,7 +17,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
     setCountryLabelWidth(countrySelectLabel.current.offsetWidth);
   }, []);
 
-  const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr.Monopoly', 'Jake the Jailbird'];
+  const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr. Monopoly', 'Jake the Jailbird'];
   const inputStyle = { margin: '1rem' };
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
