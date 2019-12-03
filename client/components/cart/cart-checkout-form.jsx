@@ -43,8 +43,22 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handlePlaceOrder = () => {
+    const shippingAddress = {
+      nameInput,
+      addressInput,
+      cityInput,
+      stateInput,
+      zipInput,
+      countryInput
+    };
+
     placeOrderCallback(cartItems[0].cartID);
-    setAppView('orderSummary', { orderItems: cartItems, orderItemCount: cartItemCount, orderTotal: cartTotal });
+    setAppView('orderSummary', {
+      orderItems: cartItems,
+      orderItemCount: cartItemCount,
+      orderTotal: cartTotal,
+      shippingAddress
+    });
   };
 
   return (
