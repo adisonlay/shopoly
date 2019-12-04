@@ -50,17 +50,31 @@ export default function OrderHistory({ setAppView }) {
     return (
       <Container fixed>
         <Typography variant="h5" gutterBottom>Order History</Typography>
+
         <Box mb="1.5rem">
           <Paper>
             <Box p="1rem">
-              <Typography>Orders Placed: {orderCount}</Typography>
-              <Typography>Items Purchased: {totalItemCount}</Typography>
-              <Typography>Customer Since: {firstOrderDate.toLocaleDateString('en-US')}</Typography>
-              <Typography>Houses Unlocked?: {''}</Typography>
-              <Typography gutterBottom>Hotels Unlocked?: {''}</Typography>
+              <Grid container spacing={3}>
+                <Grid item>
+                  <Typography>Orders Placed: </Typography>
+                  <Typography>Items Purchased: </Typography>
+                  <Typography>Customer Since: </Typography>
+                  <Typography>Houses Unlocked?: </Typography>
+                  <Typography gutterBottom>Hotels Unlocked?: </Typography>
+                </Grid>
+
+                <Grid item>
+                  <Typography>{orderCount}</Typography>
+                  <Typography>{totalItemCount}</Typography>
+                  <Typography>{firstOrderDate.toLocaleDateString('en-US')}</Typography>
+                  <Typography></Typography>
+                  <Typography gutterBottom></Typography>
+                </Grid>
+              </Grid>
             </Box>
           </Paper>
         </Box>
+
         <Paper>
           <Box p="1rem">
             {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)}
