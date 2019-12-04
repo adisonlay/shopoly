@@ -74,7 +74,7 @@ export default class App extends Component {
       cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
       checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
       orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
-      orderHistory: (<OrderHistory setAppView={this.setView} viewParams={currentParams} />)
+      orderHistory: (<OrderHistory setAppView={this.setView} />)
 
 
       // orderSummary: '',

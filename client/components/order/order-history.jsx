@@ -3,7 +3,7 @@ import OrderHistoryItem from './order-history-item';
 import { formatItemData } from '../app/functions';
 import { Container, Grid, Paper, Box, Typography } from '@material-ui/core';
 
-export default function OrderHistory({ setAppView, viewParams }) {
+export default function OrderHistory({ setAppView }) {
   const [orderHistoryData, setOrderHistoryData] = useState([]);
 
   useEffect(() => {
@@ -20,13 +20,22 @@ export default function OrderHistory({ setAppView, viewParams }) {
     };
   }, []);
 
-  const ordersArray = [];
+  const orderIDsArray = [];
+  const orderDates = [];
   orderHistoryData.forEach(orderedItem => {
-    if (!ordersArray.includes(orderedItem.cartID)) {
-      ordersArray.push(orderedItem.cartID);
+    if (!orderIDsArray.includes(orderedItem.cartID)) {
+      orderIDsArray.push(orderedItem.cartID);
+      orderDates.push(new Date(orderedItem.ordered));
     }
-  })
-  const orderCount = ordersArray.length;
+  });
+  const orderCount = orderIDsArray.length;
+
+  let firstOrderDate = orderDates[0];
+  orderDates.forEach(orderDate => {
+    if (orderDate < firstOrderDate) {
+      firstOrderDate = orderDate;
+    }
+  });
 
   let initialItemCount = 0;
   const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
@@ -40,10 +49,17 @@ export default function OrderHistory({ setAppView, viewParams }) {
   } else {
     return (
       <Container fixed>
-        <Typography variant="h5">Order History</Typography>
-        <Box display="flex" justifyContent="space-between">
-          <Typography>Orders Placed: {orderCount}</Typography>
-          <Typography gutterBottom>Items Purchased: {totalItemCount}</Typography>
+        <Typography variant="h5" gutterBottom>Order History</Typography>
+        <Box mb="1.5rem">
+          <Paper>
+            <Box p="1rem">
+              <Typography>Orders Placed: {orderCount}</Typography>
+              <Typography>Items Purchased: {totalItemCount}</Typography>
+              <Typography>Customer Since: {firstOrderDate.toLocaleDateString('en-US')}</Typography>
+              <Typography>Houses Unlocked?: {''}</Typography>
+              <Typography gutterBottom>Hotels Unlocked?: {''}</Typography>
+            </Box>
+          </Paper>
         </Box>
         <Paper>
           <Box p="1rem">
