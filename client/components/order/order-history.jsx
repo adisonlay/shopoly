@@ -3,7 +3,7 @@ import OrderHistoryItem from './order-history-item';
 import { formatItemData } from '../app/functions';
 import { Container, Grid, Paper, Box, Typography } from '@material-ui/core';
 
-export default function OrderHistory({ setAppView }) {
+export default function OrderHistory({ setAppView, viewParams }) {
   const [orderHistoryData, setOrderHistoryData] = useState([]);
 
   useEffect(() => {
@@ -20,15 +20,22 @@ export default function OrderHistory({ setAppView }) {
     };
   }, []);
 
+  let initialItemCount = 0;
+  const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
+
   if (orderHistoryData.length === 0) {
     return (<Typography variant="h5" color="textSecondary">Order history data unavailable.</Typography>);
   } else {
     return (
       <Container fixed>
-        <Typography variant="h5" gutterBottom>Order History</Typography>
+        <Typography variant="h5">Order History</Typography>
+        <Box display="flex" justifyContent="space-between">
+          <Typography>Orders Placed: {viewParams.orderCount}</Typography>
+          <Typography gutterBottom>Items Purchased: {totalItemCount}</Typography>
+        </Box>
         <Paper>
           <Box p="1rem">
-
+            {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)}
           </Box>
         </Paper>
       </Container>
