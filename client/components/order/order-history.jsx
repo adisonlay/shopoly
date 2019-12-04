@@ -20,8 +20,20 @@ export default function OrderHistory({ setAppView, viewParams }) {
     };
   }, []);
 
+  const ordersArray = [];
+  orderHistoryData.forEach(orderedItem => {
+    if (!ordersArray.includes(orderedItem.cartID)) {
+      ordersArray.push(orderedItem.cartID);
+    }
+  })
+  const orderCount = ordersArray.length;
+
   let initialItemCount = 0;
   const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
+
+
+  console.log(orderHistoryData, orderCount, totalItemCount);
+
 
   if (orderHistoryData.length === 0) {
     return (<Typography variant="h5" color="textSecondary">Order history data unavailable.</Typography>);
@@ -30,7 +42,7 @@ export default function OrderHistory({ setAppView, viewParams }) {
       <Container fixed>
         <Typography variant="h5">Order History</Typography>
         <Box display="flex" justifyContent="space-between">
-          <Typography>Orders Placed: {viewParams.orderCount}</Typography>
+          <Typography>Orders Placed: {orderCount}</Typography>
           <Typography gutterBottom>Items Purchased: {totalItemCount}</Typography>
         </Box>
         <Paper>
