@@ -17,7 +17,7 @@ export default class App extends Component {
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
-    this.placeOrder - this.placeOrder.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   setView(page, params) {

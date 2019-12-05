@@ -43,7 +43,7 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
             <Link color="textSecondary" onClick={handleCatalogClick}>
               <Box display="flex" alignItems="center">
                 <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-            </Box>
+              </Box>
             </Link>
             {crumbToDisplay1}
             {crumbToDisplay2}
