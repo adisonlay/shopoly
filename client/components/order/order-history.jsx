@@ -5,6 +5,8 @@ import { Container, Grid, Paper, Box, Typography, Divider, Chip } from '@materia
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
 import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';
+import MoneyTwoToneIcon from '@material-ui/icons/MoneyTwoTone';
+import GroupWorkTwoToneIcon from '@material-ui/icons/GroupWorkTwoTone';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 import HomeWorkTwoToneIcon from '@material-ui/icons/HomeWorkTwoTone';
 
@@ -66,6 +68,16 @@ export default function OrderHistory({ setAppView }) {
 
 
 
+  const orderStats = {
+    firstOrderDate: '',
+    orderCount: null,
+    totalItemCount: null,
+    aggRent: null,
+    monopolies: null,
+    housesUnlocked: false,
+    hotelsUnlocked: false
+  };
+
   const orderIDsArray = [];
   const orderDates = [];
   orderHistoryData.forEach(orderedItem => {
@@ -74,21 +86,45 @@ export default function OrderHistory({ setAppView }) {
       orderDates.push(new Date(orderedItem.ordered));
     }
   });
-  const orderCount = orderIDsArray.length;
 
-  let firstOrderDate = orderDates[0];
-  orderDates.forEach(orderDate => {
-    if (orderDate < firstOrderDate) {
-      firstOrderDate = orderDate;
+  orderStats.firstOrderDate = orderDates[0];
+  orderDates.forEach(currentOrderDate => {
+    if (currentOrderDate < orderStats.firstOrderDate) {
+      orderStats.firstOrderDate = currentOrderDate;
     }
   });
 
+  orderStats.orderCount = orderIDsArray.length;
+
   let initialItemCount = 0;
-  const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialItemCount);
+  orderStats.totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialItemCount);
+
+  let initialRentTotal = 0;
+  orderStats.aggRent = orderHistoryData.reduce((runningTotal, currentItemObject) => {
+    if (!isNaN(parseInt(currentItemObject.rent))) {
+      return runningTotal + currentItemObject.quantity * parseInt(currentItemObject.rent);
+    } else {
+      return runningTotal;
+    }
+  }, initialRentTotal);
+
+
+  // const orderCount = orderIDsArray.length;
+
+  // let firstOrderDate = orderDates[0];
+  // orderDates.forEach(orderDate => {
+  //   if (orderDate < firstOrderDate) {
+  //     firstOrderDate = orderDate;
+  //   }
+  // });
+
+  // let initialItemCount = 0;
+  // const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialItemCount);
 
 
 
-  console.log(orderHistoryData, orderCount, totalItemCount);
+  // console.log(orderHistoryData, orderCount, totalItemCount);
+  console.log(orderHistoryData, calculateOrderStats());
 
 
 
@@ -108,53 +144,74 @@ export default function OrderHistory({ setAppView }) {
                 <Typography variant="h6" color="textSecondary" gutterBottom>&nbsp;Shopoly Customer Since: {firstOrderDate.toLocaleDateString('en-US')}</Typography>
               </Box>
 
-              <Box my="1rem">
+              <Box mt="0.5rem" mb="1rem">
                 <Divider />
               </Box>
 
               <Grid container>
 
                 <Grid item xs={3}>
-                  <Typography component="div">
+                  <Typography component="div" variant="body2">
                     <Box display="flex" alignItems="center">
                       <LocalMallTwoToneIcon />&nbsp;Orders Placed:
                     </Box>
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography>{orderCount}</Typography>
+                  <Typography variant="body2">{orderCount}</Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography component="div">
+                  <Typography component="div" variant="body2">
                     <Box display="flex" alignItems="center">
-                      <HomeTwoToneIcon />&nbsp;Houses Unlocked?
+                      <GroupWorkTwoToneIcon />&nbsp;Monopolies Controlled:
                     </Box>
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography>Yes</Typography>
+                  <Typography variant="body2">1</Typography>
                 </Grid>
 
 
                 <Grid item xs={3}>
-                  <Typography component="div" gutterBottom>
+                  <Typography component="div" variant="body2">
                     <Box display="flex" alignItems="center">
                       <LocalOfferTwoToneIcon />&nbsp;Total Items Purchased:
                     </Box>
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography gutterBottom>{totalItemCount}</Typography>
+                  <Typography variant="body2">{totalItemCount}</Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography component="div" gutterBottom>
+                  <Typography component="div" variant="body2">
+                    <Box display="flex" alignItems="center">
+                      <HomeTwoToneIcon />&nbsp;Houses Unlocked?
+                    </Box>
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body2">Yes</Typography>
+                </Grid>
+
+                <Grid item xs={3}>
+                  <Typography component="div" variant="body2" gutterBottom>
+                    <Box display="flex" alignItems="center">
+                      <MoneyTwoToneIcon />&nbsp;Aggregate Base Rent:
+                    </Box>
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body2" gutterBottom>$12</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography component="div" variant="body2" gutterBottom>
                     <Box display="flex" alignItems="center">
                       <HomeWorkTwoToneIcon />&nbsp;Hotels Unlocked?
                     </Box>
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography gutterBottom>No</Typography>
+                  <Typography variant="body2" gutterBottom>No</Typography>
                 </Grid>
 
               </Grid>
