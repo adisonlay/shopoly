@@ -103,52 +103,59 @@ export default function OrderHistory({ setAppView }) {
 
               <Box display="flex" alignItems="center">
                 <PersonOutlineTwoToneIcon fontSize="large" />
-                <Typography variant="h6" color="textSecondary" gutterBottom>&nbsp;Customer Since: {firstOrderDate.toLocaleDateString('en-US')}</Typography>
+                <Typography variant="h6" color="textSecondary" gutterBottom>&nbsp;Shopoly Customer Since: {firstOrderDate.toLocaleDateString('en-US')}</Typography>
               </Box>
 
               <Box my="1rem">
                 <Divider />
               </Box>
 
-              <Box display="flex" justifyContent="space-between">
+              <Grid container>
 
-                  <Grid container spacing={6}>
-                    <Grid item>
-                      <Typography component="div" gutterBottom>
-                        <Box display="flex" alignItems="center">
-                          <LocalMallTwoToneIcon />&nbsp;Orders Placed:
-                        </Box>
-                        <Box display="flex" alignItems="center">
-                          <LocalOfferTwoToneIcon />&nbsp;Total Items Purchased:
-                        </Box>
-                      </Typography>
-                    </Grid>
-
-                    <Grid item>
-                      <Typography>{orderCount}</Typography>
-                      <Typography gutterBottom>{totalItemCount}</Typography>
-                    </Grid>
-                  </Grid>
-
-                  <Grid container spacing={6}>
-                    <Grid item>
-                      <Typography component="div" gutterBottom>
-                        <Box display="flex" alignItems="center">
-                          <HomeTwoToneIcon />&nbsp;Houses Unlocked?
+                <Grid item xs={3}>
+                  <Typography component="div">
+                    <Box display="flex" alignItems="center">
+                      <LocalMallTwoToneIcon />&nbsp;Orders Placed:
                     </Box>
-                        <Box display="flex" alignItems="center">
-                          <HomeWorkTwoToneIcon />&nbsp;Hotels Unlocked?
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography>{orderCount}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography component="div">
+                    <Box display="flex" alignItems="center">
+                      <HomeTwoToneIcon />&nbsp;Houses Unlocked?
                     </Box>
-                      </Typography>
-                    </Grid>
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography>Yes</Typography>
+                </Grid>
 
-                    <Grid item>
-                      <Typography>Yes</Typography>
-                      <Typography gutterBottom>No</Typography>
-                    </Grid>
-                  </Grid>
 
-              </Box>
+                <Grid item xs={3}>
+                  <Typography component="div" gutterBottom>
+                    <Box display="flex" alignItems="center">
+                      <LocalOfferTwoToneIcon />&nbsp;Total Items Purchased:
+                    </Box>
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography gutterBottom>{totalItemCount}</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography component="div" gutterBottom>
+                    <Box display="flex" alignItems="center">
+                      <HomeWorkTwoToneIcon />&nbsp;Hotels Unlocked?
+                    </Box>
+                  </Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography gutterBottom>No</Typography>
+                </Grid>
+
+              </Grid>
 
             </Box>
           </Paper>
@@ -156,6 +163,7 @@ export default function OrderHistory({ setAppView }) {
 
         <Paper>
           <Box p="1rem">
+            <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
             {/* {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)} */}
           </Box>
         </Paper>
