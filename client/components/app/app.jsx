@@ -64,8 +64,7 @@ export default class App extends Component {
   }
 
   render() {
-    let initialCartItemCount = 0;
-    const cartItemCount = this.state.cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
+    const cartItemCount = this.state.cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
 
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {

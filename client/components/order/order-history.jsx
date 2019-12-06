@@ -96,17 +96,15 @@ export default function OrderHistory({ setAppView }) {
 
   orderStats.orderCount = orderIDsArray.length;
 
-  let initialItemCount = 0;
-  orderStats.totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialItemCount);
+  orderStats.totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
 
-  let initialRentTotal = 0;
   orderStats.aggRent = orderHistoryData.reduce((runningTotal, currentItemObject) => {
     if (!isNaN(parseInt(currentItemObject.rent))) {
       return runningTotal + currentItemObject.quantity * parseInt(currentItemObject.rent);
     } else {
       return runningTotal;
     }
-  }, initialRentTotal);
+  }, 0);
 
 
   // const orderCount = orderIDsArray.length;

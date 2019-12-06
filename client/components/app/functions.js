@@ -26,7 +26,14 @@ function formatItemData(itemDataObject) {
 }
 
 function countMonopolies(itemsData) {
-
+  const groupCount = itemsData.reduce((runningGroupCount, currentItemObject) => {
+    if (!runningGroupCount[currentItemObject.itemGroup]) {
+      runningGroupCount[currentItemObject.itemGroup] = 1;
+    } else {
+      ++runningGroupCount[currentItemObject.itemGroup];
+    }
+    return runningGroupCount;
+  }, {});
 }
 
 function getHouseUnlockStatus(itemsData) {

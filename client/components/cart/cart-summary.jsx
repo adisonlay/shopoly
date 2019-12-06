@@ -6,11 +6,8 @@ export default function CartSummary({ setAppView, cartItems }) {
   let cartItemListDisplay = null;
   let checkoutButtonDisplay = null;
 
-  let initialCartItemCount = 0;
-  const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
-
-  let initialCartTotal = 0;
-  const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, initialCartTotal);
+  const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
+  const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, 0);
 
   const handleCheckout = () => setAppView('checkout', { cartItemCount, cartTotal });
 
