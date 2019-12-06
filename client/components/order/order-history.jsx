@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import OrderHistoryItem from './order-history-item';
 import { formatItemData } from '../app/functions';
-import { Container, Grid, Paper, Box, Typography, Divider } from '@material-ui/core';
+import { Container, Grid, Paper, Box, Typography, Divider, Chip } from '@material-ui/core';
+import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
 import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';
-import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 import HomeWorkTwoToneIcon from '@material-ui/icons/HomeWorkTwoTone';
 
@@ -87,7 +87,9 @@ export default function OrderHistory({ setAppView }) {
   const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialItemCount);
 
 
+
   console.log(orderHistoryData, orderCount, totalItemCount);
+
 
 
   if (orderHistoryData.length === 0) {
@@ -163,8 +165,13 @@ export default function OrderHistory({ setAppView }) {
 
         <Paper>
           <Box p="1rem">
-            <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
+            <Box display="flex" justifyContent="space-between">
+              <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
+              <Chip label={totalItemCount} />
+            </Box>
+
             {/* {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)} */}
+
           </Box>
         </Paper>
       </Container>
