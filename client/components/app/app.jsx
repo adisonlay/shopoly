@@ -98,6 +98,26 @@ export default class App extends Component {
         <Header setAppView={this.setView} cartItemCount={cartItemCount} />
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
+
+        {this.state.cartItems.length
+        ?
+          (<OrderSummary setAppView={this.setView} viewParams={{
+            orderItems: this.state.cartItems,
+            orderItemCount: 6,
+            orderTotal: 860,
+            shippingAddress: {
+              nameInput: 'Mr. Monopoly',
+              addressInput: '200 Park Place',
+              cityInput: 'Atlantic City',
+              stateInput: 'NJ',
+              zipInput: '12345',
+              countryInput: 'United States'
+            }
+          }} />)
+        :
+        null
+        }
+
       </div>
     );
   }
