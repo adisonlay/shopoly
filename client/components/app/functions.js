@@ -26,14 +26,32 @@ function formatItemData(itemDataObject) {
 }
 
 function countMonopolies(itemsData) {
-  const groupCount = itemsData.reduce((runningGroupCount, currentItemObject) => {
-    if (!runningGroupCount[currentItemObject.itemGroup]) {
-      runningGroupCount[currentItemObject.itemGroup] = 1;
+  let monopolies = 0;
+
+  const countedGroups = itemsData.reduce((groupCount, currentItem) => {
+    if (currentItem.itemGroup in groupCount) {
+      groupCount[currentItem.itemGroup]++;
     } else {
-      ++runningGroupCount[currentItemObject.itemGroup];
+      groupCount[currentItem.itemGroup] = 1;
     }
-    return runningGroupCount;
+    return groupCount;
   }, {});
+
+  for (let group in countedGroups) {
+    if (!['Utility', 'Railroad', 'Other', 'Building'].includes(group)) {
+      if (group === 'Purple/Brown' || group === 'Dark Blue') {
+        if (countedGroups[group] >= 2) {
+          monopolies++;
+        }
+      } else {
+        if (countedGroups[group] >= 3) {
+          monopolies++;
+        }
+      }
+    }
+  }
+
+  return monopolies;
 }
 
 function getHouseUnlockStatus(itemsData) {
