@@ -55,11 +55,15 @@ function countMonopolies(itemsData) {
 }
 
 function getHouseUnlockStatus(itemsData) {
-
+  if (countMonopolies(itemsData)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function getHotelUnlockStatus(itemsData) {
 
 }
 
-export { formatItemData };
+export { formatItemData, countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus };
