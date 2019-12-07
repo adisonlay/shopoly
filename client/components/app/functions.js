@@ -63,7 +63,18 @@ function getHouseUnlockStatus(itemsData) {
 }
 
 function getHotelUnlockStatus(itemsData) {
+  let houseCount = 0;
+  itemsData.forEach(currentItem => {
+    if (currentItem.name === 'House') {
+      houseCount += currentItem.quantity;
+    }
+  });
 
+  if (houseCount >= 4) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export { formatItemData, countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus };
