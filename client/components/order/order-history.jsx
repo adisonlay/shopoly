@@ -229,7 +229,7 @@ export default function OrderHistory({ setAppView }) {
               <Chip label={orderStats.totalItemCount} />
             </Box>
 
-            {/* {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)} */}
+            {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)}
 
           </Box>
         </Paper>
