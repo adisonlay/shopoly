@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import OrderHistoryItem from './order-history-item';
-import { formatItemData } from '../app/functions';
+import { countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus } from '../app/functions';
 import { Container, Grid, Paper, Box, Typography, Divider, Chip } from '@material-ui/core';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
@@ -106,6 +106,10 @@ export default function OrderHistory({ setAppView }) {
     }
   }, 0);
 
+  orderStats.monopolies = countMonopolies(orderHistoryData);
+  orderStats.housesUnlocked = getHouseUnlockStatus(orderHistoryData);
+  orderStats.hotelsUnlocked = getHotelUnlockStatus(orderHistoryData);
+
 
   // const orderCount = orderIDsArray.length;
 
@@ -122,7 +126,7 @@ export default function OrderHistory({ setAppView }) {
 
 
   // console.log(orderHistoryData, orderCount, totalItemCount);
-  console.log(orderHistoryData, calculateOrderStats());
+  console.log(orderHistoryData, orderStats);
 
 
 
@@ -139,7 +143,7 @@ export default function OrderHistory({ setAppView }) {
 
               <Box display="flex" alignItems="center">
                 <PersonOutlineTwoToneIcon fontSize="large" />
-                <Typography variant="h6" color="textSecondary" gutterBottom>&nbsp;Shopoly Customer Since: {firstOrderDate.toLocaleDateString('en-US')}</Typography>
+                <Typography variant="h6" color="textSecondary" gutterBottom>&nbsp;Shopoly Customer Since: {orderStats.firstOrderDate.toLocaleDateString('en-US')}</Typography>
               </Box>
 
               <Box mt="0.5rem" mb="1rem">
@@ -156,7 +160,7 @@ export default function OrderHistory({ setAppView }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography variant="body2">{orderCount}</Typography>
+                  <Typography variant="body2">{orderStats.orderCount}</Typography>
                 </Grid>
                 <Grid item xs={3}>
                   <Typography component="div" variant="body2">
@@ -166,7 +170,7 @@ export default function OrderHistory({ setAppView }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography variant="body2">1</Typography>
+                  <Typography variant="body2">{orderStats.monopolies}</Typography>
                 </Grid>
 
 
@@ -178,7 +182,7 @@ export default function OrderHistory({ setAppView }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography variant="body2">{totalItemCount}</Typography>
+                  <Typography variant="body2">{orderStats.totalItemCount}</Typography>
                 </Grid>
                 <Grid item xs={3}>
                   <Typography component="div" variant="body2">
@@ -188,7 +192,7 @@ export default function OrderHistory({ setAppView }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography variant="body2">Yes</Typography>
+                  <Typography variant="body2">{orderStats.housesUnlocked ? 'Yes' : 'No' }</Typography>
                 </Grid>
 
                 <Grid item xs={3}>
@@ -199,7 +203,7 @@ export default function OrderHistory({ setAppView }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography variant="body2" gutterBottom>$12</Typography>
+                  <Typography variant="body2" gutterBottom>${orderStats.aggRent}</Typography>
                 </Grid>
                 <Grid item xs={3}>
                   <Typography component="div" variant="body2" gutterBottom>
@@ -209,7 +213,7 @@ export default function OrderHistory({ setAppView }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                  <Typography variant="body2" gutterBottom>No</Typography>
+                  <Typography variant="body2" gutterBottom>{orderStats.hotelsUnlocked ? 'Yes' : 'No' }</Typography>
                 </Grid>
 
               </Grid>
@@ -222,7 +226,7 @@ export default function OrderHistory({ setAppView }) {
           <Box p="1rem">
             <Box display="flex" justifyContent="space-between">
               <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
-              <Chip label={totalItemCount} />
+              <Chip label={orderStats.totalItemCount} />
             </Box>
 
             {/* {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)} */}
