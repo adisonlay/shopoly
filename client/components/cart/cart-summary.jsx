@@ -20,7 +20,7 @@ export default function CartSummary({ setAppView, cartItems }) {
 
   return (
     <Container fixed>
-      <Typography variant="h5" gutterBottom>Your Shopping Cart</Typography>
+      <Typography variant="h5" gutterBottom>Shopping Cart</Typography>
       {cartItemListDisplay}
       <Box display="flex" justifyContent="space-between">
         <Typography variant="h6" color="textSecondary">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>

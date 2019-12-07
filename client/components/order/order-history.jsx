@@ -152,68 +152,74 @@ export default function OrderHistory({ setAppView }) {
 
               <Grid container>
 
-                <Grid item xs={3}>
-                  <Typography component="div" variant="body2">
-                    <Box display="flex" alignItems="center">
-                      <LocalMallTwoToneIcon />&nbsp;Orders Placed:
+                <Grid item xs={12} md={6} container>
+                  <Grid item xs={6}>
+                    <Typography component="div" variant="body2">
+                      <Box display="flex" alignItems="center">
+                        <LocalMallTwoToneIcon />&nbsp;Orders Placed:
                     </Box>
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography variant="body2">{orderStats.orderCount}</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography component="div" variant="body2">
-                    <Box display="flex" alignItems="center">
-                      <GroupWorkTwoToneIcon />&nbsp;Monopolies Controlled:
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="body2">{orderStats.orderCount}</Typography>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Typography component="div" variant="body2">
+                      <Box display="flex" alignItems="center">
+                        <LocalOfferTwoToneIcon />&nbsp;Total Items Purchased:
                     </Box>
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography variant="body2">{orderStats.monopolies}</Typography>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="body2">{orderStats.totalItemCount}</Typography>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Typography component="div" variant="body2" gutterBottom>
+                      <Box display="flex" alignItems="center">
+                        <MoneyTwoToneIcon />&nbsp;Aggregate Base Rent:
+                    </Box>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="body2" gutterBottom>${orderStats.aggRent}</Typography>
+                  </Grid>
                 </Grid>
 
+                <Grid item xs={12} md={6} container>
+                  <Grid item xs={6}>
+                    <Typography component="div" variant="body2">
+                      <Box display="flex" alignItems="center">
+                        <GroupWorkTwoToneIcon />&nbsp;Monopolies Controlled:
+                    </Box>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="body2">{orderStats.monopolies}</Typography>
+                  </Grid>
 
-                <Grid item xs={3}>
-                  <Typography component="div" variant="body2">
-                    <Box display="flex" alignItems="center">
-                      <LocalOfferTwoToneIcon />&nbsp;Total Items Purchased:
+                  <Grid item xs={6}>
+                    <Typography component="div" variant="body2">
+                      <Box display="flex" alignItems="center">
+                        <HomeTwoToneIcon />&nbsp;Houses Unlocked?
                     </Box>
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography variant="body2">{orderStats.totalItemCount}</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography component="div" variant="body2">
-                    <Box display="flex" alignItems="center">
-                      <HomeTwoToneIcon />&nbsp;Houses Unlocked?
-                    </Box>
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography variant="body2">{orderStats.housesUnlocked ? 'Yes' : 'No' }</Typography>
-                </Grid>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="body2">{orderStats.housesUnlocked ? 'Yes' : 'No'}</Typography>
+                  </Grid>
 
-                <Grid item xs={3}>
-                  <Typography component="div" variant="body2" gutterBottom>
-                    <Box display="flex" alignItems="center">
-                      <MoneyTwoToneIcon />&nbsp;Aggregate Base Rent:
+                  <Grid item xs={6}>
+                    <Typography component="div" variant="body2" gutterBottom>
+                      <Box display="flex" alignItems="center">
+                        <HomeWorkTwoToneIcon />&nbsp;Hotels Unlocked?
                     </Box>
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography variant="body2" gutterBottom>${orderStats.aggRent}</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography component="div" variant="body2" gutterBottom>
-                    <Box display="flex" alignItems="center">
-                      <HomeWorkTwoToneIcon />&nbsp;Hotels Unlocked?
-                    </Box>
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <Typography variant="body2" gutterBottom>{orderStats.hotelsUnlocked ? 'Yes' : 'No' }</Typography>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="body2" gutterBottom>{orderStats.hotelsUnlocked ? 'Yes' : 'No'}</Typography>
+                  </Grid>
                 </Grid>
 
               </Grid>
@@ -225,7 +231,7 @@ export default function OrderHistory({ setAppView }) {
         <Paper>
           <Box p="1rem">
             <Box display="flex" justifyContent="space-between">
-              <Typography variant="h6" color="textSecondary" gutterBottom>Your Items</Typography>
+              <Typography variant="h6" color="textSecondary">Your Items</Typography>
               <Chip label={orderStats.totalItemCount} />
             </Box>
 
