@@ -29,7 +29,7 @@ export default function OrderHistoryItem({ itemData, setAppView }) {
       </Box>
 
       <Grid container>
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Box
             width={1}
             minHeight="6rem"
@@ -43,7 +43,7 @@ export default function OrderHistoryItem({ itemData, setAppView }) {
           />
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Typography gutterBottom>
             <Link onClick={handleItemClick}>{name}</Link>
           </Typography>
@@ -52,13 +52,13 @@ export default function OrderHistoryItem({ itemData, setAppView }) {
           <Typography variant="body2" color="textSecondary">Color Group: {itemGroup}</Typography>
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Typography gutterBottom><br /></Typography>
           <Typography variant="body2" color="textSecondary">Order Number: #{cartID}</Typography>
           <Typography variant="body2" color="textSecondary">Order Date: {orderDate.toLocaleDateString('en-US')}</Typography>
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item xs={6} md={3}>
           <Typography gutterBottom><br /></Typography>
           <Typography variant="body2" color="textSecondary">Price: ${finalPrice}</Typography>
           <Typography variant="body2" color="textSecondary">Quantity: {quantity}</Typography>
