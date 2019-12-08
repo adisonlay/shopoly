@@ -1,6 +1,6 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
-import { Container, Typography, Box, Button } from '@material-ui/core';
+import { Container, Box, Typography, Chip, Button } from '@material-ui/core';
 
 export default function CartSummary({ setAppView, cartItems }) {
   const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
@@ -18,7 +18,10 @@ export default function CartSummary({ setAppView, cartItems }) {
 
   return (
     <Container fixed>
-      <Typography variant="h5" gutterBottom>Shopping Cart</Typography>
+      <Box mb="0.5rem" display="flex" justifyContent="space-between">
+        <Typography variant="h5">Shopping Cart</Typography>
+        <Chip label={cartItemCount} />
+      </Box>
       {cartItemListDisplay}
       <Box display="flex" justifyContent="space-between">
         <Typography variant="h6" color="textSecondary">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>

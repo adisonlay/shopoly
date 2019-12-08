@@ -39,7 +39,6 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
   }, []);
 
   const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr. Monopoly', 'Jake the Jailbird'];
-  const inputStyle = { margin: '1rem' };
 
   const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handlePlaceOrder = () => {
@@ -69,18 +68,18 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
           <Box mb="0.5rem">
             <Typography variant="h5">Checkout</Typography>
           </Box>
+
           <Paper>
             <Box p="2rem">
               <form>
 
                 <Typography variant="h6">Shipping Address</Typography>
                 <TextField
-                  fullWidth
                   id="name-input"
                   label="Full Name"
                   variant="outlined"
                   placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
-                  style={inputStyle}
+                  style={{ margin: '0.5rem 2.5%', width: '95%' }}
                   {...bindToNameInput}
                 />
                 <TextField
@@ -89,7 +88,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   label="Address"
                   variant="outlined"
                   placeholder="e.g. 200 Park Place"
-                  style={inputStyle}
+                  style={{ margin: '0.5rem 2.5%', width: '95%' }}
                   {...bindToAddressInput}
                 />
                 <TextField
@@ -97,10 +96,10 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   label="City"
                   variant="outlined"
                   placeholder="e.g. Atlantic City"
-                  style={inputStyle}
+                  style={{ margin: '0.5rem 2.5%', width: '40%' }}
                   {...bindToCityInput}
                 />
-                <FormControl variant="outlined" style={{ margin: '1rem', width: '20%' }}>
+                <FormControl variant="outlined" style={{ margin: '0.5rem 2.5%', width: '27.5%' }}>
                   <InputLabel ref={stateSelectLabel} id="state-select-label">State</InputLabel>
                   <Select
                     labelId="state-select-label"
@@ -118,11 +117,11 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   label="Zip"
                   variant="outlined"
                   placeholder="e.g. 50200"
-                  style={inputStyle}
+                  style={{ margin: '0.5rem 2.5%', width: '17.5%' }}
                   {...bindToZipInput}
                 />
                 <br />
-                <FormControl variant="outlined" style={{ margin: '1rem', width: '35%' }}>
+                <FormControl variant="outlined" style={{ margin: '0.5rem 2.5%', width: '35%' }}>
                   <InputLabel ref={countrySelectLabel} id="country-select-label">Country</InputLabel>
                   <Select
                     labelId="country-select-label"
@@ -145,14 +144,14 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   label="Name on Card"
                   variant="outlined"
                   placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
-                  style={{ margin: '1rem', width: '45%' }}
+                  style={{ margin: '0.5rem 2.5%', width: '45%' }}
                 />
                 <TextField
                   id="card-number-input"
                   label="Credit Card Number"
                   variant="outlined"
                   placeholder="e.g. 1234-5555-6789-0000"
-                  style={{ margin: '1rem', width: '45%' }}
+                  style={{ margin: '0.5rem 2.5%', width: '45%' }}
                 />
                 <br />
                 <TextField
@@ -160,14 +159,14 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                   label="Expiration"
                   variant="outlined"
                   placeholder="e.g. 01/2020"
-                  style={inputStyle}
+                  style={{ margin: '0.5rem 2.5%', width: '25%' }}
                 />
                 <TextField
                   id="card-cvv-input"
                   label="CVV"
                   variant="outlined"
                   placeholder="e.g. 123"
-                  style={inputStyle}
+                  style={{ margin: '0.5rem 2.5%', width: '25%' }}
                 />
 
               </form>
@@ -206,7 +205,6 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
               disabled
               variant="contained"
               color="primary"
-              size="large"
               onClick={handlePlaceOrder}
             >
               Place Order

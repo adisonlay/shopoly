@@ -54,7 +54,7 @@ export default function CartSummaryItem({ itemData, setAppView }) {
               <Box p="0.5rem" display="flex" flexDirection="column" alignItems="flex-end">
                 <Typography variant="body2" color="textSecondary">Price: ${finalPrice}</Typography>
                 <Typography variant="body2" color="textSecondary">Quantity: {quantity}</Typography>
-                <Typography><strong>Subtotal: ${finalPrice * quantity}</strong></Typography>
+                <Typography>Subtotal: ${finalPrice * quantity}</Typography>
               </Box>
             </Grid>
           </Grid>
