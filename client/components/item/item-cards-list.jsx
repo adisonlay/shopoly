@@ -17,7 +17,7 @@ export default function ItemCardsList({ setAppView }) {
     return function cleanup() {
       abortController.abort();
     };
-  }, [itemsData]);
+  }, []);
 
   if (itemsData.length === 0) {
     return (<Typography variant="h5" color="textSecondary">Items data unavailable.</Typography>);

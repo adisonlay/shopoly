@@ -20,15 +20,15 @@ export default function CartSummaryItem({ itemData, setAppView }) {
   const handleItemClick = () => setAppView('details', { itemID, itemName: name });
 
   return (
-    <Box mb="1rem">
+    <Box mb="0.5rem">
       <Paper>
         <Box p="1rem">
 
           <Grid container>
-            <Grid item xs={6} md={3}>
+            <Grid item xs={6} md={2}>
               <Box
                 width={1}
-                minHeight="8rem"
+                minHeight="6rem"
                 style={{
                   backgroundImage: `url("${images[1]}")`,
                   backgroundSize: 'contain',
@@ -41,20 +41,20 @@ export default function CartSummaryItem({ itemData, setAppView }) {
 
             <Grid item xs={6} md={4}>
               <Box>
-                <Typography gutterBottom variant="h5" >
+                <Typography gutterBottom>
                   <Link onClick={handleItemClick}>{name}</Link>
                 </Typography>
-                <Typography>Lot Number: {lotNumber}</Typography>
-                <Typography>Base Rent: {rent}</Typography>
-                <Typography>Color Group: {itemGroup}</Typography>
+                <Typography variant="body2" color="textSecondary">Lot Number: {lotNumber}</Typography>
+                <Typography variant="body2" color="textSecondary">Base Rent: {rent}</Typography>
+                <Typography variant="body2" color="textSecondary">Color Group: {itemGroup}</Typography>
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={5}>
+            <Grid item xs={12} md={6}>
               <Box p="0.5rem" display="flex" flexDirection="column" alignItems="flex-end">
-                <Typography>Price: ${finalPrice}</Typography>
-                <Typography>Quantity: {quantity}</Typography>
-                <Typography variant="h6">Subtotal: ${finalPrice * quantity}</Typography>
+                <Typography variant="body2" color="textSecondary">Price: ${finalPrice}</Typography>
+                <Typography variant="body2" color="textSecondary">Quantity: {quantity}</Typography>
+                <Typography><strong>Subtotal: ${finalPrice * quantity}</strong></Typography>
               </Box>
             </Grid>
           </Grid>

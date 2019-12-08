@@ -1,16 +1,13 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
-import { Container, Box, Typography, Button } from '@material-ui/core';
+import { Container, Typography, Box, Button } from '@material-ui/core';
 
 export default function CartSummary({ setAppView, cartItems }) {
   let cartItemListDisplay = null;
   let checkoutButtonDisplay = null;
 
-  let initialCartItemCount = 0;
-  const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialCartItemCount);
-
-  let initialCartTotal = 0;
-  const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, initialCartTotal);
+  const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
+  const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, 0);
 
   const handleCheckout = () => setAppView('checkout', { cartItemCount, cartTotal });
 
@@ -23,9 +20,10 @@ export default function CartSummary({ setAppView, cartItems }) {
 
   return (
     <Container fixed>
+      <Typography variant="h5" gutterBottom>Shopping Cart</Typography>
       {cartItemListDisplay}
       <Box display="flex" justifyContent="space-between">
-        <Typography variant="h5">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
+        <Typography variant="h6" color="textSecondary">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
         {checkoutButtonDisplay}
       </Box>
     </Container>

@@ -18,7 +18,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
     return function cleanup() {
       abortController.abort();
     };
-  }, [itemDetailData]);
+  }, []);
 
   if (Object.keys(itemDetailData).length === 0) {
     return (<Typography variant="h5" color="textSecondary">Item details unavailable.</Typography>);

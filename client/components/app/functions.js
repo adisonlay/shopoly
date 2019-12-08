@@ -3,13 +3,6 @@ function sortImageData(imagesArray) {
   const mortImageIndex = sortedArray.findIndex(url => url.includes('mort'));
   sortedArray.push(sortedArray.splice(mortImageIndex, 1)[0]);
 
-  // for (let i = 0; i < sortedArray.length; i++) {
-  //   if (sortedArray[i].includes('mort')) {
-  //     sortedArray.push(sortedArray.splice(i, 1)[0])
-  //   }
-  //   break;
-  // }
-
   return sortedArray;
 }
 
@@ -32,4 +25,56 @@ function formatItemData(itemDataObject) {
   return formattedData;
 }
 
-export { formatItemData };
+function countMonopolies(itemsData) {
+  let monopolies = 0;
+
+  const countedGroups = itemsData.reduce((groupCount, currentItem) => {
+    if (currentItem.itemGroup in groupCount) {
+      groupCount[currentItem.itemGroup]++;
+    } else {
+      groupCount[currentItem.itemGroup] = 1;
+    }
+    return groupCount;
+  }, {});
+
+  for (let group in countedGroups) {
+    if (!['Utility', 'Railroad', 'Other', 'Building'].includes(group)) {
+      if (group === 'Purple/Brown' || group === 'Dark Blue') {
+        if (countedGroups[group] >= 2) {
+          monopolies++;
+        }
+      } else {
+        if (countedGroups[group] >= 3) {
+          monopolies++;
+        }
+      }
+    }
+  }
+
+  return monopolies;
+}
+
+function getHouseUnlockStatus(itemsData) {
+  if (countMonopolies(itemsData)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function getHotelUnlockStatus(itemsData) {
+  let houseCount = 0;
+  itemsData.forEach(currentItem => {
+    if (currentItem.name === 'House') {
+      houseCount += currentItem.quantity;
+    }
+  });
+
+  if (houseCount >= 4) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export { formatItemData, countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus };

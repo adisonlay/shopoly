@@ -4,17 +4,15 @@ import { Container, Typography, Grid, Paper, Box, Divider, Chip, List, Button } 
 
 export default function OrderSummary({ setAppView, viewParams }) {
   const { orderItems, orderItemCount, orderTotal, shippingAddress } = viewParams;
+  const today = new Date();
 
-  const handleItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
   const handleContinue = () => setAppView('catalog', {});
   const handleHistory = () => setAppView('orderHistory', {});
-
-  const today = new Date();
 
   return (
     <Container fixed>
       <Typography variant="h5" gutterBottom>Order Summary</Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={3}>
           <Paper>
             <Box p="1rem">
