@@ -37,7 +37,7 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
 
   return (
     <Box mb="1rem">
-      <Paper elevation={0} style={{ backgroundColor: '#f2f2f2' }} >
+      <Paper elevation={0} style={{ backgroundColor: '#f5f5f5' }} >
         <Box ml="1rem">
           <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
             <Link color="textSecondary" onClick={handleCatalogClick}>
