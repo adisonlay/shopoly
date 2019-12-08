@@ -23,7 +23,9 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
     setToastOpen(true);
   };
   const handleCloseToast = (event, reason) => {
-    if (reason === 'clickaway') return;
+    if (reason === 'clickaway') {
+      return;
+    }
     setToastOpen(false);
   };
 
