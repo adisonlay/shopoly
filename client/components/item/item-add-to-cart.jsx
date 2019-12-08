@@ -50,10 +50,9 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
       <Button
         variant="contained"
         color="primary"
-        size="large"
         disabled={!quantity}
         onClick={handleAddToCart}
-        style={{ marginTop: '0.25rem' }}
+        style={{ marginTop: '0.5rem' }}
       >
         Add to Cart
       </Button>
