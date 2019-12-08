@@ -18,7 +18,7 @@ export default function ItemCard({ itemData, setAppView }) {
 
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea onClick={handleDetailsClick}>
         <CardMedia
           style={{ height: '16rem', backgroundSize: 'contain' }}
           image={images[0]}
@@ -26,12 +26,12 @@ export default function ItemCard({ itemData, setAppView }) {
         />
         <CardContent>
           <Box display="flex" justifyContent="space-between">
-            <Typography gutterBottom variant="h5">{name}</Typography>
-            <Typography gutterBottom variant="h5" color="textSecondary">{price}</Typography>
+            <Typography variant="h6" style={{ fontWeight: 400 }} gutterBottom>{name}</Typography>
+            <Typography variant="h6" color="textSecondary" style={{ fontWeight: 400 }} gutterBottom>{price}</Typography>
           </Box>
-          <Typography>Lot Number: {lotNumber}</Typography>
-          <Typography>Base Rent: {rent}</Typography>
-          <Typography>Color Group: {itemGroup}</Typography>
+          <Typography variant="body2">Lot Number: {lotNumber}</Typography>
+          <Typography variant="body2">Base Rent: {rent}</Typography>
+          <Typography variant="body2">Color Group: {itemGroup}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
