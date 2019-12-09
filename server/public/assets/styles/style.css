@@ -4,24 +4,33 @@
   --tc-red: #da2a2d;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   background-color: var(--tc-light-gray);
 }
 
 /* ItemGallery Component Styling */
-.gallery-slide-container {
-  position: relative;
-}
+  .gallery-thumbnails {
+    opacity: 0.5;
+  }
+    .gallery-thumb-active, .gallery-thumbnails:hover {
+      opacity: 1;
+    }
 
   .gallery-slides {
     display: none;
   }
+    .gallery-slide-active {
+      display: block;
+    }
 
 /* Helper Classes */
 .cursor {
   cursor: pointer;
+}
+
+.image-box {
+  background-color: var(--tc-light-gray);
+  background-size: 'contain';
+  background-position: 'center';
+  background-repeat: 'no-repeat';
 }
