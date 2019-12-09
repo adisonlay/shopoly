@@ -41,7 +41,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback,
       <Container fixed>
         <Paper>
           <Box p="2rem">
-            <Grid container>
+            <Grid container spacing={3}>
 
               <Grid item xs={12} md={6}>
                 <ItemGallery images={images} />
