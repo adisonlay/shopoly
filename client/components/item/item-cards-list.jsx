@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemCard from './item-card';
 import { Container, Grid, Typography } from '@material-ui/core';
 
-export default function ItemCardsList({ setAppView }) {
+export default function ItemCardsList({ setAppView, unlockStatus }) {
   const [itemsData, setItemsData] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ItemCardsList({ setAppView }) {
         <Grid container spacing={3}>
           {itemsData.map(item => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item.itemID}>
-              <ItemCard itemData={item} setAppView={setAppView} />
+              <ItemCard itemData={item} setAppView={setAppView} unlockStatus={unlockStatus} />
             </Grid>
           ))}
         </Grid>
