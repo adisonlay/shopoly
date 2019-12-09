@@ -12,10 +12,16 @@ body {
   background-color: var(--tc-light-gray);
 }
 
+/* ItemGallery Component Styling */
 .gallery-slide-container {
   position: relative;
 }
 
-.gallery-slides {
-  display: none;
+  .gallery-slides {
+    display: none;
+  }
+
+/* Helper Classes */
+.cursor {
+  cursor: pointer;
 }
