@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ItemGallery from './item-gallery';
 import ItemAddToCart from './item-add-to-cart';
 import { formatItemData } from '../app/functions';
 import { Container, Paper, Box, Grid, Typography } from '@material-ui/core';
@@ -43,17 +44,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback,
             <Grid container>
 
               <Grid item xs={12} md={6}>
-                <Box
-                  mb="1rem"
-                  width={1}
-                  height="16rem"
-                  style={{
-                    backgroundImage: `url("${images[1]}")`,
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                  }}
-                />
+                <ItemGallery images={images} />
               </Grid>
 
               <Grid item xs={12} md={6}>
