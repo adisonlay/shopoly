@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ItemAddToCart from './item-add-to-cart';
 import { formatItemData } from '../app/functions';
-import { Container, Grid, Paper, Box, Typography } from '@material-ui/core';
+import { Container, Paper, Box, Grid, Typography } from '@material-ui/core';
 
-export default function ItemDetails({ setAppView, viewParams, addToCartCallback }) {
+export default function ItemDetails({ setAppView, viewParams, addToCartCallback, unlockStatus }) {
   const [itemDetailData, setItemDetailData] = useState({});
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback 
                   <Typography>Lot Number: {lotNumber}</Typography>
                   <Typography>Base Rent: {rent}</Typography>
                   <Typography gutterBottom>Color Group: {itemGroup}</Typography>
-                  <ItemAddToCart itemDetailData={itemDetailData} addToCartCallback={addToCartCallback} />
+                  <ItemAddToCart itemDetailData={itemDetailData} addToCartCallback={addToCartCallback} unlockStatus={unlockStatus} />
                 </Box>
               </Grid>
 

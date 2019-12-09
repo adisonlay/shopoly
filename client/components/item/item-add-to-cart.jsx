@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button, Snackbar, IconButton } from '@material-ui/core';
+import { Box, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button, Typography, Snackbar, IconButton } from '@material-ui/core';
+import WarningTwoToneIcon from '@material-ui/icons/WarningTwoTone';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
+export default function ItemAddToCart({ itemDetailData, addToCartCallback, unlockStatus }) {
+  const itemLocked = (itemDetailData.name === 'House' && !unlockStatus.house) || (itemDetailData.name === 'Hotel' && !unlockStatus.hotel);
+
   const [quantity, setQuantity] = useState('');
   const [toastOpen, setToastOpen] = useState(false);
   const [labelWidth, setLabelWidth] = useState(0);
@@ -12,16 +15,22 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
   }, []);
 
   const handleSelect = event => setQuantity(event.target.value);
+
   const handleAddToCart = () => {
-    if (!quantity) return;
+    if (!quantity) {
+      return;
+    }
+
     const cartAddBody = {
       itemID: itemDetailData.itemID,
       finalPrice: parseInt(itemDetailData.price),
       quantity
     };
+
     addToCartCallback(cartAddBody, itemDetailData);
     setToastOpen(true);
   };
+
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -51,13 +60,21 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
 
       <Button
         variant="contained"
-        color="primary"
-        disabled={!quantity}
+        color={itemLocked ? 'secondary' : 'primary' }
+        disabled={!quantity || itemLocked}
         onClick={handleAddToCart}
         style={{ marginTop: '0.5rem' }}
       >
         Add to Cart
       </Button>
+
+      {itemLocked && (
+        <Typography variant="caption" color="error" gutterBottom>
+          <Box display="flex" alignItems="center">
+            <WarningTwoToneIcon />&nbsp;Item access is restricted.
+          </Box>
+        </Typography>
+      )}
 
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}

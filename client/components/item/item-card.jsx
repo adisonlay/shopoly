@@ -14,8 +14,10 @@ export default function ItemCard({ itemData, setAppView, unlockStatus }) {
     images
   } = itemData;
 
+  let textColor = 'initial';
   let lockedItemImageOverlay = null;
   if ((name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)) {
+    textColor = 'textSecondary';
     lockedItemImageOverlay = (
       <Box
         mb="1rem"
@@ -31,7 +33,6 @@ export default function ItemCard({ itemData, setAppView, unlockStatus }) {
       />
     );
   }
-
 
   const handleDetailsClick = () => setAppView('details', { itemID, itemName: name });
 
@@ -51,42 +52,12 @@ export default function ItemCard({ itemData, setAppView, unlockStatus }) {
         </CardMedia>
         <CardContent>
           <Box display="flex" justifyContent="space-between">
-            <Typography
-              variant="h6"
-              color={(name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)
-                ? 'textSecondary'
-                : 'initial'}
-              style={{ fontWeight: 400 }}
-              gutterBottom
-            >
-              {name}
-            </Typography>
+            <Typography variant="h6" color={textColor} style={{ fontWeight: 400 }} gutterBottom>{name}</Typography>
             <Typography variant="h6" color="textSecondary" style={{ fontWeight: 400 }} gutterBottom>{price}</Typography>
           </Box>
-          <Typography
-            variant="body2"
-            color={(name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)
-              ? 'textSecondary'
-              : 'initial'}
-          >
-            Lot Number: {lotNumber}
-          </Typography>
-          <Typography
-            variant="body2"
-            color={(name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)
-              ? 'textSecondary'
-              : 'initial'}
-          >
-            Base Rent: {rent}
-          </Typography>
-          <Typography
-            variant="body2"
-            color={(name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)
-              ? 'textSecondary'
-              : 'initial'}
-          >
-            Color Group: {itemGroup}
-          </Typography>
+          <Typography variant="body2" color={textColor}>Lot Number: {lotNumber}</Typography>
+          <Typography variant="body2" color={textColor}>Base Rent: {rent}</Typography>
+          <Typography variant="body2" color={textColor}>Color Group: {itemGroup}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

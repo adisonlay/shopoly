@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OrderHistoryItem from './order-history-item';
 import { countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus } from '../app/functions';
-import { Container, Grid, Paper, Box, Typography, Divider, Chip } from '@material-ui/core';
+import { Container, Typography, Box, Paper, Grid, Divider, Chip } from '@material-ui/core';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
 import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';
@@ -80,7 +80,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
                     <Typography component="div" variant="body2">
                       <Box display="flex" alignItems="center">
                         <LocalMallTwoToneIcon />&nbsp;Orders Placed:
-                    </Box>
+                      </Box>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -91,7 +91,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
                     <Typography component="div" variant="body2">
                       <Box display="flex" alignItems="center">
                         <LocalOfferTwoToneIcon />&nbsp;Total Items Purchased:
-                    </Box>
+                      </Box>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -102,7 +102,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
                     <Typography component="div" variant="body2" gutterBottom>
                       <Box display="flex" alignItems="center">
                         <MoneyTwoToneIcon />&nbsp;Aggregate Base Rent:
-                    </Box>
+                      </Box>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -115,7 +115,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
                     <Typography component="div" variant="body2">
                       <Box display="flex" alignItems="center">
                         <GroupWorkTwoToneIcon />&nbsp;Monopolies Controlled:
-                    </Box>
+                      </Box>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -126,7 +126,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
                     <Typography component="div" variant="body2">
                       <Box display="flex" alignItems="center">
                         <HomeTwoToneIcon />&nbsp;Houses Unlocked?
-                    </Box>
+                      </Box>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -137,7 +137,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
                     <Typography component="div" variant="body2" gutterBottom>
                       <Box display="flex" alignItems="center">
                         <HomeWorkTwoToneIcon />&nbsp;Hotels Unlocked?
-                    </Box>
+                      </Box>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>

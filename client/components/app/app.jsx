@@ -19,6 +19,7 @@ export default class App extends Component {
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getOrderHistory = this.getOrderHistory.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
 
@@ -89,7 +90,7 @@ export default class App extends Component {
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
       catalog: (<ItemCardsList setAppView={this.setView} unlockStatus={unlockStatus} />),
-      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
+      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} unlockStatus={unlockStatus} />),
       cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
       checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
       orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
