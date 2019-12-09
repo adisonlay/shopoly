@@ -10,64 +10,7 @@ import GroupWorkTwoToneIcon from '@material-ui/icons/GroupWorkTwoTone';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 import HomeWorkTwoToneIcon from '@material-ui/icons/HomeWorkTwoTone';
 
-export default function OrderHistory({ setAppView }) {
-  // const [orderHistoryData, setOrderHistoryData] = useState([]);
-
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   const signal = abortController.signal;
-
-  //   fetch('api/order/order.php', { signal })
-  //     .then(response => response.json())
-  //     .then(orderHistoryData => setOrderHistoryData(orderHistoryData))
-  //     .catch(error => console.error(error));
-
-  //   return function cleanup() {
-  //     abortController.abort();
-  //   };
-  // }, []);
-
-
-
-  const [orderHistoryData, setOrderHistoryData] = useState([
-    {
-      "cartID": "8",
-      "finalPrice": 150,
-      "quantity": 1,
-      "itemID": "24",
-      "name": "Water Works",
-      "lotNumber": 29,
-      "price": "150",
-      "rent": "Variable",
-      "itemGroup": "Utility",
-      "images": [
-        "server/public/assets/images/properties/waterworks1.png",
-        "server/public/assets/images/properties/waterworks2.png",
-        "server/public/assets/images/properties/waterworks3.png"
-      ],
-      "ordered": "2019-12-01 18:19:19"
-    },
-    {
-      "cartID": "9",
-      "finalPrice": 60,
-      "quantity": 1,
-      "itemID": "1",
-      "name": "Mediterranean Ave.",
-      "lotNumber": 2,
-      "price": "60",
-      "rent": "2",
-      "itemGroup": "Purple/Brown",
-      "images": [
-        "server/public/assets/images/properties/brownmort.png",
-        "server/public/assets/images/properties/mediterranean1.png",
-        "server/public/assets/images/properties/mediterranean2.png"
-      ],
-      "ordered": "2019-12-01 18:21:33"
-    }
-  ]);
-
-
-
+export default function OrderHistory({ setAppView, orderHistoryData }) {
   const orderStats = {
     firstOrderDate: '',
     orderCount: null,
@@ -109,26 +52,6 @@ export default function OrderHistory({ setAppView }) {
   orderStats.monopolies = countMonopolies(orderHistoryData);
   orderStats.housesUnlocked = getHouseUnlockStatus(orderHistoryData);
   orderStats.hotelsUnlocked = getHotelUnlockStatus(orderHistoryData);
-
-
-  // const orderCount = orderIDsArray.length;
-
-  // let firstOrderDate = orderDates[0];
-  // orderDates.forEach(orderDate => {
-  //   if (orderDate < firstOrderDate) {
-  //     firstOrderDate = orderDate;
-  //   }
-  // });
-
-  // let initialItemCount = 0;
-  // const totalItemCount = orderHistoryData.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, initialItemCount);
-
-
-
-  // console.log(orderHistoryData, orderCount, totalItemCount);
-  console.log(orderHistoryData, orderStats);
-
-
 
   if (orderHistoryData.length === 0) {
     return (<Typography variant="h5" color="textSecondary">Order history data unavailable.</Typography>);

@@ -7,13 +7,15 @@ import CartSummary from '../cart/cart-summary';
 import CartCheckoutForm from '../cart/cart-checkout-form';
 import OrderSummary from '../order/order-summary';
 import OrderHistory from '../order/order-history';
+import { getHouseUnlockStatus, getHotelUnlockStatus } from './functions';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       view: { page: 'catalog', params: {} },
-      cartItems: []
+      cartItems: [],
+      orderHistoryData: []
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -48,6 +50,13 @@ export default class App extends Component {
       .catch(error => console.error(error));
   }
 
+  getOrderHistory() {
+    fetch('api/order/order.php')
+      .then(response => response.json())
+      .then(orderHistoryData => this.setState({ orderHistoryData }))
+      .catch(error => console.error(error));
+  }
+
   placeOrder(cartID) {
     cartID = parseInt(cartID);
     fetch('/api/order/order.php', {
@@ -55,25 +64,36 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cartID })
     })
-      .then(() => this.setState({ cartItems: [] }))
+      .then(response => response.json())
+      .then(orderAddResponse => {
+        if (orderAddResponse.success) {
+          this.getOrderHistory();
+          this.setState({ cartItems: [] });
+        }
+      })
       .catch(error => console.error(error));
   }
 
   componentDidMount() {
     this.getCartItems();
+    this.getOrderHistory();
   }
 
   render() {
     const cartItemCount = this.state.cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
+    const unlockStatus = {
+      house: getHouseUnlockStatus(this.state.orderHistoryData),
+      hotel: getHotelUnlockStatus(this.state.orderHistoryData)
+    };
 
     const { page: currentPage, params: currentParams } = this.state.view;
     const pageComponents = {
-      catalog: (<ItemCardsList setAppView={this.setView} />),
+      catalog: (<ItemCardsList setAppView={this.setView} unlockStatus={unlockStatus} />),
       details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
       cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
       checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
       orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
-      orderHistory: (<OrderHistory setAppView={this.setView} />)
+      orderHistory: (<OrderHistory setAppView={this.setView} orderHistoryData={this.state.orderHistoryData} />)
 
 
       // orderSummary: '',
