@@ -11,3 +11,7 @@
 body {
   background-color: var(--tc-light-gray);
 }
+
+.slide-container {
+  position: relative;
+}

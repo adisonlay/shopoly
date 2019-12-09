@@ -30,7 +30,7 @@ export default function ItemGallery({ images }) {
         ))}
       </Grid>
 
-      <Grid item xs={9}>
+      <Grid item xs={9} className="slide-container">
         <IconButton onClick={handlePrev}>
           <NavigateBeforeIcon />
         </IconButton>
