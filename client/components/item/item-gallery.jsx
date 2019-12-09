@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Box, Link } from '@material-ui/core';
+import { Grid, Box, IconButton } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
@@ -31,6 +31,9 @@ export default function ItemGallery({ images }) {
       </Grid>
 
       <Grid item xs={9}>
+        <IconButton onClick={handlePrev}>
+          <NavigateBeforeIcon />
+        </IconButton>
         {images.map(url => (
           <Box
             key={url + 'slides'}
@@ -45,8 +48,9 @@ export default function ItemGallery({ images }) {
             }}
           />
         ))}
-        <Link onClick={handlePrev}><NavigateBeforeIcon /></Link>
-        <Link onClick={handleNext}><NavigateNextIcon /></Link>
+        <IconButton onClick={handleNext}>
+          <NavigateNextIcon />
+        </IconButton>
       </Grid>
     </Grid>
   );
