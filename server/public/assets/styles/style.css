@@ -12,6 +12,10 @@ body {
   background-color: var(--tc-light-gray);
 }
 
-.slide-container {
+.gallery-slide-container {
   position: relative;
+}
+
+.gallery-slides {
+  display: none;
 }

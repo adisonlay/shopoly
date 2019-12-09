@@ -30,7 +30,7 @@ export default function ItemGallery({ images }) {
         ))}
       </Grid>
 
-      <Grid item xs={9} className="slide-container">
+      <Grid item xs={9} className="gallery-slide-container">
         <IconButton onClick={handlePrev}>
           <NavigateBeforeIcon />
         </IconButton>
@@ -40,6 +40,7 @@ export default function ItemGallery({ images }) {
             mb="1rem"
             width={1}
             height="20rem"
+            className="gallery-slides"
             style={{
               backgroundImage: `url("${url}")`,
               backgroundSize: 'contain',
