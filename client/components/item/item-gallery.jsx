@@ -5,30 +5,21 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export default function ItemGallery({ images }) {
   const slideCount = images.length;
+  const fadeAnimationDuration = 300;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [fadeToggle, setFadeToggle] = useState(true);
 
-  const handlePrev = () => {
+  const handleSlideChange = slideIndex => {
     setFadeToggle(false);
     setTimeout(() => {
-      setCurrentSlide(slideIndex => (((slideIndex - 1) % slideCount) + slideCount) % slideCount);
+      setCurrentSlide(slideIndex);
       setFadeToggle(true);
-    }, 500);
+    }, fadeAnimationDuration);
   };
-  const handleNext = () => {
-    setFadeToggle(false);
-    setTimeout(() => {
-      setCurrentSlide(slideIndex => (((slideIndex + 1) % slideCount) + slideCount) % slideCount);
-      setFadeToggle(true);
-    }, 500);
-  };
-  const handleThumbnailClick = clickedSlideIndex => {
-    setFadeToggle(false);
-    setTimeout(() => {
-      setCurrentSlide(clickedSlideIndex);
-      setFadeToggle(true);
-    }, 500);
-  };
+
+  const handlePrev = () => handleSlideChange((((currentSlide - 1) % slideCount) + slideCount) % slideCount);
+  const handleNext = () => handleSlideChange((((currentSlide + 1) % slideCount) + slideCount) % slideCount);
 
   return (
     <Box mb="1rem">
@@ -41,7 +32,7 @@ export default function ItemGallery({ images }) {
               height={slideCount > 3 ? '20%' : '30%'}
               className={'gallery-thumbnails image-box cursor ' + (index === currentSlide ? 'gallery-thumb-active' : '')}
               style={{ backgroundImage: `url("${url}")` }}
-              onClick={() => handleThumbnailClick(index)}
+              onClick={() => handleSlideChange(index)}
             />
           ))}
         </Grid>
@@ -50,7 +41,7 @@ export default function ItemGallery({ images }) {
           <IconButton onClick={handlePrev}>
             <NavigateBeforeIcon />
           </IconButton>
-          <Fade in={fadeToggle} timeout={500}>
+          <Fade in={fadeToggle} timeout={fadeAnimationDuration}>
             <Box
               width={1}
               height="20rem"
