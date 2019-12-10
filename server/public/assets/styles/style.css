@@ -8,15 +8,6 @@ body {
   background-color: var(--tc-light-gray);
 }
 
-/*
-Enable cursor not-allowed for disabled buttons
-https://material-ui.com/components/buttons/#cursor-not-allowed
-*/
-.MuiButtonBase-root:disabled {
-  cursor: not-allowed;
-  pointer-events: auto;
-}
-
 /* ItemGallery Component Styling */
   .gallery-thumbnails {
     opacity: 0.5;
