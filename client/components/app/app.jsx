@@ -81,25 +81,21 @@ export default class App extends Component {
   }
 
   render() {
-    const cartItemCount = this.state.cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
-    const unlockStatus = {
-      house: getHouseUnlockStatus(this.state.orderHistoryData),
-      hotel: getHotelUnlockStatus(this.state.orderHistoryData)
-    };
-
+    const { cartItems, orderHistoryData } = this.state;
     const { page: currentPage, params: currentParams } = this.state.view;
+
+    const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
+    const unlockStatus = { house: getHouseUnlockStatus(orderHistoryData), hotel: getHotelUnlockStatus(orderHistoryData) };
+
     const pageComponents = {
       catalog: (<ItemCardsList setAppView={this.setView} unlockStatus={unlockStatus} />),
       details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} unlockStatus={unlockStatus} />),
-      cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
-      checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
+      cart: (<CartSummary setAppView={this.setView} cartItems={cartItems} />),
+      checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={cartItems} placeOrderCallback={this.placeOrder} />),
       orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
-      orderHistory: (<OrderHistory setAppView={this.setView} orderHistoryData={this.state.orderHistoryData} />)
-
-
-      // orderSummary: '',
+      orderHistory: (<OrderHistory setAppView={this.setView} orderHistoryData={orderHistoryData} />)
       // orderHistory: (<OrderSummary setAppView={this.setView} viewParams={{
-      //   orderItems: this.state.cartItems,
+      //   orderItems: cartItems,
       //   orderItemCount: 6,
       //   orderTotal: 860,
       //   shippingAddress: {
@@ -119,10 +115,10 @@ export default class App extends Component {
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
 
-        {this.state.cartItems.length
+        {cartItems.length
         ?
           (<OrderSummary setAppView={this.setView} viewParams={{
-            orderItems: this.state.cartItems,
+            orderItems: cartItems,
             orderItemCount: 6,
             orderTotal: 860,
             shippingAddress: {
