@@ -1,6 +1,6 @@
 import React from 'react';
 import CartSummaryItem from './cart-summary-item';
-import { Container, Box, Typography, Chip, Button } from '@material-ui/core';
+import { Container, Box, Typography, Chip, Button, Paper } from '@material-ui/core';
 
 export default function CartSummary({ setAppView, cartItems }) {
   const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
@@ -11,7 +11,15 @@ export default function CartSummary({ setAppView, cartItems }) {
 
   let cartItemListDisplay = null;
   if (!cartItems.length) {
-    cartItemListDisplay = (<Typography variant="h6" color="textSecondary">There are no items in your cart.</Typography>);
+    cartItemListDisplay = (
+      <Box mb="0.5rem">
+        <Paper>
+          <Box p="1rem">
+            <Typography variant="h6" color="textSecondary">There are no items in your cart.</Typography>
+          </Box>
+        </Paper>
+      </Box>
+    );
   } else {
     cartItemListDisplay = (cartItems.map(cartItem => <CartSummaryItem key={cartItem.itemID} itemData={cartItem} setAppView={setAppView} />));
   }
