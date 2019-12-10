@@ -92,19 +92,6 @@ export default class App extends Component {
       checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={cartItems} placeOrderCallback={this.placeOrder} />),
       orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
       orderHistory: (<OrderHistory setAppView={this.setView} orderHistoryData={orderHistoryData} />)
-      // orderHistory: (<OrderSummary setAppView={this.setView} viewParams={{
-      //   orderItems: cartItems,
-      //   orderItemCount: 6,
-      //   orderTotal: 860,
-      //   shippingAddress: {
-      //     nameInput: 'Mr. Monopoly',
-      //     addressInput: '200 Park Place',
-      //     cityInput: 'Atlantic City',
-      //     stateInput: 'NJ',
-      //     zipInput: '12345',
-      //     countryInput: 'United States'
-      //   }
-      // }} />)
     };
 
     return (
@@ -112,26 +99,6 @@ export default class App extends Component {
         <Header setAppView={this.setView} cartItemCount={cartItemCount} />
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
-
-        {/* {cartItems.length
-        ?
-          (<OrderSummary setAppView={this.setView} viewParams={{
-            orderItems: cartItems,
-            orderItemCount: 6,
-            orderTotal: 860,
-            shippingAddress: {
-              nameInput: 'Mr. Monopoly',
-              addressInput: '200 Park Place',
-              cityInput: 'Atlantic City',
-              stateInput: 'NJ',
-              zipInput: '12345',
-              countryInput: 'United States'
-            }
-          }} />)
-        :
-        null
-        } */}
-
       </div>
     );
   }

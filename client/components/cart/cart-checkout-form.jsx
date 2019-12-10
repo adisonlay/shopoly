@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Container, Grid, Box, Paper, Typography, Chip, Button,
+  Fade, Container, Grid, Box, Paper, Typography, Chip, Button,
   TextField, FormControl, InputLabel, Select, MenuItem,
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
@@ -61,157 +61,159 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
   };
 
   return (
-    <Container fixed>
-      <Grid container spacing={3}>
+    <Fade in>
+      <Container fixed>
+        <Grid container spacing={3}>
 
-        <Grid item xs={12} md={9}>
-          <Box mb="0.5rem">
-            <Typography variant="h5">Checkout</Typography>
-          </Box>
-
-          <Paper>
-            <Box p="2rem">
-              <form>
-
-                <Typography variant="h6">Shipping Address</Typography>
-                <TextField
-                  id="name-input"
-                  label="Full Name"
-                  variant="outlined"
-                  placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
-                  style={{ margin: '0.5rem 2.5%', width: '95%' }}
-                  {...bindToNameInput}
-                />
-                <TextField
-                  fullWidth
-                  id="address-input"
-                  label="Address"
-                  variant="outlined"
-                  placeholder="e.g. 200 Park Place"
-                  style={{ margin: '0.5rem 2.5%', width: '95%' }}
-                  {...bindToAddressInput}
-                />
-                <TextField
-                  id="city-input"
-                  label="City"
-                  variant="outlined"
-                  placeholder="e.g. Atlantic City"
-                  style={{ margin: '0.5rem 2.5%', width: '40%' }}
-                  {...bindToCityInput}
-                />
-                <FormControl variant="outlined" style={{ margin: '0.5rem 2.5%', width: '27.5%' }}>
-                  <InputLabel ref={stateSelectLabel} id="state-select-label">State</InputLabel>
-                  <Select
-                    labelId="state-select-label"
-                    id="state-input"
-                    labelWidth={stateLabelWidth}
-                    {...bindToStateInput}
-                  >
-                    <MenuItem value=""><em>Choose...</em></MenuItem>
-                    <MenuItem value="NJ">New Jersey</MenuItem>
-                    <MenuItem value="CA">California</MenuItem>
-                  </Select>
-                </FormControl>
-                <TextField
-                  id="zip-input"
-                  label="Zip"
-                  variant="outlined"
-                  placeholder="e.g. 50200"
-                  style={{ margin: '0.5rem 2.5%', width: '17.5%' }}
-                  {...bindToZipInput}
-                />
-                <br />
-                <FormControl variant="outlined" style={{ margin: '0.5rem 2.5%', width: '35%' }}>
-                  <InputLabel ref={countrySelectLabel} id="country-select-label">Country</InputLabel>
-                  <Select
-                    labelId="country-select-label"
-                    id="country-input"
-                    labelWidth={countryLabelWidth}
-                    {...bindToCountryInput}
-                  >
-                    <MenuItem value=""><em>Choose...</em></MenuItem>
-                    <MenuItem value="United States">United States</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <Box my="1rem">
-                  <Divider />
-                </Box>
-
-                <Typography variant="h6">Payment</Typography>
-                <TextField
-                  id="card-name-input"
-                  label="Name on Card"
-                  variant="outlined"
-                  placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
-                  style={{ margin: '0.5rem 2.5%', width: '45%' }}
-                />
-                <TextField
-                  id="card-number-input"
-                  label="Credit Card Number"
-                  variant="outlined"
-                  placeholder="e.g. 1234-5555-6789-0000"
-                  style={{ margin: '0.5rem 2.5%', width: '45%' }}
-                />
-                <br />
-                <TextField
-                  id="card-expiration-input"
-                  label="Expiration"
-                  variant="outlined"
-                  placeholder="e.g. 01/2020"
-                  style={{ margin: '0.5rem 2.5%', width: '25%' }}
-                />
-                <TextField
-                  id="card-cvv-input"
-                  label="CVV"
-                  variant="outlined"
-                  placeholder="e.g. 123"
-                  style={{ margin: '0.5rem 2.5%', width: '25%' }}
-                />
-
-              </form>
+          <Grid item xs={12} md={9}>
+            <Box mb="0.5rem">
+              <Typography variant="h5">Checkout</Typography>
             </Box>
-          </Paper>
-        </Grid>
 
-        <Grid item xs={12} md={3}>
-          <Box mb="0.5rem" display="flex" justifyContent="space-between">
-            <Typography variant="h5">Cart</Typography>
-            <Chip label={cartItemCount} />
-          </Box>
+            <Paper>
+              <Box p="2rem">
+                <form>
 
-          <Paper>
-            <List>
-              {cartItems.map(cartItem => (
-                <ListItem key={cartItem.itemID} button onClick={() => handleCartItemClick(cartItem)}>
-                  <ListItemText primary={cartItem.name} secondary={'Quantity: ' + cartItem.quantity} />
+                  <Typography variant="h6">Shipping Address</Typography>
+                  <TextField
+                    id="name-input"
+                    label="Full Name"
+                    variant="outlined"
+                    placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
+                    style={{ margin: '0.5rem 2.5%', width: '95%' }}
+                    {...bindToNameInput}
+                  />
+                  <TextField
+                    fullWidth
+                    id="address-input"
+                    label="Address"
+                    variant="outlined"
+                    placeholder="e.g. 200 Park Place"
+                    style={{ margin: '0.5rem 2.5%', width: '95%' }}
+                    {...bindToAddressInput}
+                  />
+                  <TextField
+                    id="city-input"
+                    label="City"
+                    variant="outlined"
+                    placeholder="e.g. Atlantic City"
+                    style={{ margin: '0.5rem 2.5%', width: '40%' }}
+                    {...bindToCityInput}
+                  />
+                  <FormControl variant="outlined" style={{ margin: '0.5rem 2.5%', width: '27.5%' }}>
+                    <InputLabel ref={stateSelectLabel} id="state-select-label">State</InputLabel>
+                    <Select
+                      labelId="state-select-label"
+                      id="state-input"
+                      labelWidth={stateLabelWidth}
+                      {...bindToStateInput}
+                    >
+                      <MenuItem value=""><em>Choose...</em></MenuItem>
+                      <MenuItem value="NJ">New Jersey</MenuItem>
+                      <MenuItem value="CA">California</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    id="zip-input"
+                    label="Zip"
+                    variant="outlined"
+                    placeholder="e.g. 50200"
+                    style={{ margin: '0.5rem 2.5%', width: '17.5%' }}
+                    {...bindToZipInput}
+                  />
+                  <br />
+                  <FormControl variant="outlined" style={{ margin: '0.5rem 2.5%', width: '35%' }}>
+                    <InputLabel ref={countrySelectLabel} id="country-select-label">Country</InputLabel>
+                    <Select
+                      labelId="country-select-label"
+                      id="country-input"
+                      labelWidth={countryLabelWidth}
+                      {...bindToCountryInput}
+                    >
+                      <MenuItem value=""><em>Choose...</em></MenuItem>
+                      <MenuItem value="United States">United States</MenuItem>
+                    </Select>
+                  </FormControl>
+
+                  <Box my="1rem">
+                    <Divider />
+                  </Box>
+
+                  <Typography variant="h6">Payment</Typography>
+                  <TextField
+                    id="card-name-input"
+                    label="Name on Card"
+                    variant="outlined"
+                    placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
+                    style={{ margin: '0.5rem 2.5%', width: '45%' }}
+                  />
+                  <TextField
+                    id="card-number-input"
+                    label="Credit Card Number"
+                    variant="outlined"
+                    placeholder="e.g. 1234-5555-6789-0000"
+                    style={{ margin: '0.5rem 2.5%', width: '45%' }}
+                  />
+                  <br />
+                  <TextField
+                    id="card-expiration-input"
+                    label="Expiration"
+                    variant="outlined"
+                    placeholder="e.g. 01/2020"
+                    style={{ margin: '0.5rem 2.5%', width: '25%' }}
+                  />
+                  <TextField
+                    id="card-cvv-input"
+                    label="CVV"
+                    variant="outlined"
+                    placeholder="e.g. 123"
+                    style={{ margin: '0.5rem 2.5%', width: '25%' }}
+                  />
+
+                </form>
+              </Box>
+            </Paper>
+          </Grid>
+
+          <Grid item xs={12} md={3}>
+            <Box mb="0.5rem" display="flex" justifyContent="space-between">
+              <Typography variant="h5">Cart</Typography>
+              <Chip label={cartItemCount} />
+            </Box>
+
+            <Paper>
+              <List>
+                {cartItems.map(cartItem => (
+                  <ListItem key={cartItem.itemID} button onClick={() => handleCartItemClick(cartItem)}>
+                    <ListItemText primary={cartItem.name} secondary={'Quantity: ' + cartItem.quantity} />
+                    <ListItemSecondaryAction>
+                      <Typography>${cartItem.finalPrice * cartItem.quantity}</Typography>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ))}
+                <Divider />
+                <ListItem>
+                  <ListItemText primary="Total" />
                   <ListItemSecondaryAction>
-                    <Typography>${cartItem.finalPrice * cartItem.quantity}</Typography>
+                    <Typography>${cartTotal}</Typography>
                   </ListItemSecondaryAction>
                 </ListItem>
-              ))}
-              <Divider />
-              <ListItem>
-                <ListItemText primary="Total" />
-                <ListItemSecondaryAction>
-                  <Typography>${cartTotal}</Typography>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </List>
-          </Paper>
+              </List>
+            </Paper>
 
-          <Box mt="1rem" display="flex" justifyContent="flex-end">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handlePlaceOrder}
-            >
-              Place Order
-          </Button>
-          </Box>
+            <Box mt="1rem" display="flex" justifyContent="flex-end">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handlePlaceOrder}
+              >
+                Place Order
+            </Button>
+            </Box>
+          </Grid>
+
         </Grid>
-
-      </Grid>
-    </Container>
+      </Container>
+    </Fade>
   );
 }

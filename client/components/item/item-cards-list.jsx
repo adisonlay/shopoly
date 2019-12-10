@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ItemCard from './item-card';
-import { Container, Box, CircularProgress, Typography, Grid } from '@material-ui/core';
+import { Container, Box, CircularProgress, Typography, Grid, Fade } from '@material-ui/core';
 
 export default function ItemCardsList({ setAppView, unlockStatus }) {
   const [pageLoading, setPageLoading] = useState(true);
@@ -42,9 +42,11 @@ export default function ItemCardsList({ setAppView, unlockStatus }) {
       <Container maxWidth={false}>
         <Grid container spacing={3}>
           {itemsData.map(item => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={item.itemID}>
-              <ItemCard itemData={item} setAppView={setAppView} unlockStatus={unlockStatus} />
-            </Grid>
+            <Fade in key={item.itemID}>
+              <Grid item xs={12} sm={6} md={4} lg={3}>
+                <ItemCard itemData={item} setAppView={setAppView} unlockStatus={unlockStatus} />
+              </Grid>
+            </Fade>
           ))}
         </Grid>
       </Container>
