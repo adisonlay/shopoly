@@ -58,15 +58,17 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback, unloc
         <FormHelperText style={{ margin: '0.5rem 0' }}>Maximum order quantity: 4</FormHelperText>
       </FormControl>
 
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={!quantity || itemLocked}
-        onClick={handleAddToCart}
-        style={{ margin: '0.5rem 0.25rem' }}
-      >
-        Add to Cart
-      </Button>
+      <span style={itemLocked ? { cursor: 'not-allowed' } : {}}>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={!quantity || itemLocked}
+          onClick={handleAddToCart}
+          style={{ margin: '0.5rem 0.25rem' }}
+        >
+          Add to Cart
+        </Button>
+      </span>
 
       {itemLocked && (
         <Typography variant="caption" color="error" gutterBottom>
