@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
-import { Box, Grid, IconButton } from '@material-ui/core';
+import { Box, Grid, IconButton, Fade } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 export default function ItemGallery({ images }) {
   const slideCount = images.length;
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [fadeToggle, setFadeToggle] = useState(true);
 
-  const handlePrev = () => setCurrentSlide((((currentSlide - 1) % slideCount) + slideCount) % slideCount);
-  const handleNext = () => setCurrentSlide((((currentSlide + 1) % slideCount) + slideCount) % slideCount);
-  const handleThumbnailClick = index => setCurrentSlide(index);
+  const handlePrev = () => {
+    setFadeToggle(false);
+    setTimeout(() => {
+      setCurrentSlide(slideIndex => (((slideIndex - 1) % slideCount) + slideCount) % slideCount);
+      setFadeToggle(true);
+    }, 500);
+  };
+  const handleNext = () => {
+    setFadeToggle(false);
+    setTimeout(() => {
+      setCurrentSlide(slideIndex => (((slideIndex + 1) % slideCount) + slideCount) % slideCount);
+      setFadeToggle(true);
+    }, 500);
+  };
+  const handleThumbnailClick = clickedSlideIndex => {
+    setFadeToggle(false);
+    setTimeout(() => {
+      setCurrentSlide(clickedSlideIndex);
+      setFadeToggle(true);
+    }, 500);
+  };
 
   return (
     <Box mb="1rem">
@@ -31,12 +50,14 @@ export default function ItemGallery({ images }) {
           <IconButton onClick={handlePrev}>
             <NavigateBeforeIcon />
           </IconButton>
-          <Box
-            width={1}
-            height="20rem"
-            className="image-box"
-            style={{ backgroundImage: `url("${images[currentSlide]}")` }}
-          />
+          <Fade in={fadeToggle} timeout={500}>
+            <Box
+              width={1}
+              height="20rem"
+              className="image-box"
+              style={{ backgroundImage: `url("${images[currentSlide]}")` }}
+            />
+          </Fade>
           <IconButton onClick={handleNext}>
             <NavigateNextIcon />
           </IconButton>
