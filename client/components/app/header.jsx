@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, AppBar, Toolbar, Typography, IconButton, Badge, Tooltip } from '@material-ui/core';
-import ShoppingCartTwoToneIcon from '@material-ui/icons/ShoppingCartTwoTone';
+import { Box, AppBar, Toolbar, Typography, IconButton, Tooltip, Badge } from '@material-ui/core';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
+import ShoppingCartTwoToneIcon from '@material-ui/icons/ShoppingCartTwoTone';
 
 export default function Header({ setAppView, cartItemCount }) {
   const handleLogoClick = () => setAppView('catalog', {});

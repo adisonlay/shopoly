@@ -16,21 +16,21 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
       crumbToDisplay1 = (<Typography color="textPrimary">Catalog</Typography>);
       break;
     case 'details':
-      crumbToDisplay1 = (<Link color="textSecondary" onClick={handleCatalogClick}>Catalog</Link>);
+      crumbToDisplay1 = (<Link className="cursor" color="textSecondary" onClick={handleCatalogClick}>Catalog</Link>);
       crumbToDisplay2 = (<Typography color="textPrimary">{itemName}</Typography>);
       break;
     case 'cart':
       crumbToDisplay1 = (<Typography color="textPrimary">Cart</Typography>);
       break;
     case 'checkout':
-      crumbToDisplay1 = (<Link color="textSecondary" onClick={handleCartClick}>Cart</Link>);
+      crumbToDisplay1 = (<Link className="cursor" color="textSecondary" onClick={handleCartClick}>Cart</Link>);
       crumbToDisplay2 = (<Typography color="textPrimary">Checkout</Typography>);
       break;
     case 'orderHistory':
       crumbToDisplay1 = (<Typography color="textPrimary">Orders</Typography>);
       break;
     case 'orderSummary':
-      crumbToDisplay1 = (<Link color="textSecondary" onClick={handleOrdersClick}>Orders</Link>);
+      crumbToDisplay1 = (<Link className="cursor" color="textSecondary" onClick={handleOrdersClick}>Orders</Link>);
       crumbToDisplay2 = (<Typography color="textPrimary">Summary</Typography>);
       break;
   }
@@ -40,7 +40,7 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
       <Paper elevation={0} style={{ backgroundColor: '#f5f5f5' }} >
         <Box ml="1rem">
           <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-            <Link color="textSecondary" onClick={handleCatalogClick}>
+            <Link className="cursor" color="textSecondary" onClick={handleCatalogClick}>
               <Box display="flex" alignItems="center">
                 <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
               </Box>
