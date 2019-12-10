@@ -8,6 +8,15 @@ body {
   background-color: var(--tc-light-gray);
 }
 
+/*
+Enable cursor not-allowed for disabled buttons
+https://material-ui.com/components/buttons/#cursor-not-allowed
+*/
+.MuiButtonBase-root:disabled {
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
 /* ItemGallery Component Styling */
   .gallery-thumbnails {
     opacity: 0.5;
@@ -16,21 +25,13 @@ body {
       opacity: 1;
     }
 
-  .gallery-slides {
-    display: none;
-  }
-    .gallery-slide-active {
-      display: block;
-    }
-
 /* Helper Classes */
 .cursor {
   cursor: pointer;
 }
 
 .image-box {
-  background-color: var(--tc-light-gray);
-  background-size: 'contain';
-  background-position: 'center';
-  background-repeat: 'no-repeat';
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
