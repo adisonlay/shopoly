@@ -115,7 +115,7 @@ export default class App extends Component {
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
 
-        {cartItems.length
+        {/* {cartItems.length
         ?
           (<OrderSummary setAppView={this.setView} viewParams={{
             orderItems: cartItems,
@@ -132,7 +132,7 @@ export default class App extends Component {
           }} />)
         :
         null
-        }
+        } */}
 
       </div>
     );
