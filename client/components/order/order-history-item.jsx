@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatItemData } from '../app/functions';
-import { Box, Paper, Grid, Typography, Link, Divider } from '@material-ui/core';
+import { Box, Divider, Grid, Typography, Link } from '@material-ui/core';
 
 export default function OrderHistoryItem({ itemData, setAppView }) {
   const formattedData = formatItemData(itemData);

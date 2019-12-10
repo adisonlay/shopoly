@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import OrderHistoryItem from './order-history-item';
 import { countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus } from '../app/functions';
 import { Container, Typography, Box, Paper, Grid, Divider, Chip } from '@material-ui/core';
@@ -158,7 +158,7 @@ export default function OrderHistory({ setAppView, orderHistoryData }) {
               <Chip label={orderStats.totalItemCount} />
             </Box>
 
-            {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)}
+            {orderHistoryData.map(orderedItem => <OrderHistoryItem key={orderedItem.cartID + orderedItem.itemID} itemData={orderedItem} setAppView={setAppView} />)}
 
           </Box>
         </Paper>
