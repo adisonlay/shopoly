@@ -16,18 +16,16 @@ export default function ItemCard({ itemData, setAppView, unlockStatus }) {
 
   let textColor = 'initial';
   let lockedItemImageOverlay = null;
+
   if ((name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)) {
     textColor = 'textSecondary';
     lockedItemImageOverlay = (
       <Box
-        mb="1rem"
         width={1}
         height="16rem"
+        className="image-box"
         style={{
           backgroundImage: 'url("/assets/images/helper/locked.png")',
-          backgroundSize: 'contain',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
           position: 'absolute'
         }}
       />

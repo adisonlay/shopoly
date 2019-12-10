@@ -29,12 +29,8 @@ export default function CartSummaryItem({ itemData, setAppView }) {
               <Box
                 width={1}
                 minHeight="6rem"
-                style={{
-                  backgroundImage: `url("${images[1]}")`,
-                  backgroundSize: 'contain',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat'
-                }}
+                className="cursor image-box"
+                style={{ backgroundImage: `url("${images[1]}")` }}
                 onClick={handleItemClick}
               />
             </Grid>
@@ -42,7 +38,7 @@ export default function CartSummaryItem({ itemData, setAppView }) {
             <Grid item xs={6} md={4}>
               <Box>
                 <Typography gutterBottom>
-                  <Link onClick={handleItemClick}>{name}</Link>
+                  <Link className="cursor" onClick={handleItemClick}>{name}</Link>
                 </Typography>
                 <Typography variant="body2" color="textSecondary">Lot Number: {lotNumber}</Typography>
                 <Typography variant="body2" color="textSecondary">Base Rent: {rent}</Typography>
