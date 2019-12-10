@@ -42,11 +42,9 @@ export default class App extends Component {
     })
       .then(response => response.json())
       .then(cartAddResponse => {
-        const newCartItemData = JSON.parse(JSON.stringify(itemDetailData));
-        newCartItemData.cartID = cartAddResponse.cartID;
-        newCartItemData.finalPrice = cartAddBody.finalPrice;
-        newCartItemData.quantity = cartAddBody.quantity;
-        this.setState(prevState => { cartItems: prevState.cartItems.concat([newCartItemData]) });
+        if (cartAddResponse.success) {
+          this.getCartItems();
+        }
       })
       .catch(error => console.error(error));
   }
