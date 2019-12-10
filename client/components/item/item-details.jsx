@@ -70,7 +70,12 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback,
                   <Typography>Lot Number: {lotNumber}</Typography>
                   <Typography>Base Rent: {rent}</Typography>
                   <Typography gutterBottom>Color Group: {itemGroup}</Typography>
-                  <ItemAddToCart itemDetailData={itemDetailData} addToCartCallback={addToCartCallback} unlockStatus={unlockStatus} />
+                  <ItemAddToCart
+                    setAppView={setAppView}
+                    itemDetailData={itemDetailData}
+                    addToCartCallback={addToCartCallback}
+                    unlockStatus={unlockStatus}
+                  />
                 </Box>
               </Grid>
 

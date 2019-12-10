@@ -3,7 +3,7 @@ import { Box, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button,
 import WarningTwoToneIcon from '@material-ui/icons/WarningTwoTone';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function ItemAddToCart({ itemDetailData, addToCartCallback, unlockStatus }) {
+export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCallback, unlockStatus }) {
   const itemLocked = (itemDetailData.name === 'House' && !unlockStatus.house) || (itemDetailData.name === 'Hotel' && !unlockStatus.hotel);
 
   const [quantity, setQuantity] = useState('');
@@ -37,6 +37,8 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback, unloc
     }
     setToastOpen(false);
   };
+
+  const handleCartClick = () => setAppView('cart', {});
 
   return (
     <Box my="1rem">
@@ -85,11 +87,12 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback, unloc
         onClose={handleCloseToast}
         ContentProps={{ 'aria-describedby': 'cart-toast-message' }}
         message={<span id="cart-toast-message">{itemDetailData.name} Added to Cart</span>}
-        action={
-          <IconButton aria-label="close" color="inherit" onClick={handleCloseToast}>
+        action={[
+          (<Button key="cart" size="small" color="primary" onClick={handleCartClick}>View Cart</Button>),
+          (<IconButton key="close" aria-label="close" color="inherit" onClick={handleCloseToast}>
             <CloseIcon />
-          </IconButton>
-        }
+          </IconButton>)
+        ]}
       />
     </Box>
   );
