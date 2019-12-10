@@ -12,7 +12,7 @@ export default function Header({ setAppView, cartItemCount }) {
     <Box mb="1rem">
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3" onClick={handleLogoClick}>Shopoly</Typography>
+          <Typography variant="h3" className="cursor" onClick={handleLogoClick}>Shopoly</Typography>
           <Box alignSelf="flex-end" ml="0.75rem" mb="0.25rem">
             <Typography variant="subtitle1">The Property Trading Shop</Typography>
           </Box>
