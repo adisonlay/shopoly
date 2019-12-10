@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ItemGallery from './item-gallery';
 import ItemAddToCart from './item-add-to-cart';
 import { formatItemData } from '../app/functions';
-import { Container, Paper, Box, Grid, Typography } from '@material-ui/core';
+import { Container, Box, CircularProgress, Typography, Paper, Grid } from '@material-ui/core';
 
 export default function ItemDetails({ setAppView, viewParams, addToCartCallback, unlockStatus }) {
+  const [pageLoading, setPageLoading] = useState(true);
   const [itemDetailData, setItemDetailData] = useState({});
 
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback,
     fetch(`api/helper/items.php?id=${viewParams.itemID}`, { signal })
       .then(response => response.json())
       .then(itemDetailData => setItemDetailData(itemDetailData))
+      .then(() => setPageLoading(false))
       .catch(error => console.error(error));
 
     return function cleanup() {
@@ -21,8 +23,22 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback,
     };
   }, []);
 
-  if (Object.keys(itemDetailData).length === 0) {
-    return (<Typography variant="h5" color="textSecondary">Item details unavailable.</Typography>);
+  if (pageLoading) {
+    return (
+      <Container fixed>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <CircularProgress size="10%" />
+        </Box>
+      </Container>
+    );
+
+  } else if (Object.keys(itemDetailData).length === 0) {
+    return (
+      <Container fixed>
+        <Typography variant="h6" color="textSecondary">Item details unavailable.</Typography>
+      </Container>
+    );
+
   } else {
     const formattedData = formatItemData(itemDetailData);
     const {
