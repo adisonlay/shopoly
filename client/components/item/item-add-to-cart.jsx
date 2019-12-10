@@ -40,7 +40,7 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback, unloc
 
   return (
     <Box my="1rem">
-      <FormControl variant="outlined" margin="dense">
+      <FormControl variant="outlined" margin="dense" disabled={itemLocked} error={itemLocked}>
         <InputLabel ref={selectLabel} id="quantity-select-label">Quantity</InputLabel>
         <Select
           labelId="quantity-select-label"
@@ -60,10 +60,10 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback, unloc
 
       <Button
         variant="contained"
-        color={itemLocked ? 'secondary' : 'primary' }
+        color="primary"
         disabled={!quantity || itemLocked}
         onClick={handleAddToCart}
-        style={{ marginTop: '0.5rem' }}
+        style={{ margin: '0.5rem 0.25rem' }}
       >
         Add to Cart
       </Button>
