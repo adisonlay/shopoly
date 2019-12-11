@@ -54,4 +54,18 @@ if (mysqli_num_rows($selectResult) === 0) {
   exit();
 }
 
+$updateCartItemQuery = "UPDATE `cart_items` SET `quantity` = {$newQuantity} WHERE `item_id` = {$itemID} AND `cart_id` = {$cartID};";
+
+$updateCartItemResult = mysqli_query($conn, $updateCartItemQuery);
+
+if (!$updateCartItemResult) {
+  throw new Exception('Query error; invalid UPDATE: ' . mysqli_error($conn));
+  exit();
+}
+
+if (mysqli_affected_rows($conn) === 0) {
+  throw new Exception('Unable to update cart item, cart item quantity unchanged');
+  exit();
+}
+
 ?>
