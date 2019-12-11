@@ -35,8 +35,22 @@ if ($itemID <= 0) {
   exit();
 }
 
-if ($newQuantity <= 0) {
+if ($newQuantity <= 0 || $newQuantity > 4) {
   throw new Exception('Invalid Quantity: ' . $bodyData['newQuantity']);
+  exit();
+}
+
+$selectQuery = "SELECT * FROM `items` WHERE `id` = {$itemID};";
+
+$selectResult = mysqli_query($conn, $selectQuery);
+
+if (!$selectResult) {
+  throw new Exception('Query error; invalid SELECT: ' . mysqli_error($conn));
+  exit();
+}
+
+if (mysqli_num_rows($selectResult) === 0) {
+  throw new Exception('Item ID: ' . $itemID . ' not found; cart item quantity not updated');
   exit();
 }
 
