@@ -43,7 +43,7 @@ if (mysqli_num_rows($selectResult) === 0) {
   exit();
 }
 
-$deleteCartItemQuery = "DELETE FROM `cart_items` WHERE `item_id` = {$itemID}";
+$deleteCartItemQuery = "DELETE FROM `cart_items` WHERE `item_id` = {$itemID} AND `cart_id` = {$cartID}";
 
 $deleteCartItemResult = mysqli_query($conn, $deleteCartItemQuery);
 
