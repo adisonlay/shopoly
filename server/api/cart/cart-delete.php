@@ -57,4 +57,11 @@ if (mysqli_affected_rows($conn) === 0) {
   exit();
 }
 
+$cartDeleteOutput = [
+  'success' => true,
+  'cartID' => $cartID,
+  'itemID' => $itemID
+];
+print(json_encode($cartDeleteOutput));
+
 ?>
