@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paper, Breadcrumbs, Link, Typography } from '@material-ui/core';
+import { Box, Breadcrumbs, Link, Typography } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import HomeTwoToneIcon from '@material-ui/icons/HomeTwoTone';
 
@@ -36,20 +36,16 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
   }
 
   return (
-    <Box mb="1rem">
-      <Paper elevation={0} style={{ backgroundColor: '#f5f5f5' }} >
-        <Box ml="1rem">
-          <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
-            <Link className="cursor" color="textSecondary" onClick={handleCatalogClick}>
-              <Box display="flex" alignItems="center">
-                <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
-              </Box>
-            </Link>
-            {crumbToDisplay1}
-            {crumbToDisplay2}
-          </Breadcrumbs>
-        </Box>
-      </Paper>
+    <Box m="1rem">
+      <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
+        <Link className="cursor" color="textSecondary" onClick={handleCatalogClick}>
+          <Box display="flex" alignItems="center">
+            <HomeTwoToneIcon fontSize="small" />&nbsp;Shopoly
+          </Box>
+        </Link>
+        {crumbToDisplay1}
+        {crumbToDisplay2}
+      </Breadcrumbs>
     </Box>
   );
 }

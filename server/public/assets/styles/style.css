@@ -9,12 +9,13 @@ body {
 }
 
 /* ItemGallery Component Styling */
-  .gallery-thumbnails {
-    opacity: 0.5;
-  }
-    .gallery-thumb-active, .gallery-thumbnails:hover {
-      opacity: 1;
-    }
+.gallery-thumbnails {
+  opacity: 0.5;
+}
+
+.gallery-thumb-active, .gallery-thumbnails:hover {
+  opacity: 1;
+}
 
 /* Helper Classes */
 .cursor {
