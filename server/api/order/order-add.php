@@ -38,10 +38,12 @@ $orderCartResult = mysqli_query($conn, $orderCartQuery);
 
 if (!$orderCartResult) {
   throw new Exception('Query error; invalid UPDATE: ' . mysqli_error($conn));
+  exit();
 }
 
 if (mysqli_affected_rows($conn) === 0) {
   throw new Exception('Unable to update cart, cannot place order');
+  exit();
 }
 
 if (empty($_SESSION['orderedCarts'])) {

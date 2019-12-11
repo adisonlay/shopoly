@@ -4,19 +4,25 @@ if (!defined('INTERNAL')) {
   exit('Direct access unavailable');
 }
 
-if (empty($_SESSION['activeCartID'])) {
+$bodyData = getBodyData();
+
+if (empty($bodyData['cartID']) || empty($_SESSION['activeCartID'])) {
   throw new Exception('Cart ID missing; item not removed from cart');
   exit();
 }
-
-$bodyData = getBodyData();
 
 if (empty($bodyData['itemID'])) {
   throw new Exception('Item ID missing; item not removed from cart');
   exit();
 }
 
+$cartID = intval($bodyData['cartID']);
 $itemID = intval($bodyData['itemID']);
+
+if ($cartID <= 0 || $cartID !== intval($_SESSION['activeCartID'])) {
+  throw new Exception('Invalid Cart ID: ' . $bodyData['cartID']);
+  exit();
+}
 
 if ($itemID <= 0) {
   throw new Exception('Invalid Item ID: ' . $bodyData['itemID']);
@@ -34,6 +40,20 @@ if (!$selectResult) {
 
 if (mysqli_num_rows($selectResult) === 0) {
   throw new Exception('Item ID: ' . $itemID . ' not found; item not removed from cart');
+  exit();
+}
+
+$deleteCartItemQuery = "DELETE FROM `cart_items` WHERE `item_id` = {$itemID}";
+
+$deleteCartItemResult = mysqli_query($conn, $deleteCartItemQuery);
+
+if (!$deleteCartItemResult) {
+  throw new Exception('Query error; invalid DELETE: ' . mysqli_error($conn));
+  exit();
+}
+
+if (mysqli_affected_rows($conn) === 0) {
+  throw new Exception('Unable to delete from cart, item not removed');
   exit();
 }
 
