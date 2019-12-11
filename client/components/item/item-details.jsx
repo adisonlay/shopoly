@@ -41,17 +41,7 @@ export default function ItemDetails({ setAppView, viewParams, addToCartCallback,
 
   } else {
     const formattedData = formatItemData(itemDetailData);
-    const {
-      itemID,
-      name,
-      price,
-      lotNumber,
-      rent,
-      itemGroup,
-      description1,
-      description2,
-      images
-    } = formattedData;
+    const { itemID, name, price, lotNumber, rent, itemGroup, description1, description2, images } = formattedData;
 
     return (
       <Fade in>

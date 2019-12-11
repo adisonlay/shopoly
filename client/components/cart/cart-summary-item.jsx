@@ -4,18 +4,7 @@ import { Box, Paper, Grid, Typography, Link } from '@material-ui/core';
 
 export default function CartSummaryItem({ itemData, setAppView }) {
   const formattedData = formatItemData(itemData);
-  const {
-    cartID,
-    finalPrice,
-    quantity,
-    itemID,
-    name,
-    price,
-    lotNumber,
-    rent,
-    itemGroup,
-    images
-  } = formattedData;
+  const { cartID, finalPrice, quantity, itemID, name, price, lotNumber, rent, itemGroup, images } = formattedData;
 
   const handleItemClick = () => setAppView('details', { itemID, itemName: name });
 

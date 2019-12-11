@@ -3,16 +3,8 @@ import { formatItemData } from '../app/functions';
 import { Card, CardActionArea, CardMedia, CardContent, CardActions, Box, Typography, Button } from '@material-ui/core';
 
 export default function ItemCard({ itemData, setAppView, unlockStatus }) {
-  itemData = formatItemData(itemData);
-  const {
-    itemID,
-    name,
-    price,
-    lotNumber,
-    rent,
-    itemGroup,
-    images
-  } = itemData;
+  const formattedData = formatItemData(itemData);
+  const { itemID, name, price, lotNumber, rent, itemGroup, images } = formattedData;
 
   let textColor = 'initial';
   let lockedItemImageOverlay = null;

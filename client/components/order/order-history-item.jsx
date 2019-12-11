@@ -6,20 +6,7 @@ export default function OrderHistoryItem({ itemData, setAppView }) {
   const [popperAnchor, setPopperAnchor] = useState(null);
 
   const formattedData = formatItemData(itemData);
-  const {
-    cartID,
-    finalPrice,
-    quantity,
-    itemID,
-    name,
-    price,
-    lotNumber,
-    rent,
-    itemGroup,
-    images,
-    ordered
-  } = formattedData;
-
+  const { cartID, finalPrice, quantity, itemID, name, price, lotNumber, rent, itemGroup, images, ordered } = formattedData;
   const orderDate = new Date(ordered);
 
   const handleItemClick = event => {

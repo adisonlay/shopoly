@@ -4,18 +4,7 @@ import { ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction, Box, T
 
 export default function OrderSummaryItem({ itemData, setAppView }) {
   const formattedData = formatItemData(itemData);
-  const {
-    cartID,
-    finalPrice,
-    quantity,
-    itemID,
-    name,
-    price,
-    lotNumber,
-    rent,
-    itemGroup,
-    images
-  } = formattedData;
+  const { cartID, finalPrice, quantity, itemID, name, price, lotNumber, rent, itemGroup, images } = formattedData;
 
   const handleItemClick = () => setAppView('details', { itemID, itemName: name });
 
