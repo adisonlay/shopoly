@@ -22,18 +22,7 @@ const useInput = initialValue => {
 
 export default function CartCheckoutForm({ setAppView, viewParams, cartItems, placeOrderCallback }) {
   const { cartItemCount, cartTotal } = viewParams;
-  const placeholderNames = [
-    'Battleship',
-    'Boot',
-    'Cat',
-    'Racecar',
-    'Scottie Dog',
-    'Thimble',
-    'Top Hat',
-    'Wheelbarrow',
-    'Mr. Monopoly',
-    'Jake the Jailbird'
-  ];
+  const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr. Monopoly', 'Jake the Jailbird'];
 
   const { value: nameInput, bindToInput: bindToNameInput} = useInput('');
   const { value: addressInput, bindToInput: bindToAddressInput} = useInput('');
