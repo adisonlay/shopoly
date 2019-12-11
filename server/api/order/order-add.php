@@ -32,11 +32,11 @@ if (mysqli_num_rows($selectResult) === 0) {
   exit();
 }
 
-$updateCartQuery = "UPDATE `carts` SET `ordered` = NOW() WHERE `id` = {$cartID};";
+$orderCartQuery = "UPDATE `carts` SET `ordered` = NOW() WHERE `id` = {$cartID};";
 
-$updateCartResult = mysqli_query($conn, $updateCartQuery);
+$orderCartResult = mysqli_query($conn, $orderCartQuery);
 
-if (!$updateCartResult) {
+if (!$orderCartResult) {
   throw new Exception('Query error; invalid UPDATE: ' . mysqli_error($conn));
 }
 
