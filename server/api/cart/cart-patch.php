@@ -68,4 +68,12 @@ if (mysqli_affected_rows($conn) === 0) {
   exit();
 }
 
+$cartPatchOutput = [
+  'success' => true,
+  'cartID' => $cartID,
+  'itemID' => $itemID,
+  'newQuantity' => $newQuantity
+];
+print(json_encode($cartPatchOutput));
+
 ?>
