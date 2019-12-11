@@ -1,0 +1,28 @@
+:root {
+  --tc-light-gray: #f5f5f5;
+  --tc-light-green: #cae8de;
+  --tc-red: #da2a2d;
+}
+
+body {
+  background-color: var(--tc-light-gray);
+}
+
+/* ItemGallery Component Styling */
+  .gallery-thumbnails {
+    opacity: 0.5;
+  }
+    .gallery-thumb-active, .gallery-thumbnails:hover {
+      opacity: 1;
+    }
+
+/* Helper Classes */
+.cursor {
+  cursor: pointer;
+}
+
+.image-box {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}

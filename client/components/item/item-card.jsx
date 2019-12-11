@@ -1,37 +1,53 @@
 import React from 'react';
-import { formatItemData } from '../app/functions'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Box, Typography, Button } from '@material-ui/core';
+import { formatItemData } from '../app/functions';
+import { Card, CardActionArea, CardMedia, CardContent, CardActions, Box, Typography, Button } from '@material-ui/core';
 
-export default function ItemCard({ itemData, setAppView }) {
-  itemData = formatItemData(itemData);
-  const {
-    itemID,
-    name,
-    price,
-    lotNumber,
-    rent,
-    itemGroup,
-    images
-  } = itemData;
+export default function ItemCard({ itemData, setAppView, unlockStatus }) {
+  const formattedData = formatItemData(itemData);
+  const { itemID, name, price, lotNumber, rent, itemGroup, images } = formattedData;
+
+  let textColor = 'initial';
+  let lockedItemImageOverlay = null;
+
+  if ((name === 'House' && !unlockStatus.house) || (name === 'Hotel' && !unlockStatus.hotel)) {
+    textColor = 'textSecondary';
+    lockedItemImageOverlay = (
+      <Box
+        width={1}
+        height="16rem"
+        className="image-box"
+        style={{
+          backgroundImage: 'url("/assets/images/helper/locked.png")',
+          position: 'absolute'
+        }}
+      />
+    );
+  }
 
   const handleDetailsClick = () => setAppView('details', { itemID, itemName: name });
 
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea onClick={handleDetailsClick}>
         <CardMedia
-          style={{ height: '16rem', backgroundSize: 'contain' }}
           image={images[0]}
           title={name}
-        />
+          style={{
+            height: '16rem',
+            backgroundSize: 'contain',
+            position: 'relative'
+          }}
+        >
+          {lockedItemImageOverlay}
+        </CardMedia>
         <CardContent>
           <Box display="flex" justifyContent="space-between">
-            <Typography gutterBottom variant="h5">{name}</Typography>
-            <Typography gutterBottom variant="h5" color="textSecondary">{price}</Typography>
+            <Typography variant="h6" color={textColor} style={{ fontWeight: 400 }} gutterBottom>{name}</Typography>
+            <Typography variant="h6" color="textSecondary" style={{ fontWeight: 400 }} gutterBottom>{price}</Typography>
           </Box>
-          <Typography>Lot Number: {lotNumber}</Typography>
-          <Typography>Base Rent: {rent}</Typography>
-          <Typography>Color Group: {itemGroup}</Typography>
+          <Typography variant="body2" color={textColor}>Lot Number: {lotNumber}</Typography>
+          <Typography variant="body2" color={textColor}>Base Rent: {rent}</Typography>
+          <Typography variant="body2" color={textColor}>Color Group: {itemGroup}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

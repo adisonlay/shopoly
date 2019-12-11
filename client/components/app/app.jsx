@@ -7,16 +7,19 @@ import CartSummary from '../cart/cart-summary';
 import CartCheckoutForm from '../cart/cart-checkout-form';
 import OrderSummary from '../order/order-summary';
 import OrderHistory from '../order/order-history';
+import { getHouseUnlockStatus, getHotelUnlockStatus } from './functions';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       view: { page: 'catalog', params: {} },
-      cartItems: []
+      cartItems: [],
+      orderHistoryData: []
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getOrderHistory = this.getOrderHistory.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
 
@@ -39,12 +42,17 @@ export default class App extends Component {
     })
       .then(response => response.json())
       .then(cartAddResponse => {
-        const newCartItemData = JSON.parse(JSON.stringify(itemDetailData));
-        newCartItemData.cartID = cartAddResponse.cartID;
-        newCartItemData.finalPrice = cartAddBody.finalPrice;
-        newCartItemData.quantity = cartAddBody.quantity;
-        this.setState(prevState => { cartItems: prevState.cartItems.concat([newCartItemData]) });
+        if (cartAddResponse.success) {
+          this.getCartItems();
+        }
       })
+      .catch(error => console.error(error));
+  }
+
+  getOrderHistory() {
+    fetch('api/order/order.php')
+      .then(response => response.json())
+      .then(orderHistoryData => this.setState({ orderHistoryData }))
       .catch(error => console.error(error));
   }
 
@@ -55,41 +63,35 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cartID })
     })
-      .then(() => this.setState({ cartItems: [] }))
+      .then(response => response.json())
+      .then(orderAddResponse => {
+        if (orderAddResponse.success) {
+          this.getOrderHistory();
+          this.setState({ cartItems: [] });
+        }
+      })
       .catch(error => console.error(error));
   }
 
   componentDidMount() {
     this.getCartItems();
+    this.getOrderHistory();
   }
 
   render() {
-    const cartItemCount = this.state.cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
-
+    const { cartItems, orderHistoryData } = this.state;
     const { page: currentPage, params: currentParams } = this.state.view;
+
+    const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
+    const unlockStatus = { house: getHouseUnlockStatus(orderHistoryData), hotel: getHotelUnlockStatus(orderHistoryData) };
+
     const pageComponents = {
-      catalog: (<ItemCardsList setAppView={this.setView} />),
-      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} />),
-      cart: (<CartSummary setAppView={this.setView} cartItems={this.state.cartItems} />),
-      checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={this.state.cartItems} placeOrderCallback={this.placeOrder} />),
+      catalog: (<ItemCardsList setAppView={this.setView} unlockStatus={unlockStatus} />),
+      details: (<ItemDetails setAppView={this.setView} viewParams={currentParams} addToCartCallback={this.addToCart} unlockStatus={unlockStatus} />),
+      cart: (<CartSummary setAppView={this.setView} cartItems={cartItems} />),
+      checkout: (<CartCheckoutForm setAppView={this.setView} viewParams={currentParams} cartItems={cartItems} placeOrderCallback={this.placeOrder} />),
       orderSummary: (<OrderSummary setAppView={this.setView} viewParams={currentParams} />),
-      orderHistory: (<OrderHistory setAppView={this.setView} />)
-
-
-      // orderSummary: '',
-      // orderHistory: (<OrderSummary setAppView={this.setView} viewParams={{
-      //   orderItems: this.state.cartItems,
-      //   orderItemCount: 6,
-      //   orderTotal: 860,
-      //   shippingAddress: {
-      //     nameInput: 'Mr. Monopoly',
-      //     addressInput: '200 Park Place',
-      //     cityInput: 'Atlantic City',
-      //     stateInput: 'NJ',
-      //     zipInput: '12345',
-      //     countryInput: 'United States'
-      //   }
-      // }} />)
+      orderHistory: (<OrderHistory setAppView={this.setView} orderHistoryData={orderHistoryData} />)
     };
 
     return (
@@ -97,26 +99,6 @@ export default class App extends Component {
         <Header setAppView={this.setView} cartItemCount={cartItemCount} />
         <BreadcrumbBar setAppView={this.setView} currentView={currentPage} itemName={currentPage === 'details' ? currentParams.itemName : null} />
         {pageComponents[currentPage]}
-
-        {this.state.cartItems.length
-        ?
-          (<OrderSummary setAppView={this.setView} viewParams={{
-            orderItems: this.state.cartItems,
-            orderItemCount: 6,
-            orderTotal: 860,
-            shippingAddress: {
-              nameInput: 'Mr. Monopoly',
-              addressInput: '200 Park Place',
-              cityInput: 'Atlantic City',
-              stateInput: 'NJ',
-              zipInput: '12345',
-              countryInput: 'United States'
-            }
-          }} />)
-        :
-        null
-        }
-
       </div>
     );
   }

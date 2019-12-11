@@ -1,24 +1,39 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button, Snackbar, IconButton } from '@material-ui/core';
+import { Box, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button, Typography, Snackbar, IconButton } from '@material-ui/core';
+import WarningTwoToneIcon from '@material-ui/icons/WarningTwoTone';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
+export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCallback, unlockStatus }) {
+  const itemLocked = (itemDetailData.name === 'House' && !unlockStatus.house) || (itemDetailData.name === 'Hotel' && !unlockStatus.hotel);
+
+  const [buildingColor, setBuildingColor] = useState('');
   const [quantity, setQuantity] = useState('');
   const [toastOpen, setToastOpen] = useState(false);
-  const [labelWidth, setLabelWidth] = useState(0);
-  const selectLabel = useRef(null);
+
+  const [buildingColorLabelWidth, setBuildingColorLabelWidth] = useState(0);
+  const [quantityLabelWidth, setQuantityLabelWidth] = useState(0);
+  const buildingColorSelectLabel = useRef(null);
+  const quantitySelectLabel = useRef(null);
   useEffect(() => {
-    setLabelWidth(selectLabel.current.offsetWidth);
+    setBuildingColorLabelWidth(buildingColorSelectLabel.current.offsetWidth);
+    setQuantityLabelWidth(quantitySelectLabel.current.offsetWidth);
   }, []);
 
-  const handleSelect = event => setQuantity(event.target.value);
+  const handleBuildingColorSelect = event => setBuildingColor(event.target.value);
+  const handleQuantitySelect = event => setQuantity(event.target.value);
+  const handleCartClick = () => setAppView('cart', {});
   const handleAddToCart = () => {
-    if (!quantity) return;
+    if (itemLocked || !quantity || (itemDetailData.itemGroup === 'Building' && !buildingColor)) return;
+
     const cartAddBody = {
       itemID: itemDetailData.itemID,
       finalPrice: parseInt(itemDetailData.price),
       quantity
     };
+    if (itemDetailData.itemGroup === 'Building') {
+      cartAddBody.finalPrice = parseInt(buildingColor);
+    }
+
     addToCartCallback(cartAddBody, itemDetailData);
     setToastOpen(true);
   };
@@ -29,14 +44,33 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
 
   return (
     <Box my="1rem">
-      <FormControl variant="outlined" margin="dense">
-        <InputLabel ref={selectLabel} id="quantity-select-label">Quantity</InputLabel>
+      <Box display={itemDetailData.itemGroup === 'Building' ? 'inherit' : 'none' }>
+        <FormControl variant="outlined" margin="dense" style={{ width: '50%' }}>
+          <InputLabel ref={buildingColorSelectLabel} id="color-select-label">Color Group</InputLabel>
+          <Select
+            labelId="color-select-label"
+            id="color-select"
+            value={buildingColor}
+            onChange={handleBuildingColorSelect}
+            labelWidth={buildingColorLabelWidth}
+          >
+            <MenuItem value={50}>Purple/Brown/Light Blue ($50)</MenuItem>
+            <MenuItem value={100}>Pink/Orange ($100)</MenuItem>
+            <MenuItem value={150}>Red/Yellow ($150)</MenuItem>
+            <MenuItem value={200}>Green/Dark Blue ($200)</MenuItem>
+          </Select>
+        </FormControl>
+        <br />
+      </Box>
+
+      <FormControl variant="outlined" margin="dense" disabled={itemLocked} error={itemLocked}>
+        <InputLabel ref={quantitySelectLabel} id="quantity-select-label">Quantity</InputLabel>
         <Select
           labelId="quantity-select-label"
           id="quantity-select"
           value={quantity}
-          onChange={handleSelect}
-          labelWidth={labelWidth}
+          onChange={handleQuantitySelect}
+          labelWidth={quantityLabelWidth}
           style={{ width: '75%' }}
         >
           <MenuItem value={1}>1</MenuItem>
@@ -47,16 +81,25 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
         <FormHelperText style={{ margin: '0.5rem 0' }}>Maximum order quantity: 4</FormHelperText>
       </FormControl>
 
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        disabled={!quantity}
-        onClick={handleAddToCart}
-        style={{ marginTop: '0.25rem' }}
-      >
-        Add to Cart
-      </Button>
+      <span style={itemLocked ? { cursor: 'not-allowed' } : {}}>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={itemLocked || !quantity || (itemDetailData.itemGroup === 'Building' && !buildingColor)}
+          onClick={handleAddToCart}
+          style={{ margin: '0.5rem 0.25rem' }}
+        >
+          Add to Cart
+        </Button>
+      </span>
+
+      {itemLocked && (
+        <Typography variant="caption" color="error" gutterBottom>
+          <Box display="flex" alignItems="center">
+            <WarningTwoToneIcon />&nbsp;Item access is restricted.
+          </Box>
+        </Typography>
+      )}
 
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
@@ -65,11 +108,12 @@ export default function ItemAddToCart({ itemDetailData, addToCartCallback }) {
         onClose={handleCloseToast}
         ContentProps={{ 'aria-describedby': 'cart-toast-message' }}
         message={<span id="cart-toast-message">{itemDetailData.name} Added to Cart</span>}
-        action={
-          <IconButton aria-label="close" color="inherit" onClick={handleCloseToast}>
+        action={[
+          (<Button key="cart" size="small" color="primary" onClick={handleCartClick}>View Cart</Button>),
+          (<IconButton key="close" aria-label="close" color="inherit" onClick={handleCloseToast}>
             <CloseIcon />
-          </IconButton>
-        }
+          </IconButton>)
+        ]}
       />
     </Box>
   );
