@@ -38,9 +38,7 @@ export default class App extends Component {
     const { cartItems } = this.state;
     for (let cartItem of cartItems) {
       if (parseInt(cartItem.itemID) === parseInt(cartAddBody.itemID)) {
-        if (cartItem.quantity + cartAddBody.quantity > 4) {
-          return false;
-        }
+        if (cartItem.quantity + cartAddBody.quantity > 4) return false;
       }
     }
 
@@ -60,8 +58,37 @@ export default class App extends Component {
     return true;
   }
 
-  updateQuantity() {
+  updateQuantity(cartID, itemID, newQuantity) {
+    cartID = parseInt(cartID);
+    itemID = parseInt(itemID);
+    newQuantity = parseInt(newQuantity);
 
+    const currentItem = this.state.cartItems.find(cartItem => parseInt(cartItem.cartID) === cartID && parseInt(cartItem.itemID) === itemID);
+    if (newQuantity <= 0 || newQuantity > 4 || !currentItem || currentItem.quantity === newQuantity) return false;
+
+    fetch('/api/cart/cart.php', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cartId, itemID, newQuantity })
+    })
+      .then(response => response.json())
+      .then(cartPatchResponse => {
+        if (cartPatchResponse.success) {
+          const newCart = this.state.cartItems.map(cartItem => {
+            if (parseInt(cartItem.itemID) === itemID) {
+              const updatedItem = JSON.parse(JSON.stringify(currentItem));
+              updatedItem.quantity = newQuantity;
+              return updatedItem;
+            } else {
+              return cartItem;
+            }
+          });
+          this.setState({ cartItems: newCart });
+        }
+      })
+      .catch(error => console.error(error));
+
+    return true;
   }
 
   removeFromCart(cartID, itemID) {
