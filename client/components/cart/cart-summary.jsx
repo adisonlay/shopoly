@@ -2,7 +2,7 @@ import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 import { Fade, Container, Box, Typography, Chip, Button, Paper } from '@material-ui/core';
 
-export default function CartSummary({ setAppView, cartItems }) {
+export default function CartSummary({ setAppView, cartItems, updateQuantityCallback, removeFromCartCallback }) {
   const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
   const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, 0);
 
@@ -21,7 +21,15 @@ export default function CartSummary({ setAppView, cartItems }) {
       </Box>
     );
   } else {
-    cartItemListDisplay = (cartItems.map(cartItem => <CartSummaryItem key={cartItem.itemID} itemData={cartItem} setAppView={setAppView} />));
+    cartItemListDisplay = (cartItems.map(cartItem => (
+      <CartSummaryItem
+        key={cartItem.itemID}
+        itemData={cartItem}
+        setAppView={setAppView}
+        updateQuantityCallback={updateQuantityCallback}
+        removeFromCartCallback={removeFromCartCallback}
+      />
+    )));
   }
 
   return (
