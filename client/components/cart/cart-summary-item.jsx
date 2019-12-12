@@ -7,6 +7,8 @@ export default function CartSummaryItem({ itemData, setAppView }) {
   const { cartID, finalPrice, quantity, itemID, name, price, lotNumber, rent, itemGroup, images } = formattedData;
 
   const handleItemClick = () => setAppView('details', { itemID, itemName: name });
+  const handleQuantityUpdate = () => {};
+  const handleRemoveFromCart = () => {};
 
   return (
     <Box mb="0.5rem">
