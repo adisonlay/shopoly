@@ -71,7 +71,7 @@ export default class App extends Component {
     fetch('/api/cart/cart.php', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cartId, itemID, newQuantity })
+      body: JSON.stringify({ cartID, itemID, newQuantity })
     })
       .then(response => response.json())
       .then(cartPatchResponse => {
@@ -100,7 +100,7 @@ export default class App extends Component {
     fetch('/api/cart/cart.php', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cartId, itemID })
+      body: JSON.stringify({ cartID, itemID })
     })
       .then(response => response.json())
       .then(cartDeleteResponse => {
