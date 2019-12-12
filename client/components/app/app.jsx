@@ -35,6 +35,15 @@ export default class App extends Component {
   }
 
   addToCart(cartAddBody, itemDetailData) {
+    const { cartItems } = this.state;
+    for (let cartItem of cartItems) {
+      if (parseInt(cartItem.itemID) === parseInt(cartAddBody.itemID)) {
+        if (cartItem.quantity + cartAddBody.quantity > 4) {
+          return false;
+        }
+      }
+    }
+
     fetch('/api/cart/cart.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -47,6 +56,8 @@ export default class App extends Component {
         }
       })
       .catch(error => console.error(error));
+
+    return true;
   }
 
   getOrderHistory() {
