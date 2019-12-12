@@ -60,6 +60,33 @@ export default class App extends Component {
     return true;
   }
 
+  updateQuantity() {
+
+  }
+
+  removeFromCart(cartID, itemID) {
+    cartID = parseInt(cartID);
+    itemID = parseInt(itemID);
+
+    fetch('/api/cart/cart.php', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cartId, itemID })
+    })
+      .then(response => response.json())
+      .then(cartDeleteResponse => {
+        if (cartDeleteResponse.success) {
+          const newCart = this.state.cartItems.filter(cartItem => {
+            if (!(parseInt(cartItem.cartID) === cartID && parseInt(cartItem.itemID) === itemID)) {
+              return true;
+            }
+          });
+          this.setState({ cartItems: newCart });
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
   getOrderHistory() {
     fetch('api/order/order.php')
       .then(response => response.json())
