@@ -8,6 +8,7 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
 
   const [buildingColor, setBuildingColor] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [maxQuantityExceeded, setMaxQuantityExceeded] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
 
   const [buildingColorLabelWidth, setBuildingColorLabelWidth] = useState(0);
@@ -34,8 +35,13 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
       cartAddBody.finalPrice = parseInt(buildingColor);
     }
 
-    addToCartCallback(cartAddBody, itemDetailData);
-    setToastOpen(true);
+    if (!addToCartCallback(cartAddBody, itemDetailData)) {
+      setMaxQuantityExceeded(true);
+      setQuantity('');
+    } else {
+      setToastOpen(true);
+      setQuantity('');
+    }
   };
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') return;
@@ -45,7 +51,7 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
   return (
     <Box my="1rem">
       <Box display={itemDetailData.itemGroup === 'Building' ? 'inherit' : 'none' }>
-        <FormControl variant="outlined" margin="dense" style={{ width: '50%' }}>
+        <FormControl variant="outlined" margin="dense" disabled={itemLocked} error={itemLocked} style={{ width: '50%' }}>
           <InputLabel ref={buildingColorSelectLabel} id="color-select-label">Color Group</InputLabel>
           <Select
             labelId="color-select-label"
@@ -93,10 +99,10 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
         </Button>
       </span>
 
-      {itemLocked && (
+      {(itemLocked || maxQuantityExceeded) && (
         <Typography variant="caption" color="error" gutterBottom>
           <Box display="flex" alignItems="center">
-            <WarningTwoToneIcon />&nbsp;Item access is restricted.
+            <WarningTwoToneIcon />&nbsp;{itemLocked ? 'Item access is restricted.' : 'Maximum item quantity exceeded for this order.'}
           </Box>
         </Typography>
       )}
