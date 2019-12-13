@@ -104,7 +104,9 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
     setCountryInput(event.target.value);
   };
 
-  const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
+  const handleCartItemClick = itemClicked => {
+    setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
+  }
 
   const handlePlaceOrder = () => {
     if (!validateInputs()) {
@@ -292,13 +294,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
             </Paper>
 
             <Box mt="1rem" display="flex" justifyContent="flex-end">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handlePlaceOrder}
-              >
-                Place Order
-            </Button>
+              <Button variant="contained" color="primary" onClick={handlePlaceOrder}>Place Order</Button>
             </Box>
           </Grid>
 

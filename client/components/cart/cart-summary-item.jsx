@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { formatItemData } from '../app/functions';
-import { Box, Paper, Grid, Typography, Link, FormControl, InputLabel, Select, MenuItem, Tooltip, IconButton } from '@material-ui/core';
+import { Box, Paper, Grid, Typography, Link, FormControl, InputLabel, Select, MenuItem, Tooltip, IconButton, Snackbar } from '@material-ui/core';
 import CachedIcon from '@material-ui/icons/Cached';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -9,6 +9,7 @@ export default function CartSummaryItem({ itemData, setAppView, updateQuantityCa
   const { cartID, finalPrice, quantity, itemID, name, price, lotNumber, rent, itemGroup, images } = formattedData;
 
   const [newQuantity, setNewQuantity] = useState(quantity);
+  const [toastText, setToastText] = useState('');
   const [labelWidth, setLabelWidth] = useState(0);
   const selectLabel = useRef(null);
   useEffect(() => {
@@ -17,8 +18,21 @@ export default function CartSummaryItem({ itemData, setAppView, updateQuantityCa
 
   const handleItemClick = () => setAppView('details', { itemID, itemName: name });
   const handleQuantitySelect = event => setNewQuantity(event.target.value);
-  const handleQuantityUpdate = () => updateQuantityCallback(cartID, itemID, newQuantity);
-  const handleRemoveFromCart = () => removeFromCartCallback(cartID, itemID);
+
+  const handleQuantityUpdate = () => {
+    setToastText('Item quantity updated.');
+    updateQuantityCallback(cartID, itemID, newQuantity);
+  }
+
+  const handleRemoveFromCart = () => {
+    setToastText('Removing item from cart...');
+    removeFromCartCallback(cartID, itemID);
+  }
+
+  const handleCloseToast = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setToastText('');
+  };
 
   return (
     <Box mb="0.5rem">
@@ -71,9 +85,11 @@ export default function CartSummaryItem({ itemData, setAppView, updateQuantityCa
                 </Box>
               </Tooltip>
               <Tooltip title="Remove">
-                <IconButton color="primary" onClick={handleRemoveFromCart}>
-                  <CloseIcon />
-                </IconButton>
+                <Box display="inline">
+                  <IconButton color="primary" onClick={handleRemoveFromCart}>
+                    <CloseIcon />
+                  </IconButton>
+                </Box>
               </Tooltip>
             </Grid>
 
@@ -87,6 +103,20 @@ export default function CartSummaryItem({ itemData, setAppView, updateQuantityCa
 
         </Box>
       </Paper>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        open={!!toastText}
+        autoHideDuration={6000}
+        onClose={handleCloseToast}
+        ContentProps={{ 'aria-describedby': 'quantity-toast-message' }}
+        message={toastText}
+        action={(
+          <IconButton aria-label="close" color="inherit" onClick={handleCloseToast}>
+            <CloseIcon />
+          </IconButton>
+        )}
+      />
     </Box>
   );
 }

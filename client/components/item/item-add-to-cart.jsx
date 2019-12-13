@@ -23,6 +23,7 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
   const handleBuildingColorSelect = event => setBuildingColor(event.target.value);
   const handleQuantitySelect = event => setQuantity(event.target.value);
   const handleCartClick = () => setAppView('cart', {});
+
   const handleAddToCart = () => {
     if (itemLocked || !quantity || (itemDetailData.itemGroup === 'Building' && !buildingColor)) return;
 
@@ -43,6 +44,7 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
       setQuantity('');
     }
   };
+
   const handleCloseToast = (event, reason) => {
     if (reason === 'clickaway') return;
     setToastOpen(false);
@@ -113,7 +115,7 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
         autoHideDuration={6000}
         onClose={handleCloseToast}
         ContentProps={{ 'aria-describedby': 'cart-toast-message' }}
-        message={<span id="cart-toast-message">{itemDetailData.name} Added to Cart</span>}
+        message={itemDetailData.name + ' added to cart.'}
         action={[
           (<Button key="cart" size="small" color="primary" onClick={handleCartClick}>View Cart</Button>),
           (<IconButton key="close" aria-label="close" color="inherit" onClick={handleCloseToast}>
