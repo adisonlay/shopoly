@@ -24,7 +24,7 @@ export default function ItemGallery({ images }) {
   return (
     <Box mb="1rem">
       <Grid container>
-        <Grid item xs={3} container direction="column" justify="space-between">
+        <Grid item xs={1} md={3} container direction="column" justify="space-between">
           {images.map((url, index) => (
             <Box
               key={url}
@@ -37,7 +37,7 @@ export default function ItemGallery({ images }) {
           ))}
         </Grid>
 
-        <Grid item xs={9} container alignItems="center" wrap="nowrap">
+        <Grid item xs={11} md={9} container alignItems="center" wrap="nowrap">
           <IconButton onClick={handlePrev}>
             <NavigateBeforeIcon />
           </IconButton>

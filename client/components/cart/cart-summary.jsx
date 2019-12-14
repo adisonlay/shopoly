@@ -40,12 +40,12 @@ export default function CartSummary({ setAppView, cartItems, updateQuantityCallb
           <Chip label={cartItemCount} />
         </Box>
         {cartItemListDisplay}
-        <Box display="flex" justifyContent="space-between">
-          <Typography variant="h6" color="textSecondary">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
-          <Box>
-            <Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>
-            <Button variant="contained" color="primary" onClick={handleCheckout} disabled={!cartItems.length} style={{ marginLeft: '0.5rem' }}>Checkout</Button>
-          </Box>
+        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+          <Typography variant="h6" color="textSecondary" style={{ margin: '0.5rem 0' }}>Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
+          <div>
+            <Button variant="contained" color="primary" onClick={handleContinue} style={{ margin: '0.5rem 0.5rem 0.5rem 0' }}>Continue Shopping</Button>
+            <Button variant="contained" color="primary" onClick={handleCheckout} disabled={!cartItems.length} style={{ margin: '0.5rem 0' }}>Checkout</Button>
+          </div>
         </Box>
       </Container>
     </Fade>
