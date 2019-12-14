@@ -302,7 +302,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
 
         <Box mt="2rem">
           <Typography variant="caption" color="textSecondary">
-            Disclaimer: Shopoly is a web application built for demonstration purposes only and does not sell, provide, or distribute any product or service. Orders placed on Shopoly will not be charged payment. Please keep your personal information secure.
+            Disclaimer: Shopoly is a web application built for demonstration purposes only and does not sell, provide, or distribute any product or service. Orders placed on Shopoly will not be charged payment. Always keep your personal information secure.
           </Typography>
         </Box>
       </Container>
