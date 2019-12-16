@@ -117,7 +117,7 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
         ContentProps={{ 'aria-describedby': 'cart-toast-message' }}
         message={itemDetailData.name + ' added to cart.'}
         action={[
-          (<Button key="cart" size="small" color="primary" onClick={handleCartClick}>View Cart</Button>),
+          (<Button key="cart" size="small" color="secondary" onClick={handleCartClick}>View Cart</Button>),
           (<IconButton key="close" aria-label="close" color="inherit" onClick={handleCloseToast}>
             <CloseIcon />
           </IconButton>)

@@ -10,7 +10,6 @@ import OrderHistory from '../order/order-history';
 import { getHouseUnlockStatus, getHotelUnlockStatus } from './functions';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-// import KabobLight from '../../../server/public/assets/fonts/kaboblight.ttf';
 
 export default class App extends Component {
   constructor() {
@@ -155,15 +154,6 @@ export default class App extends Component {
     const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
     const unlockStatus = { house: getHouseUnlockStatus(orderHistoryData), hotel: getHotelUnlockStatus(orderHistoryData) };
 
-    // const kabobFont = {
-    //   fontFamily: 'KabobLight',
-    //   fontStyle: 'normal',
-    //   fontDisplay: 'swap',
-    //   fontWeight: 400,
-    //   src: `url('${KabobLight}')`,
-    //   unicodeRange: 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF'
-    // };
-
     const appTheme = createMuiTheme({
       palette: {
         primary: { main: '#284ea1' }, //dark blue
@@ -172,17 +162,8 @@ export default class App extends Component {
       },
       typography: {
         fontFamily: `"KabobLight", "Roboto", "Helvetica", "Arial", sans-serif`
-      },
-      // overrides: {
-      //   MuiCssBaseline: {
-      //     '@global': {
-      //       '@font-face': [kabobFont]
-      //     }
-      //   }
-      // }
+      }
     });
-
-    console.log('appTheme:', appTheme);
 
     const pageComponents = {
       catalog: (<ItemCardsList setAppView={this.setView} unlockStatus={unlockStatus} />),

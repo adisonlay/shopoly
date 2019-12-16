@@ -25,7 +25,7 @@ export default function Header({ setAppView, cartItemCount }) {
             </Tooltip>
             <Tooltip title="Cart">
               <IconButton onClick={handleCartClick}>
-                <Badge color="secondary" badgeContent={cartItemCount}>
+                <Badge color="error" badgeContent={cartItemCount}>
                   <ShoppingCartTwoToneIcon />
                 </Badge>
               </IconButton>
