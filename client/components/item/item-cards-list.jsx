@@ -33,7 +33,7 @@ export default function ItemCardsList({ setAppView, unlockStatus }) {
   } else if (itemsData.length === 0) {
     return (
       <Container fixed>
-        <Typography variant="h6" color="textSecondary">Items data unavailable.</Typography>
+        <Typography variant="h6" color="textSecondary">Item data unavailable.</Typography>
       </Container>
     );
 
