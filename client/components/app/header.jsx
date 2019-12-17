@@ -12,7 +12,20 @@ export default function Header({ setAppView, cartItemCount }) {
     <Box mb="1rem">
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h3" className="cursor" onClick={handleLogoClick}>Shopoly</Typography>
+          <Box className="cursor" p="0.25rem" my="0.5rem" bgcolor="error.main" borderRadius="1rem" onClick={handleLogoClick}>
+            <Box
+              pl="1.25rem"
+              pr="1rem"
+              fontWeight={700}
+              fontSize="h4.fontSize"
+              fontFamily="'KabaleMedium', 'KabobLight', 'Roboto', 'Helvetica', 'Arial', sans-serif"
+              letterSpacing="0.25rem"
+              border={3}
+              borderRadius="1rem"
+            >
+              SHOPOLY
+            </Box>
+          </Box>
           <Box alignSelf="flex-end" ml="0.75rem" mb="0.25rem">
             <Typography variant="subtitle1">The Property Trading Shop</Typography>
           </Box>
