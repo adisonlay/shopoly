@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getStatesData } from '../app/functions';
 import {
-  Fade, Container, Grid, Box, Paper, Typography, Chip, Button,
+  Fade, Container, Grid, Box, Typography, Paper, Chip, Button,
   TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText,
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
@@ -106,7 +106,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
 
   const handleCartItemClick = itemClicked => {
     setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
-  }
+  };
 
   const handlePlaceOrder = () => {
     if (!validateInputs()) {

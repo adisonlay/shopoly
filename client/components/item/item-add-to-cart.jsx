@@ -38,11 +38,12 @@ export default function ItemAddToCart({ setAppView, itemDetailData, addToCartCal
 
     if (!addToCartCallback(cartAddBody, itemDetailData)) {
       setMaxQuantityExceeded(true);
-      setQuantity('');
     } else {
+      setMaxQuantityExceeded(false);
       setToastOpen(true);
-      setQuantity('');
     }
+
+    setQuantity('');
   };
 
   const handleCloseToast = (event, reason) => {

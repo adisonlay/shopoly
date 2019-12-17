@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemGallery from './item-gallery';
 import ItemAddToCart from './item-add-to-cart';
 import { formatItemData } from '../app/functions';
-import { Fade, Container, Box, CircularProgress, Typography, Paper, Grid } from '@material-ui/core';
+import { Container, Box, CircularProgress, Typography, Fade, Paper, Grid } from '@material-ui/core';
 
 export default function ItemDetails({ setAppView, viewParams, addToCartCallback, unlockStatus }) {
   const [pageLoading, setPageLoading] = useState(true);

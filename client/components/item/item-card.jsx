@@ -40,6 +40,7 @@ export default function ItemCard({ itemData, setAppView, unlockStatus }) {
         >
           {lockedItemImageOverlay}
         </CardMedia>
+
         <CardContent>
           <Box display="flex" justifyContent="space-between">
             <Typography variant="h6" color={textColor} style={{ fontWeight: 400 }} gutterBottom>{name}</Typography>
@@ -50,6 +51,7 @@ export default function ItemCard({ itemData, setAppView, unlockStatus }) {
           <Typography variant="body2" color={textColor}>Color Group: {itemGroup}</Typography>
         </CardContent>
       </CardActionArea>
+
       <CardActions>
         <Button size="small" color="primary" onClick={handleDetailsClick}>View Product Details</Button>
       </CardActions>
