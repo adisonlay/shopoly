@@ -41,7 +41,9 @@ export default function CartSummary({ setAppView, cartItems, updateQuantityCallb
         </Box>
         {cartItemListDisplay}
         <Box display="flex" flexWrap="wrap" justifyContent="space-between">
-          <Typography variant="h6" color="textSecondary" style={{ margin: '0.5rem 0' }}>Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
+          <Typography variant="h6" color="textSecondary" style={{ margin: '0.5rem 0' }}>
+            Cart Total ({cartItemCount === 1 ? '1 Item' : cartItemCount + ' Items'}): ${cartTotal}
+          </Typography>
           <div>
             <Button variant="contained" color="primary" onClick={handleContinue} style={{ margin: '0.5rem 0.5rem 0.5rem 0' }}>Continue Shopping</Button>
             <Button variant="contained" color="primary" onClick={handleCheckout} disabled={!cartItems.length} style={{ margin: '0.5rem 0' }}>Checkout</Button>
