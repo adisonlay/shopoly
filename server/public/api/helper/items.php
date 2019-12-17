@@ -3,7 +3,7 @@
 require_once('functions.php');
 set_exception_handler('handleErrors');
 startup();
-require_once('../../dbconnection.php');
+require_once('../../../dbconnection.php');
 
 $idIncluded = false;
 $getDetailsQueryModifiers = [
