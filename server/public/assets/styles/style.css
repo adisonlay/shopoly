@@ -1,7 +1,26 @@
 :root {
   --tc-light-gray: #f5f5f5;
+  --tc-dark-blue: #284ea1;
   --tc-light-green: #cae8de;
   --tc-red: #da2a2d;
+}
+
+@font-face {
+  font-family: KabobLight;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../fonts/kaboblight.ttf');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+}
+
+@font-face {
+  font-family: KabaleMedium;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../fonts/kabalemedium.ttf');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
 }
 
 body {
@@ -9,12 +28,13 @@ body {
 }
 
 /* ItemGallery Component Styling */
-  .gallery-thumbnails {
-    opacity: 0.5;
-  }
-    .gallery-thumb-active, .gallery-thumbnails:hover {
-      opacity: 1;
-    }
+.gallery-thumbnails {
+  opacity: 0.5;
+}
+
+.gallery-thumb-active, .gallery-thumbnails:hover {
+  opacity: 1;
+}
 
 /* Helper Classes */
 .cursor {

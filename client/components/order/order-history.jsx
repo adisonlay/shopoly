@@ -1,7 +1,7 @@
 import React from 'react';
 import OrderHistoryItem from './order-history-item';
 import { countMonopolies, getHouseUnlockStatus, getHotelUnlockStatus } from '../app/functions';
-import { Fade, Container, Typography, Box, Paper, Grid, Divider, Chip } from '@material-ui/core';
+import { Fade, Container, Typography, Box, Paper, Divider, Grid, Chip } from '@material-ui/core';
 import PersonOutlineTwoToneIcon from '@material-ui/icons/PersonOutlineTwoTone';
 import LocalMallTwoToneIcon from '@material-ui/icons/LocalMallTwoTone';
 import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getStatesData } from '../app/functions';
 import {
-  Fade, Container, Grid, Box, Paper, Typography, Chip, Button,
+  Fade, Container, Grid, Box, Typography, Paper, Chip, Button,
   TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText,
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
@@ -22,18 +22,7 @@ const useInput = initialValue => {
 
 export default function CartCheckoutForm({ setAppView, viewParams, cartItems, placeOrderCallback }) {
   const { cartItemCount, cartTotal } = viewParams;
-  const placeholderNames = [
-    'Battleship',
-    'Boot',
-    'Cat',
-    'Racecar',
-    'Scottie Dog',
-    'Thimble',
-    'Top Hat',
-    'Wheelbarrow',
-    'Mr. Monopoly',
-    'Jake the Jailbird'
-  ];
+  const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr. Monopoly', 'Jake the Jailbird'];
 
   const { value: nameInput, bindToInput: bindToNameInput} = useInput('');
   const { value: addressInput, bindToInput: bindToAddressInput} = useInput('');
@@ -115,7 +104,9 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
     setCountryInput(event.target.value);
   };
 
-  const handleCartItemClick = itemClicked => setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
+  const handleCartItemClick = itemClicked => {
+    setAppView('details', { itemID: itemClicked.itemID, itemName: itemClicked.name });
+  };
 
   const handlePlaceOrder = () => {
     if (!validateInputs()) {
@@ -303,17 +294,17 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
             </Paper>
 
             <Box mt="1rem" display="flex" justifyContent="flex-end">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handlePlaceOrder}
-              >
-                Place Order
-            </Button>
+              <Button variant="contained" color="primary" onClick={handlePlaceOrder}>Place Order</Button>
             </Box>
           </Grid>
 
         </Grid>
+
+        <Box mt="2rem">
+          <Typography variant="caption" color="textSecondary">
+            Disclaimer: Shopoly is a web application built for demonstration purposes only and does not sell, provide, or distribute any product or service. Orders placed on Shopoly will not be charged payment. Always keep your personal information secure.
+          </Typography>
+        </Box>
       </Container>
     </Fade>
   );

@@ -85,6 +85,12 @@ export default function OrderSummary({ setAppView, viewParams }) {
           <Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>
           <Button variant="contained" color="primary" onClick={handleHistory} style={{ marginLeft: '0.5rem' }}>View Order History</Button>
         </Box>
+
+        <Box mt="2rem">
+          <Typography variant="caption" color="textSecondary">
+            Disclaimer: Shopoly is a web application built for demonstration purposes only and does not sell, provide, or distribute any product or service. Orders placed on Shopoly will not be charged payment. Always keep your personal information secure.
+          </Typography>
+        </Box>
       </Container>
     </Fade>
   );

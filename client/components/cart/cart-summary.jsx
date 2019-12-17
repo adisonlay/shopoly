@@ -2,7 +2,7 @@ import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 import { Fade, Container, Box, Typography, Chip, Button, Paper } from '@material-ui/core';
 
-export default function CartSummary({ setAppView, cartItems }) {
+export default function CartSummary({ setAppView, cartItems, updateQuantityCallback, removeFromCartCallback }) {
   const cartItemCount = cartItems.reduce((runningCount, currentItemObject) => runningCount + currentItemObject.quantity, 0);
   const cartTotal = cartItems.reduce((runningTotal, currentItemObject) => runningTotal + currentItemObject.finalPrice * currentItemObject.quantity, 0);
 
@@ -21,7 +21,15 @@ export default function CartSummary({ setAppView, cartItems }) {
       </Box>
     );
   } else {
-    cartItemListDisplay = (cartItems.map(cartItem => <CartSummaryItem key={cartItem.itemID} itemData={cartItem} setAppView={setAppView} />));
+    cartItemListDisplay = (cartItems.map(cartItem => (
+      <CartSummaryItem
+        key={cartItem.itemID}
+        itemData={cartItem}
+        setAppView={setAppView}
+        updateQuantityCallback={updateQuantityCallback}
+        removeFromCartCallback={removeFromCartCallback}
+      />
+    )));
   }
 
   return (
@@ -32,12 +40,12 @@ export default function CartSummary({ setAppView, cartItems }) {
           <Chip label={cartItemCount} />
         </Box>
         {cartItemListDisplay}
-        <Box display="flex" justifyContent="space-between">
-          <Typography variant="h6" color="textSecondary">Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
-          <Box>
-            <Button variant="contained" color="primary" onClick={handleContinue}>Continue Shopping</Button>
-            <Button variant="contained" color="primary" onClick={handleCheckout} disabled={!cartItems.length} style={{ marginLeft: '0.5rem' }}>Checkout</Button>
-          </Box>
+        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+          <Typography variant="h6" color="textSecondary" style={{ margin: '0.5rem 0' }}>Cart Total ({cartItemCount} Items): ${cartTotal}</Typography>
+          <div>
+            <Button variant="contained" color="primary" onClick={handleContinue} style={{ margin: '0.5rem 0.5rem 0.5rem 0' }}>Continue Shopping</Button>
+            <Button variant="contained" color="primary" onClick={handleCheckout} disabled={!cartItems.length} style={{ margin: '0.5rem 0' }}>Checkout</Button>
+          </div>
         </Box>
       </Container>
     </Fade>
