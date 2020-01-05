@@ -28,7 +28,7 @@ Try the application live at [http://shopoly.adisonlay.com/](http://shopoly.adiso
 
 ## Development
 #### System Requirements
-- NPM 6 or higher
+- npm 6 or higher
 - MySQL 5.7 or higher
 - PHP 7.2 or higher
 - Apache HTTP Server
@@ -40,21 +40,30 @@ Try the application live at [http://shopoly.adisonlay.com/](http://shopoly.adiso
     cd shopoly
     ```
 
-1. Install all dependencies with NPM.
+1. Install all dependencies with npm.
     ```shell
     npm install
     ```
 
 1. Add and enable the `shopoly.localhost` site on Apache web server using the provided virtual host configuration file (in the `server` directory).
     ```shell
-    sudo cp server/shopoly.localhost.conf /etc/apache2/sites-available
-    sudo a2ensite shopoly.localhost
-    sudo service apache2 restart
+    cp server/shopoly.localhost.conf /etc/apache2/sites-available
+    a2ensite shopoly.localhost
+    service apache2 restart
     ```
+
+1. Connect to MySQL and create a new database.
+    ```shell
+    mysql -u username -p
+    CREATE DATABASE `shopoly`;
+    quit;
+    ```
+
+1. Configure MySQL database connection file `dbconnection.php` based on the `dbconnection.php.config` file (in the `server` directory). Include the host, username, and password for your database management system.
 
 1. Import the example database to MySQL.
     ```shell
-    mysql shopoly < shopoly.sql
+    mysql -u username -p shopoly < shopoly.sql
     ```
 
 1. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
