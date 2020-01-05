@@ -13,7 +13,7 @@ A full-stack, single-page React e-commerce web application with a dynamic PHP AP
 - AWS EC2
 
 ## Live Demo
-Try the application live at [shopoly.adisonlay.com](shopoly.adisonlay.com).
+Try the application live at [http://shopoly.adisonlay.com/](http://shopoly.adisonlay.com/).
 
 ## Features
 - Shoppers can view the items for purchase.
