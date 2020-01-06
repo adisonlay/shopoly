@@ -3,7 +3,7 @@
 A full-stack, single-page React e-commerce web application with a dynamic PHP API that allows shoppers to browse properties, add their items to a cart, and place orders online.
 
 ## Technologies Used
-- React.js
+- React
 - Webpack 4
 - Material-UI
 - HTML5
