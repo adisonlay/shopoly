@@ -40,7 +40,8 @@ export default function BreadcrumbBar({ setAppView, currentView, itemName }) {
       <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
         <Link className="cursor" color="textSecondary" onClick={handleCatalogClick}>
           <Box display="flex" alignItems="center">
-            <HomeTwoToneIcon fontSize="small" />Shopoly
+            <HomeTwoToneIcon fontSize="small" />
+            <Box display="inline" ml={0.25}>Shopoly</Box>
           </Box>
         </Link>
         {crumbToDisplay1}
