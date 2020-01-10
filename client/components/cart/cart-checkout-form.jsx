@@ -187,7 +187,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                       labelWidth={stateLabelWidth}
                       {...bindToStateInput}
                     >
-                      <MenuItem value=""><em>Select...</em></MenuItem>
+                      <MenuItem value="">{countryInput ? <em>Select...</em> : 'Select a country for options...'}</MenuItem>
                       {getStatesData(countryInput).map(stateArray => <MenuItem key={stateArray[0]} value={stateArray[0]}>{stateArray[1]}</MenuItem>)}
                     </Select>
                     {inputErrorStatus.stateInput && <FormHelperText>Please select a state/province.</FormHelperText>}
