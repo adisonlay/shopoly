@@ -5,6 +5,7 @@ import {
   TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText,
   List, ListItem, ListItemText, ListItemSecondaryAction, Divider
 } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 //Custom hook to handle input change
 const useInput = initialValue => {
@@ -23,6 +24,8 @@ const useInput = initialValue => {
 export default function CartCheckoutForm({ setAppView, viewParams, cartItems, placeOrderCallback }) {
   const { cartItemCount, cartTotal } = viewParams;
   const placeholderNames = ['Battleship', 'Boot', 'Cat', 'Racecar', 'Scottie Dog', 'Thimble', 'Top Hat', 'Wheelbarrow', 'Mr. Monopoly', 'Jake the Jailbird'];
+  const screenNonMobile = useMediaQuery('(min-width: 600px)');
+  const nonMobileInputStyle = { margin: '0.5rem 2.5%', width: '95%' };
 
   const { value: nameInput, bindToInput: bindToNameInput} = useInput('');
   const { value: addressInput, bindToInput: bindToAddressInput} = useInput('');
@@ -153,7 +156,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
                     error={inputErrorStatus.nameInput}
                     helperText={inputErrorStatus.nameInput ? 'Please enter a name.' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '95%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '95%' } : nonMobileInputStyle}
                     {...bindToNameInput}
                   />
                   <TextField
@@ -163,7 +166,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder="e.g. 200 Park Place"
                     error={inputErrorStatus.addressInput}
                     helperText={inputErrorStatus.addressInput ? 'Please enter an address.' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '95%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '95%' } : nonMobileInputStyle}
                     {...bindToAddressInput}
                   />
                   <TextField
@@ -173,10 +176,10 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder="e.g. Atlantic City"
                     error={inputErrorStatus.cityInput}
                     helperText={inputErrorStatus.cityInput ? 'Please enter a city.' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '40%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '40%' } : nonMobileInputStyle}
                     {...bindToCityInput}
                   />
-                  <FormControl variant="outlined" error={inputErrorStatus.stateInput} style={{ margin: '0.5rem 2.5%', width: '27.5%' }}>
+                  <FormControl variant="outlined" error={inputErrorStatus.stateInput} style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '27.5%' } : nonMobileInputStyle}>
                     <InputLabel ref={stateSelectLabel} id="state-select-label">{countryInput === 'Canada' ? 'Province' : 'State'}</InputLabel>
                     <Select
                       labelId="state-select-label"
@@ -196,10 +199,10 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder="e.g. 50200"
                     error={inputErrorStatus.zipInput}
                     helperText={inputErrorStatus.zipInput ? 'Please enter a valid zip/postal code.' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '17.5%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '17.5%' } : nonMobileInputStyle}
                     {...bindToZipInput}
                   />
-                  <FormControl variant="outlined" error={inputErrorStatus.countryInput} style={{ margin: '0.5rem 2.5%', width: '35%' }}>
+                  <FormControl variant="outlined" error={inputErrorStatus.countryInput} style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '35%' } : nonMobileInputStyle}>
                     <InputLabel ref={countrySelectLabel} id="country-select-label">Country</InputLabel>
                     <Select
                       labelId="country-select-label"
@@ -228,7 +231,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder={'e.g. ' + placeholderNames[Math.floor(Math.random() * placeholderNames.length)]}
                     error={inputErrorStatus.cardNameInput}
                     helperText={inputErrorStatus.cardNameInput ? 'Enter full name as it appears on card.' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '45%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '45%' } : nonMobileInputStyle}
                     {...bindToCardNameInput}
                   />
                   <TextField
@@ -238,7 +241,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder="e.g. 1234-5555-6789-0000"
                     error={inputErrorStatus.cardNumberInput}
                     helperText={inputErrorStatus.cardNumberInput ? 'Enter 16 digit card number (with dashes).' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '45%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '45%' } : nonMobileInputStyle}
                     {...bindToCardNumberInput}
                   />
                   <TextField
@@ -248,7 +251,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder="e.g. 01/2020"
                     error={inputErrorStatus.cardExpInput}
                     helperText={inputErrorStatus.cardExpInput ? 'Enter a valid expiration date (mm/yyyy).' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '25%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '25%' } : nonMobileInputStyle}
                     {...bindToCardExpInput}
                   />
                   <TextField
@@ -258,7 +261,7 @@ export default function CartCheckoutForm({ setAppView, viewParams, cartItems, pl
                     placeholder="e.g. 123"
                     error={inputErrorStatus.cardCVVInput}
                     helperText={inputErrorStatus.cardCVVInput ? 'Enter 3 digit card verification value.' : ''}
-                    style={{ margin: '0.5rem 2.5%', width: '25%' }}
+                    style={screenNonMobile ? { margin: '0.5rem 2.5%', width: '25%' } : nonMobileInputStyle}
                     {...bindToCardCVVInput}
                   />
 
